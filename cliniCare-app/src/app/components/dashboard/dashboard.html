@@ -1,0 +1,134 @@
+<section class="dashboard-container">
+
+  <!-- Header -->
+  <div class="dashboard-header">
+    <div>
+      <h1>Olá, {{ nomeUsuario }}!</h1>
+    </div>
+  </div>
+
+  <!-- Métricas -->
+  <div class="metrics-row">
+    <article class="metric-card">
+      <div class="metric-content">
+        <span class="metric-label">Consultas do Mês</span>
+        <strong>{{ consultasDoMes }}</strong>
+      </div>
+      <span class="metric-icon">📅</span>
+    </article>
+
+    <article class="metric-card green">
+      <div class="metric-content">
+        <span class="metric-label">Pacientes Cadastrados</span>
+        <strong>{{ pacientesCadastrados }}</strong>
+      </div>
+      <span class="metric-icon">👤</span>
+    </article>
+
+    <article class="metric-card violet">
+      <div class="metric-content">
+        <span class="metric-label">Prontuários</span>
+        <strong>{{ prontuarios }}</strong>
+      </div>
+      <span class="metric-icon">📄</span>
+    </article>
+  </div>
+
+  <!-- Próximo Atendimento -->
+  <section class="large-card next-appointment-card">
+    <div class="next-appointment-info">
+      <span class="label">Próximo Atendimento</span>
+      @if (proximoAtendimento) {
+        <h2>{{ proximoAtendimento.pacienteNome }}</h2>
+      } @else {
+        <h2 class="sem-atendimento">Nenhum atendimento agendado</h2>
+      }
+    </div>
+
+    @if (proximoAtendimento?.pacienteId) {
+      <a [routerLink]="['/patients', proximoAtendimento!.pacienteId]" class="badge badge-link">Ver Perfil</a>
+    } @else if (proximoAtendimento) {
+      <span class="badge">Ficha de Evolução</span>
+    }
+  </section>
+
+  <!-- Aniversariantes do Mês -->
+  <section class="large-card aniversariantes-card">
+    <div class="card-header">
+      <div>
+        <strong>Aniversariantes do Mês</strong>
+        <p>Pacientes que fazem aniversário em {{ nomeMesAtual }}</p>
+      </div>
+    </div>
+
+    <div class="table-wrapper">
+      <table>
+        <thead>
+          <tr>
+            <th>Nome</th>
+            <th>Data</th>
+            <th>Idade</th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (p of aniversariantesDoMes; track p.id) {
+            <tr>
+              <td>{{ p.nome }}</td>
+              <td>{{ formatarData(p.dataNascimento) }}</td>
+              <td>{{ calcularIdade(p.dataNascimento) }} anos</td>
+            </tr>
+          } @empty {
+            <tr>
+              <td colspan="3" class="empty-row">Nenhum aniversariante este mês.</td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- Rodapé -->
+  <div class="bottom-row">
+
+    <article class="bottom-card">
+      <strong>Pacientes do dia</strong>
+      <span class="bottom-value">{{ pacientesDoDia }}</span>
+      <div class="icon-circle">🩺</div>
+    </article>
+
+    <article class="bottom-card">
+      <strong>Próximo atendimento</strong>
+      <span class="bottom-value">{{ proximoAtendimento?.horario ?? '--:--' }}</span>
+      <div class="icon-circle purple">⏰</div>
+    </article>
+
+    <article class="bottom-card notes-card">
+      <div class="notes-header">
+        <strong>Notas</strong>
+        <div class="notes-controls">
+          @if (!editandoNotas) {
+            <button class="edit-btn" (click)="iniciarEdicaoNotas()" title="Editar notas">✏️</button>
+          } @else {
+            <button class="save-btn" (click)="salvarNotas()">Salvar</button>
+            <button class="cancel-btn" (click)="cancelarEdicaoNotas()">✕</button>
+          }
+        </div>
+      </div>
+
+      @if (editandoNotas) {
+        <textarea
+          [(ngModel)]="notasRascunho"
+          class="notes-textarea"
+          placeholder="Escreva um lembrete rápido..."
+          rows="4"
+        ></textarea>
+      } @else if (notas) {
+        <p class="notes-text">{{ notas }}</p>
+      } @else {
+        <p class="notes-placeholder">Escreva um lembrete rápido...</p>
+      }
+    </article>
+
+  </div>
+
+</section>

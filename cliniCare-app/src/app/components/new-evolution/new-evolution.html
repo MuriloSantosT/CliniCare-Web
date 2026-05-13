@@ -1,0 +1,54 @@
+<div class="evolution-container">
+
+  <div class="evo-header">
+    <button class="btn-back" (click)="cancelar()">&#8592; Voltar</button>
+    <div>
+      <h1>Nova Evolução</h1>
+      @if (patientName) {
+        <p class="evo-patient">{{ patientName }}</p>
+      }
+    </div>
+  </div>
+
+  <form class="evo-form" (ngSubmit)="salvar()">
+
+    <div class="form-group">
+      <label>Título <span class="hint">(opcional)</span></label>
+      <input
+        type="text"
+        [(ngModel)]="titulo"
+        name="titulo"
+        placeholder="Ex.: Sessão de avaliação fonoaudiológica"
+      />
+    </div>
+
+    <div class="form-group evo-text-group">
+      <label>Evolução <span class="required">*</span></label>
+      <textarea
+        [(ngModel)]="texto"
+        name="texto"
+        class="evo-textarea"
+        placeholder="Descreva a evolução do paciente nesta sessão..."
+        required
+      ></textarea>
+    </div>
+
+    <div class="form-group">
+      <label>Plano para a próxima sessão <span class="hint">(opcional)</span></label>
+      <textarea
+        [(ngModel)]="planoProximaSessao"
+        name="planoProximaSessao"
+        class="plano-textarea"
+        placeholder="Objetivos e atividades planejadas para a próxima sessão..."
+      ></textarea>
+    </div>
+
+    <div class="form-actions">
+      <button type="button" class="btn-secondary" (click)="cancelar()">Cancelar</button>
+      <button type="submit" class="btn-primary" [disabled]="!texto.trim() || saving">
+        {{ saving ? 'Salvando...' : 'Salvar Evolução' }}
+      </button>
+    </div>
+
+  </form>
+</div>

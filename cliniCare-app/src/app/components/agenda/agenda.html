@@ -1,0 +1,223 @@
+<div class="agenda-container">
+
+  <!-- Topo -->
+  <div class="header">
+    <h2>Agenda</h2>
+    <button class="btn-primary" (click)="openAppointmentForm()">+ Novo Compromisso</button>
+  </div>
+
+  <!-- Navegação de semana -->
+  <div class="week-nav">
+    <div class="week-controls">
+      <button class="nav-btn" (click)="previousWeek()">&#8249;</button>
+      <span class="week-label">{{ weekLabel }}</span>
+      <button class="nav-btn" (click)="nextWeek()">&#8250;</button>
+    </div>
+    @if (!isCurrentWeek()) {
+      <button class="btn-today" (click)="goToday()">Hoje</button>
+    }
+  </div>
+
+  <!-- Grade semanal -->
+  <div class="week-grid-wrapper">
+
+    <!-- Cabeçalho com os dias da semana -->
+    <div class="week-grid-header">
+      <div class="grid-corner"></div>
+      @for (day of weekDays; track day.toDateString()) {
+        <div class="day-col-header" [class.today]="isToday(day)">
+          <span class="day-abbr">{{ getDayAbbr(day) }}</span>
+          <span class="day-num">{{ day.getDate() }}</span>
+        </div>
+      }
+    </div>
+
+    <!-- Corpo: horários + agendamentos -->
+    <div class="week-grid-body">
+
+      <!-- Coluna de rótulos de hora -->
+      <div class="time-gutter">
+        @for (hour of hours; track hour) {
+          <div class="gutter-slot" [class.current-hour-label]="isCurrentHour(hour)">
+            {{ formatHour(hour) }}
+          </div>
+        }
+      </div>
+
+      <!-- Colunas dos dias -->
+      <div class="days-wrapper">
+        @for (day of weekDays; track day.toDateString()) {
+          <div class="day-col" [class.today-col]="isToday(day)">
+
+            <!-- Divisores de hora (fundo clicável) -->
+            @for (hour of hours; track hour) {
+              <div
+                class="hour-slot"
+                [class.current-cell]="isCurrentHour(hour) && isToday(day)"
+                (click)="selectCell(day, hour)"
+              ></div>
+            }
+
+            <!-- Blocos de agendamento posicionados pela duração real -->
+            @for (apt of getAppointmentsForDay(day); track apt.id) {
+              <div
+                class="apt-block {{ getStatusClass(apt.status) }}"
+                [style.top.px]="getAptTop(apt)"
+                [style.height.px]="getAptHeight(apt)"
+                (click)="$event.stopPropagation(); openDetail(apt)"
+              >
+                <div class="apt-row">
+                  <span class="apt-time">
+                    {{ apt.dataInicio | date:'HH:mm' }}–{{ apt.dataFim | date:'HH:mm' }}
+                  </span>
+                  <button
+                    class="apt-del"
+                    (click)="$event.stopPropagation(); deleteAppointment(apt.id)"
+                    title="Excluir"
+                  >✕</button>
+                </div>
+                <span class="apt-name">{{ apt.patient?.nome || '—' }}</span>
+              </div>
+            }
+
+          </div>
+        }
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Popup de detalhes do agendamento -->
+  @if (selectedApt) {
+    <div class="detail-overlay" (click)="closeDetail()">
+      <div class="detail-card" (click)="$event.stopPropagation()">
+
+        <div class="detail-header">
+          <span class="detail-patient">{{ selectedApt.patient?.nome || 'Sem paciente' }}</span>
+          <button class="close-btn" (click)="closeDetail()">&#215;</button>
+        </div>
+
+        <p class="detail-time">
+          {{ selectedApt.dataInicio | date:'HH:mm' }} – {{ selectedApt.dataFim | date:'HH:mm' }}
+        </p>
+
+        <span class="detail-status status-{{ getStatusClass(selectedApt.status) }}">
+          {{ selectedApt.status }}
+        </span>
+
+        @if (selectedApt.status !== 'Realizado' && selectedApt.status !== 'Cancelado') {
+          <button class="btn-evolucao" (click)="openEvolution(selectedApt)">
+            Fazer Evolução
+          </button>
+        }
+
+      </div>
+    </div>
+  }
+
+  <!-- Modal: novo compromisso -->
+  @if (showForm) {
+    <div class="modal" (click)="closeAppointmentForm()">
+      <div class="modal-content" (click)="$event.stopPropagation()">
+
+        <div class="modal-header">
+          <h3>Novo Compromisso</h3>
+          <button class="close-btn" (click)="closeAppointmentForm()">&#215;</button>
+        </div>
+
+        <form class="appointment-form" (ngSubmit)="saveAppointment()">
+
+          <div class="form-group">
+            <label>Paciente</label>
+            <select [(ngModel)]="newAppointment.patientId" name="patientId">
+              <option [ngValue]="null">Selecione o paciente</option>
+              @for (p of patients; track p.id) {
+                <option [ngValue]="p.id">{{ p.nome }}</option>
+              }
+            </select>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label>Início *</label>
+              <input
+                type="datetime-local"
+                [(ngModel)]="newAppointment.dataInicio"
+                name="dataInicio"
+                (change)="onStartChange()"
+                required
+              />
+            </div>
+            <div class="form-group">
+              <label>Fim *</label>
+              <input
+                type="datetime-local"
+                [(ngModel)]="newAppointment.dataFim"
+                name="dataFim"
+                required
+              />
+            </div>
+          </div>
+
+          @if (errorMsg) {
+            <p class="error-msg">{{ errorMsg }}</p>
+          }
+
+          <div class="form-group">
+            <label>Status</label>
+            <select [(ngModel)]="newAppointment.status" name="status">
+              <option value="Agendado">Agendado</option>
+              <option value="Confirmado">Confirmado</option>
+              <option value="Cancelado">Cancelado</option>
+              <option value="Realizado">Realizado</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label>Observações</label>
+            <textarea
+              [(ngModel)]="newAppointment.observacoes"
+              name="observacoes"
+              placeholder="Observações sobre o compromisso..."
+            ></textarea>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label>Valor (R$)</label>
+              <input
+                type="number"
+                [(ngModel)]="newAppointment.valor"
+                name="valor"
+                step="0.01"
+                min="0"
+                placeholder="0,00"
+              />
+            </div>
+            <div class="form-group">
+              <label>Forma de Pagamento</label>
+              <select [(ngModel)]="newAppointment.formaPagamento" name="formaPagamento">
+                <option value="">Selecione</option>
+                <option value="Dinheiro">Dinheiro</option>
+                <option value="Cartão de Crédito">Cartão de Crédito</option>
+                <option value="Cartão de Débito">Cartão de Débito</option>
+                <option value="PIX">PIX</option>
+                <option value="Cheque">Cheque</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-actions">
+            <button type="button" class="btn-secondary" (click)="closeAppointmentForm()">Cancelar</button>
+            <button type="submit" class="btn-primary"
+              [disabled]="!newAppointment.dataInicio || !newAppointment.dataFim">
+              Salvar
+            </button>
+          </div>
+
+        </form>
+      </div>
+    </div>
+  }
+
+</div>

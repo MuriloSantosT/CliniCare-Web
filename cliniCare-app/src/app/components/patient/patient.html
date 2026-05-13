@@ -1,0 +1,283 @@
+<div class="patient-container">
+  <ng-container *ngIf="patient">
+    <!-- Header -->
+    <header class="patient-header">
+      <h1>{{ patient?.nome }}</h1>
+      <div class="header-buttons">
+        <button class="btn-action btn-evolution" (click)="novaFichaEvolucao()">
+          + Ficha de Evolução
+        </button>
+        <button class="btn-action btn-report" (click)="novoRelatorio()">
+          + Relatório
+        </button>
+        <button class="btn-action btn-anamnese" (click)="novaAnamnese()">
+          + Anamnese
+        </button>
+        <button class="edit-btn" (click)="editarPaciente()">
+          ✏️ Editar
+        </button>
+        <button class="btn-action btn-nova-consulta" (click)="abrirNovaConsulta()">
+          📅 Nova Consulta
+        </button>
+      </div>
+    </header>
+
+    <!-- Galeria/Foto -->
+    <div class="gallery-area" (click)="mostrarNotificacao()">
+      <div class="gallery-placeholder">📷 Galeria de Fotos</div>
+      <div class="gallery-overlay">
+        <span class="lock-icon">🔒</span>
+        <span class="coming-soon">Em construção</span>
+      </div>
+    </div>
+
+    <!-- Card de Informações do Paciente -->
+    <section class="info-card">
+      <h2>Informações do Paciente</h2>
+      <div class="info-grid">
+        <div class="info-item">
+          <label>Data de Nascimento</label>
+          <p>{{ patient?.dataNascimento | date: 'dd/MM/yyyy' }}</p>
+        </div>
+        <div class="info-item">
+          <label>CPF</label>
+          <p>{{ patient?.cpf || '-' }}</p>
+        </div>
+        <div class="info-item">
+          <label>Sexo</label>
+          <p>{{ patient?.sexo || '-' }}</p>
+        </div>
+        <div class="info-item">
+          <label>Alergias</label>
+          <p>{{ patient?.alergias || '-' }}</p>
+        </div>
+        <div class="info-item">
+          <label>Convênio</label>
+          <p>{{ patient?.convenio || '-' }}</p>
+        </div>
+        <div class="info-item">
+          <label>Telefone</label>
+          <p>{{ patient?.telefoneEmergencia || '-' }}</p>
+        </div>
+        <div class="info-item">
+          <label>Observações Gerais</label>
+          <p>{{ patient?.observacoesGerais || '-' }}</p>
+        </div>
+      </div>
+
+      <h3 class="section-title">Informações Escolares</h3>
+      <div class="info-grid">
+        <div class="info-item">
+          <label>Escola</label>
+          <p>{{ patient?.nomeEscola || '-' }}</p>
+        </div>
+        <div class="info-item">
+          <label>Telefone da Escola</label>
+          <p>{{ patient?.telefoneEscola || '-' }}</p>
+        </div>
+        <div class="info-item">
+          <label>Ano</label>
+          <p>{{ patient?.ano || '-' }}</p>
+        </div>
+        <div class="info-item">
+          <label>Período</label>
+          <p>{{ patient?.periodo || '-' }}</p>
+        </div>
+      </div>
+
+      <h3 class="section-title">Endereço</h3>
+      <div class="info-grid">
+        <div class="info-item">
+          <label>Rua</label>
+          <p>{{ patient?.rua || '-' }}</p>
+        </div>
+        <div class="info-item">
+          <label>Número</label>
+          <p>{{ patient?.numero || '-' }}</p>
+        </div>
+        <div class="info-item">
+          <label>Complemento</label>
+          <p>{{ patient?.complemento || '-' }}</p>
+        </div>
+        <div class="info-item">
+          <label>Bairro</label>
+          <p>{{ patient?.bairro || '-' }}</p>
+        </div>
+        <div class="info-item">
+          <label>Cidade</label>
+          <p>{{ patient?.cidade || '-' }}</p>
+        </div>
+        <div class="info-item">
+          <label>Estado</label>
+          <p>{{ patient?.estado || '-' }}</p>
+        </div>
+        <div class="info-item">
+          <label>CEP</label>
+          <p>{{ patient?.cep || '-' }}</p>
+        </div>
+      </div>
+
+      <div *ngIf="patient.responsaveis && patient.responsaveis.length">
+        <h3 class="section-title">Responsáveis</h3>
+        <div class="responsaveis-list">
+          <div class="responsavel-item" *ngFor="let resp of patient.responsaveis">
+            <strong>{{ resp.nome }}</strong>
+            <p>CPF: {{ resp.cpf }}</p>
+            <p>Telefone: {{ resp.telefone || '-' }}</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Dropdown de Documentos (Ficha de Evolução / Relatórios / Anamneses) -->
+    <section class="documents-section">
+      <div class="dropdown-trigger">
+        <button
+          class="dropdown-btn"
+          (click)="toggleDocumentMenu()"
+          [class.active]="showDocumentTypeMenu"
+        >
+          <span>{{ documentTypeTitle }}</span>
+          <span class="dropdown-icon">{{ showDocumentTypeMenu ? '▼' : '▶' }}</span>
+        </button>
+        
+        <!-- Menu de seleção de tipo -->
+        <div class="document-type-menu" *ngIf="showDocumentTypeMenu">
+          <button
+            class="document-type-option"
+            (click)="selectDocumentType('evolution')"
+            [class.selected]="documentType === 'evolution'"
+          >
+            📄 Ficha de Evolução
+          </button>
+          <button
+            class="document-type-option"
+            (click)="selectDocumentType('reports')"
+            [class.selected]="documentType === 'reports'"
+          >
+            📋 Relatórios
+          </button>
+          <button
+            class="document-type-option"
+            (click)="selectDocumentType('anamnese')"
+            [class.selected]="documentType === 'anamnese'"
+          >
+            🩺 Anamneses
+          </button>
+        </div>
+      </div>
+      
+      <div class="documents-list">
+        <div
+          class="document-card"
+          *ngFor="let doc of currentDocuments"
+          (click)="abrirDocumento(doc)"
+        >
+          <div class="doc-icon">{{ documentIcon }}</div>
+          <div class="doc-content">
+            <strong>{{ doc.title }}</strong>
+            <p class="doc-description">
+              {{ doc.description }}
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- Modal: nova consulta -->
+    <div class="consulta-modal" *ngIf="showConsultaForm" (click)="fecharNovaConsulta()">
+      <div class="consulta-modal-content" (click)="$event.stopPropagation()">
+
+        <div class="consulta-modal-header">
+          <div>
+            <h3>Nova Consulta</h3>
+            <span class="consulta-paciente-nome">{{ patient?.nome }}</span>
+          </div>
+          <button class="close-btn" (click)="fecharNovaConsulta()">&#215;</button>
+        </div>
+
+        <form class="consulta-form" (ngSubmit)="salvarConsulta()">
+
+          <div class="consulta-form-row">
+            <div class="consulta-form-group">
+              <label>Início *</label>
+              <input
+                type="datetime-local"
+                [(ngModel)]="novaConsulta.dataInicio"
+                name="dataInicio"
+                (change)="onInicioChange()"
+                required
+              />
+            </div>
+            <div class="consulta-form-group">
+              <label>Fim *</label>
+              <input
+                type="datetime-local"
+                [(ngModel)]="novaConsulta.dataFim"
+                name="dataFim"
+                required
+              />
+            </div>
+          </div>
+
+          <div class="consulta-form-group">
+            <label>Status</label>
+            <select [(ngModel)]="novaConsulta.status" name="status">
+              <option value="Agendado">Agendado</option>
+              <option value="Confirmado">Confirmado</option>
+              <option value="Cancelado">Cancelado</option>
+              <option value="Realizado">Realizado</option>
+            </select>
+          </div>
+
+          <div class="consulta-form-group">
+            <label>Observações</label>
+            <textarea
+              [(ngModel)]="novaConsulta.observacoes"
+              name="observacoes"
+              placeholder="Observações sobre a consulta..."
+            ></textarea>
+          </div>
+
+          <div class="consulta-form-row">
+            <div class="consulta-form-group">
+              <label>Valor (R$)</label>
+              <input
+                type="number"
+                [(ngModel)]="novaConsulta.valor"
+                name="valor"
+                step="0.01"
+                min="0"
+                placeholder="0,00"
+              />
+            </div>
+            <div class="consulta-form-group">
+              <label>Forma de Pagamento</label>
+              <select [(ngModel)]="novaConsulta.formaPagamento" name="formaPagamento">
+                <option value="">Selecione</option>
+                <option value="Dinheiro">Dinheiro</option>
+                <option value="Cartão de Crédito">Cartão de Crédito</option>
+                <option value="Cartão de Débito">Cartão de Débito</option>
+                <option value="PIX">PIX</option>
+                <option value="Cheque">Cheque</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="consulta-form-actions">
+            <button type="button" class="btn-cancel" (click)="fecharNovaConsulta()">Cancelar</button>
+            <button type="submit" class="btn-save"
+              [disabled]="!novaConsulta.dataInicio || !novaConsulta.dataFim">
+              Salvar
+            </button>
+          </div>
+
+        </form>
+      </div>
+    </div>
+
+  </ng-container>
+
+  <ng-container *ngIf="!patient">
+    <div class="loading">Carregando informações do paciente...</div>
+  </ng-container>
+</div>

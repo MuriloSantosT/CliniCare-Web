@@ -1,0 +1,348 @@
+<div class="edit-patient-container">
+  <header class="page-header">
+    <h1>Editar Paciente</h1>
+  </header>
+
+  <!-- Informações Básicas -->
+  <section class="form-section">
+    <div class="form-card">
+      <div class="card-header">
+        <div class="card-icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+            <circle cx="12" cy="7" r="4"/>
+          </svg>
+        </div>
+        <h2>Informações Básicas</h2>
+      </div>
+      <div class="form-grid">
+        <div class="form-group">
+          <label for="nome">Nome *</label>
+          <input
+            id="nome"
+            type="text"
+            [(ngModel)]="patient.nome"
+            placeholder="Digite o nome completo"
+            required
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="cpf">CPF *</label>
+          <input
+            id="cpf"
+            type="text"
+            [(ngModel)]="patient.cpf"
+            placeholder="000.000.000-00"
+            required
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="dataNascimento">Data de Nascimento *</label>
+          <input
+            id="dataNascimento"
+            type="date"
+            [(ngModel)]="patient.dataNascimento"
+            required
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="sexo">Sexo</label>
+          <select id="sexo" [(ngModel)]="patient.sexo">
+            <option value="">Selecione</option>
+            <option value="Masculino">Masculino</option>
+            <option value="Feminino">Feminino</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="telefoneEmergencia">Telefone de Emergência</label>
+          <input
+            id="telefoneEmergencia"
+            type="tel"
+            [(ngModel)]="patient.telefoneEmergencia"
+            placeholder="(00) 00000-0000"
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="convenio">Convênio</label>
+          <input
+            id="convenio"
+            type="text"
+            [(ngModel)]="patient.convenio"
+            placeholder="Nome do convênio"
+          />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Informações Médicas -->
+  <section class="form-section">
+    <div class="form-card">
+      <div class="card-header">
+        <div class="card-icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/>
+          </svg>
+        </div>
+        <h2>Informações Médicas</h2>
+      </div>
+      <div class="form-grid">
+        <div class="form-group full-width">
+          <label for="alergias">Alergias</label>
+          <textarea
+            id="alergias"
+            [(ngModel)]="patient.alergias"
+            placeholder="Liste as alergias do paciente"
+            rows="3"
+          ></textarea>
+        </div>
+
+        <div class="form-group full-width">
+          <label for="observacoesGerais">Observações Gerais</label>
+          <textarea
+            id="observacoesGerais"
+            [(ngModel)]="patient.observacoesGerais"
+            placeholder="Observações gerais sobre o paciente"
+            rows="3"
+          ></textarea>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Informações Escolares -->
+  <section class="form-section">
+    <div class="form-card">
+      <div class="card-header">
+        <div class="card-icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/>
+            <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/>
+          </svg>
+        </div>
+        <h2>Informações Escolares</h2>
+      </div>
+      <div class="form-grid">
+        <div class="form-group">
+          <label for="nomeEscola">Nome da Escola</label>
+          <input
+            id="nomeEscola"
+            type="text"
+            [(ngModel)]="patient.nomeEscola"
+            placeholder="Nome da instituição de ensino"
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="telefoneEscola">Telefone da Escola</label>
+          <input
+            id="telefoneEscola"
+            type="tel"
+            [(ngModel)]="patient.telefoneEscola"
+            placeholder="(00) 00000-0000"
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="ano">Ano/Série</label>
+          <input
+            id="ano"
+            type="text"
+            [(ngModel)]="patient.ano"
+            placeholder="Ex: 5º ano, 1ª série"
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="periodo">Período</label>
+          <select id="periodo" [(ngModel)]="patient.periodo">
+            <option value="">Selecione</option>
+            <option value="Manhã">Manhã</option>
+            <option value="Tarde">Tarde</option>
+            <option value="Noite">Noite</option>
+            <option value="Integral">Integral</option>
+          </select>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Endereço -->
+  <section class="form-section">
+    <div class="form-card">
+      <div class="card-header">
+        <div class="card-icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
+            <circle cx="12" cy="10" r="3"/>
+          </svg>
+        </div>
+        <h2>Endereço</h2>
+      </div>
+      <div class="form-grid">
+        <div class="form-group">
+          <label for="cep">CEP</label>
+          <input
+            id="cep"
+            type="text"
+            [(ngModel)]="patient.cep"
+            placeholder="00000-000"
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="rua">Rua</label>
+          <input
+            id="rua"
+            type="text"
+            [(ngModel)]="patient.rua"
+            placeholder="Nome da rua"
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="numero">Número</label>
+          <input
+            id="numero"
+            type="text"
+            [(ngModel)]="patient.numero"
+            placeholder="Número"
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="complemento">Complemento</label>
+          <input
+            id="complemento"
+            type="text"
+            [(ngModel)]="patient.complemento"
+            placeholder="Apartamento, bloco, etc."
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="bairro">Bairro</label>
+          <input
+            id="bairro"
+            type="text"
+            [(ngModel)]="patient.bairro"
+            placeholder="Nome do bairro"
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="cidade">Cidade</label>
+          <input
+            id="cidade"
+            type="text"
+            [(ngModel)]="patient.cidade"
+            placeholder="Nome da cidade"
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="estado">Estado</label>
+          <input
+            id="estado"
+            type="text"
+            [(ngModel)]="patient.estado"
+            placeholder="Ex: SP, RJ, MG"
+          />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Responsáveis -->
+  <section class="form-section">
+    <div class="form-card">
+      <div class="card-header">
+        <div class="card-icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+            <circle cx="9" cy="7" r="4"/>
+            <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
+            <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+          </svg>
+        </div>
+        <h2>Responsáveis</h2>
+      </div>
+
+      <!-- Lista de Responsáveis -->
+      <div class="responsaveis-list" *ngIf="patient.responsaveis && patient.responsaveis.length">
+        <div class="responsavel-item" *ngFor="let resp of patient.responsaveis; let i = index">
+          <div class="responsavel-info">
+            <strong>{{ resp.nome }}</strong>
+            <p>CPF: {{ resp.cpf }}</p>
+            <p *ngIf="resp.telefone">Telefone: {{ resp.telefone }}</p>
+          </div>
+          <button type="button" class="btn-remove" (click)="removerResponsavel(i)" title="Remover responsável">
+            ✕
+          </button>
+        </div>
+      </div>
+
+      <!-- Formulário para adicionar responsável -->
+      <div class="add-responsavel-form">
+        <h3>Adicionar Responsável</h3>
+        <div class="form-grid">
+          <div class="form-group">
+            <label for="respNome">Nome *</label>
+            <input
+              id="respNome"
+              type="text"
+              [(ngModel)]="novoResponsavel.nome"
+              placeholder="Nome completo"
+            />
+          </div>
+
+          <div class="form-group">
+            <label for="respCpf">CPF *</label>
+            <input
+              id="respCpf"
+              type="text"
+              [(ngModel)]="novoResponsavel.cpf"
+              placeholder="000.000.000-00"
+            />
+          </div>
+
+          <div class="form-group">
+            <label for="respTelefone">Telefone</label>
+            <input
+              id="respTelefone"
+              type="tel"
+              [(ngModel)]="novoResponsavel.telefone"
+              placeholder="(00) 00000-0000"
+            />
+          </div>
+
+          <div class="form-group">
+            <button
+              type="button"
+              class="btn-add-responsavel"
+              (click)="adicionarResponsavel()"
+              [disabled]="!novoResponsavel.nome || !novoResponsavel.cpf"
+            >
+              Adicionar
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Botões de Ação -->
+  <section class="form-actions">
+    <button type="button" class="btn-cancel" (click)="cancelar()">
+      Cancelar
+    </button>
+    <button type="button" class="btn-save" (click)="salvarPaciente()">
+      Atualizar Paciente
+    </button>
+  </section>
+</div>

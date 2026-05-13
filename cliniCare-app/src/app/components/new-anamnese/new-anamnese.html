@@ -1,0 +1,666 @@
+<div class="new-anamnese-container">
+  <header class="page-header">
+    <div class="header-content">
+      <div>
+        <h1>Anamnese Familiar</h1>
+        <p class="patient-info">Paciente: {{ patientName }}</p>
+      </div>
+      <div class="header-actions">
+        <button type="button" class="btn-outline" (click)="cancelar()">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M15 18l-6-6 6-6"/>
+          </svg>
+          Voltar
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <form class="anamnese-form" (ngSubmit)="salvarAnamnese()" #anamneseForm="ngForm">
+
+    <!-- Data -->
+    <section class="form-section">
+      <div class="form-card">
+        <div class="card-header">
+          <div class="card-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+              <line x1="16" y1="2" x2="16" y2="6"/>
+              <line x1="8" y1="2" x2="8" y2="6"/>
+              <line x1="3" y1="10" x2="21" y2="10"/>
+            </svg>
+          </div>
+          <h2>Informações da Anamnese</h2>
+        </div>
+        <div class="form-grid">
+          <div class="form-group">
+            <label for="data" class="required">Data da Anamnese</label>
+            <div class="input-wrapper">
+              <svg class="input-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+                <line x1="16" y1="2" x2="16" y2="6"/>
+                <line x1="8" y1="2" x2="8" y2="6"/>
+                <line x1="3" y1="10" x2="21" y2="10"/>
+              </svg>
+              <input
+                id="data"
+                type="date"
+                [(ngModel)]="anamnese.data"
+                name="data"
+                #data="ngModel"
+                required
+                class="form-input has-icon"
+                [class.error]="data.invalid && data.touched"
+              />
+            </div>
+            <div class="error-message" *ngIf="data.invalid && data.touched">
+              Data da anamnese é obrigatória
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section 1 - Identificação do Paciente -->
+    <section class="form-section">
+      <div class="form-card">
+        <div class="card-header">
+          <div class="card-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/>
+              <circle cx="12" cy="7" r="4"/>
+            </svg>
+          </div>
+          <h2>1 - Identificação do Paciente</h2>
+        </div>
+        <div class="form-grid">
+          <div class="form-group full-width">
+            <label for="medicamentos">Medicamentos</label>
+            <div class="textarea-wrapper">
+              <textarea id="medicamentos" [(ngModel)]="anamnese.medicamentos" name="medicamentos" rows="3" class="form-textarea"></textarea>
+            </div>
+          </div>
+          <div class="form-group full-width">
+            <label for="acompanhamentoProfissional">Acompanhamento Profissional</label>
+            <div class="textarea-wrapper">
+              <textarea id="acompanhamentoProfissional" [(ngModel)]="anamnese.acompanhamentoProfissional" name="acompanhamentoProfissional" rows="3" class="form-textarea"></textarea>
+            </div>
+          </div>
+          <div class="form-group full-width">
+            <label for="cirurgiasPrevias">Cirurgias Prévias</label>
+            <div class="textarea-wrapper">
+              <textarea id="cirurgiasPrevias" [(ngModel)]="anamnese.cirurgiasPrevias" name="cirurgiasPrevias" rows="3" class="form-textarea"></textarea>
+            </div>
+          </div>
+          <div class="form-group full-width">
+            <label for="deficienciaTranstorno">Deficiência / Transtorno</label>
+            <div class="textarea-wrapper">
+              <textarea id="deficienciaTranstorno" [(ngModel)]="anamnese.deficienciaTranstorno" name="deficienciaTranstorno" rows="3" class="form-textarea"></textarea>
+            </div>
+          </div>
+          <div class="form-group full-width">
+            <label for="responsavel">Responsável</label>
+            <div class="textarea-wrapper">
+              <textarea id="responsavel" [(ngModel)]="anamnese.responsavel" name="responsavel" rows="3" class="form-textarea"></textarea>
+            </div>
+          </div>
+          <div class="form-group full-width">
+            <label for="irmaos">Irmãos</label>
+            <div class="textarea-wrapper">
+              <textarea id="irmaos" [(ngModel)]="anamnese.irmaos" name="irmaos" rows="3" class="form-textarea"></textarea>
+            </div>
+          </div>
+          <div class="form-group full-width">
+            <label for="quemMoraNaCasa">Quem mora na casa</label>
+            <div class="textarea-wrapper">
+              <textarea id="quemMoraNaCasa" [(ngModel)]="anamnese.quemMoraNaCasa" name="quemMoraNaCasa" rows="3" class="form-textarea"></textarea>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="escolaAnamnese">Escola</label>
+            <div class="input-wrapper">
+              <input id="escolaAnamnese" type="text" [(ngModel)]="anamnese.escolaAnamnese" name="escolaAnamnese" class="form-input" />
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Turno Escolar</label>
+            <div class="radio-group">
+              <label class="checkbox-item">
+                <input type="radio" [(ngModel)]="anamnese.turnoEscolar" name="turnoEscolar" value="sim" />
+                <span class="checkmark"></span>
+                Sim
+              </label>
+              <label class="checkbox-item">
+                <input type="radio" [(ngModel)]="anamnese.turnoEscolar" name="turnoEscolar" value="não" />
+                <span class="checkmark"></span>
+                Não
+              </label>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section 2 - Histórico da Gestação -->
+    <section class="form-section">
+      <div class="form-card">
+        <div class="card-header">
+          <div class="card-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2z"/>
+              <path d="M12 6v6l4 2"/>
+            </svg>
+          </div>
+          <h2>2 - Histórico da Gestação</h2>
+        </div>
+        <div class="form-grid">
+          <div class="form-group full-width">
+            <label for="gravidezPlanejada">Gravidez Planejada</label>
+            <div class="textarea-wrapper">
+              <textarea id="gravidezPlanejada" [(ngModel)]="anamnese.gravidezPlanejada" name="gravidezPlanejada" rows="3" class="form-textarea"></textarea>
+            </div>
+          </div>
+          <div class="form-group full-width">
+            <label for="usoBebidasAlcoolicas">Uso de Bebidas Alcoólicas</label>
+            <div class="textarea-wrapper">
+              <textarea id="usoBebidasAlcoolicas" [(ngModel)]="anamnese.usoBebidasAlcoolicas" name="usoBebidasAlcoolicas" rows="3" class="form-textarea"></textarea>
+            </div>
+          </div>
+          <div class="form-group full-width">
+            <label for="gestacaoParto">Gestação / Parto</label>
+            <div class="textarea-wrapper">
+              <textarea id="gestacaoParto" [(ngModel)]="anamnese.gestacaoParto" name="gestacaoParto" rows="3" class="form-textarea"></textarea>
+            </div>
+          </div>
+          <div class="form-group full-width">
+            <label for="usoMedicamentosGestacao">Uso de Medicamentos na Gestação</label>
+            <div class="textarea-wrapper">
+              <textarea id="usoMedicamentosGestacao" [(ngModel)]="anamnese.usoMedicamentosGestacao" name="usoMedicamentosGestacao" rows="3" class="form-textarea"></textarea>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="idadeGravidez">Idade na Gravidez</label>
+            <div class="input-wrapper">
+              <input id="idadeGravidez" type="text" [(ngModel)]="anamnese.idadeGravidez" name="idadeGravidez" class="form-input" />
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Fez Pré-Natal</label>
+            <div class="radio-group">
+              <label class="checkbox-item">
+                <input type="radio" [(ngModel)]="anamnese.fezPreNatal" name="fezPreNatal" value="sim" />
+                <span class="checkmark"></span>
+                Sim
+              </label>
+              <label class="checkbox-item">
+                <input type="radio" [(ngModel)]="anamnese.fezPreNatal" name="fezPreNatal" value="não" />
+                <span class="checkmark"></span>
+                Não
+              </label>
+            </div>
+          </div>
+          <div class="form-group full-width">
+            <label for="partoPrematuro">Parto Prematuro</label>
+            <div class="textarea-wrapper">
+              <textarea id="partoPrematuro" [(ngModel)]="anamnese.partoPrematuro" name="partoPrematuro" rows="3" class="form-textarea"></textarea>
+            </div>
+          </div>
+          <div class="form-group full-width">
+            <label for="condicoesBebe">Condições do Bebê ao Nascer</label>
+            <div class="textarea-wrapper">
+              <textarea id="condicoesBebe" [(ngModel)]="anamnese.condicoesBebe" name="condicoesBebe" rows="3" class="form-textarea"></textarea>
+            </div>
+          </div>
+          <div class="form-group full-width">
+            <label for="partoProlongadoDuracao">Parto Prolongado / Duração</label>
+            <div class="textarea-wrapper">
+              <textarea id="partoProlongadoDuracao" [(ngModel)]="anamnese.partoProlongadoDuracao" name="partoProlongadoDuracao" rows="3" class="form-textarea"></textarea>
+            </div>
+          </div>
+          <div class="form-group full-width">
+            <label for="usouForceps">Usou Fórceps</label>
+            <div class="textarea-wrapper">
+              <textarea id="usouForceps" [(ngModel)]="anamnese.usouForceps" name="usouForceps" rows="3" class="form-textarea"></textarea>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="pontuacaoApgar">Pontuação Apgar</label>
+            <div class="input-wrapper">
+              <input id="pontuacaoApgar" type="text" [(ngModel)]="anamnese.pontuacaoApgar" name="pontuacaoApgar" class="form-input" />
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="triagemNeonatal">Triagem Neonatal</label>
+            <div class="input-wrapper">
+              <input id="triagemNeonatal" type="text" [(ngModel)]="anamnese.triagemNeonatal" name="triagemNeonatal" class="form-input" />
+            </div>
+          </div>
+          <div class="form-group full-width">
+            <label for="bebeRecebeuVacinas">Bebê Recebeu Vacinas</label>
+            <div class="textarea-wrapper">
+              <textarea id="bebeRecebeuVacinas" [(ngModel)]="anamnese.bebeRecebeuVacinas" name="bebeRecebeuVacinas" rows="3" class="form-textarea"></textarea>
+            </div>
+          </div>
+          <div class="form-group full-width">
+            <label for="problemaSaudeNascimento">Problema de Saúde ao Nascer</label>
+            <div class="textarea-wrapper">
+              <textarea id="problemaSaudeNascimento" [(ngModel)]="anamnese.problemaSaudeNascimento" name="problemaSaudeNascimento" rows="3" class="form-textarea"></textarea>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section 3 - Histórico e Desenvolvimento do Bebê -->
+    <section class="form-section">
+      <div class="form-card">
+        <div class="card-header">
+          <div class="card-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M12 2a5 5 0 100 10A5 5 0 0012 2z"/>
+              <path d="M6 20v-2a4 4 0 014-4h4a4 4 0 014 4v2"/>
+              <path d="M8 14l-2 4"/>
+              <path d="M16 14l2 4"/>
+            </svg>
+          </div>
+          <h2>3 - Histórico e Desenvolvimento do Bebê</h2>
+        </div>
+        <div class="form-grid">
+          <div class="form-group">
+            <label for="pesoBebe">Peso ao Nascer</label>
+            <div class="input-wrapper">
+              <input id="pesoBebe" type="text" [(ngModel)]="anamnese.pesoBebe" name="pesoBebe" class="form-input" />
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="tamanhoBebe">Tamanho ao Nascer</label>
+            <div class="input-wrapper">
+              <input id="tamanhoBebe" type="text" [(ngModel)]="anamnese.tamanhoBebe" name="tamanhoBebe" class="form-input" />
+            </div>
+          </div>
+          <div class="form-group full-width">
+            <label for="alimentacaoPrimeirosMeses">Alimentação nos Primeiros Meses</label>
+            <div class="textarea-wrapper">
+              <textarea id="alimentacaoPrimeirosMeses" [(ngModel)]="anamnese.alimentacaoPrimeirosMeses" name="alimentacaoPrimeirosMeses" rows="3" class="form-textarea"></textarea>
+            </div>
+          </div>
+          <div class="form-group full-width">
+            <label for="sonoPrimeirosMeses">Sono nos Primeiros Meses</label>
+            <div class="textarea-wrapper">
+              <textarea id="sonoPrimeirosMeses" [(ngModel)]="anamnese.sonoPrimeirosMeses" name="sonoPrimeirosMeses" rows="3" class="form-textarea"></textarea>
+            </div>
+          </div>
+          <div class="form-group full-width">
+            <label for="interacaoAmbiente">Interação com o Ambiente</label>
+            <div class="textarea-wrapper">
+              <textarea id="interacaoAmbiente" [(ngModel)]="anamnese.interacaoAmbiente" name="interacaoAmbiente" rows="3" class="form-textarea"></textarea>
+            </div>
+          </div>
+          <div class="form-group full-width">
+            <label for="contatoVisual">Contato Visual</label>
+            <div class="textarea-wrapper">
+              <textarea id="contatoVisual" [(ngModel)]="anamnese.contatoVisual" name="contatoVisual" rows="3" class="form-textarea"></textarea>
+            </div>
+          </div>
+          <div class="form-group full-width">
+            <label for="sorria">Sorria</label>
+            <div class="textarea-wrapper">
+              <textarea id="sorria" [(ngModel)]="anamnese.sorria" name="sorria" rows="3" class="form-textarea"></textarea>
+            </div>
+          </div>
+          <div class="form-group full-width">
+            <label for="deitarRolar">Deitar / Rolar</label>
+            <div class="textarea-wrapper">
+              <textarea id="deitarRolar" [(ngModel)]="anamnese.deitarRolar" name="deitarRolar" rows="3" class="form-textarea"></textarea>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="inicioEngatinhar">Início do Engatinhar</label>
+            <div class="input-wrapper">
+              <input id="inicioEngatinhar" type="text" [(ngModel)]="anamnese.inicioEngatinhar" name="inicioEngatinhar" class="form-input" />
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="inicioRodar">Início do Rolar</label>
+            <div class="input-wrapper">
+              <input id="inicioRodar" type="text" [(ngModel)]="anamnese.inicioRodar" name="inicioRodar" class="form-input" />
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="inicioSentar">Início do Sentar</label>
+            <div class="input-wrapper">
+              <input id="inicioSentar" type="text" [(ngModel)]="anamnese.inicioSentar" name="inicioSentar" class="form-input" />
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="inicioAndar">Início do Andar</label>
+            <div class="input-wrapper">
+              <input id="inicioAndar" type="text" [(ngModel)]="anamnese.inicioAndar" name="inicioAndar" class="form-input" />
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section 4 - Linguagem e Comunicação -->
+    <section class="form-section">
+      <div class="form-card">
+        <div class="card-header">
+          <div class="card-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/>
+            </svg>
+          </div>
+          <h2>4 - Linguagem e Comunicação</h2>
+        </div>
+        <div class="form-grid">
+          <div class="form-group full-width">
+            <label for="primeiraspalavras">Primeiras Palavras</label>
+            <div class="textarea-wrapper">
+              <textarea id="primeiraspalavras" [(ngModel)]="anamnese.primeiraspalavras" name="primeiraspalavras" rows="3" class="form-textarea"></textarea>
+            </div>
+          </div>
+          <div class="form-group full-width">
+            <label for="primeirasFrases">Primeiras Frases</label>
+            <div class="textarea-wrapper">
+              <textarea id="primeirasFrases" [(ngModel)]="anamnese.primeirasFrases" name="primeirasFrases" rows="3" class="form-textarea"></textarea>
+            </div>
+          </div>
+          <div class="form-group full-width">
+            <label for="quandoApontou">Quando Apontou</label>
+            <div class="textarea-wrapper">
+              <textarea id="quandoApontou" [(ngModel)]="anamnese.quandoApontou" name="quandoApontou" rows="3" class="form-textarea"></textarea>
+            </div>
+          </div>
+          <div class="form-group full-width">
+            <label for="alimentacaoBebeCrianca">Alimentação Bebê / Criança</label>
+            <div class="textarea-wrapper">
+              <textarea id="alimentacaoBebeCrianca" [(ngModel)]="anamnese.alimentacaoBebeCrianca" name="alimentacaoBebeCrianca" rows="3" class="form-textarea"></textarea>
+            </div>
+          </div>
+          <div class="form-group full-width">
+            <label>Tipo de Bebê</label>
+            <div class="radio-group">
+              <label class="checkbox-item">
+                <input type="radio" [(ngModel)]="anamnese.tipoBebe" name="tipoBebe" value="tranquilo" />
+                <span class="checkmark"></span>
+                Tranquilo
+              </label>
+              <label class="checkbox-item">
+                <input type="radio" [(ngModel)]="anamnese.tipoBebe" name="tipoBebe" value="choroso" />
+                <span class="checkmark"></span>
+                Choroso
+              </label>
+              <label class="checkbox-item">
+                <input type="radio" [(ngModel)]="anamnese.tipoBebe" name="tipoBebe" value="agitado" />
+                <span class="checkmark"></span>
+                Agitado
+              </label>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section 5 - Ambiente Escolar e Social -->
+    <section class="form-section">
+      <div class="form-card">
+        <div class="card-header">
+          <div class="card-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/>
+              <polyline points="9,22 9,12 15,12 15,22"/>
+            </svg>
+          </div>
+          <h2>5 - Ambiente Escolar e Social</h2>
+        </div>
+        <div class="form-grid">
+          <div class="form-group full-width">
+            <label for="comportamentoCasa">Comportamento em Casa</label>
+            <div class="textarea-wrapper">
+              <textarea id="comportamentoCasa" [(ngModel)]="anamnese.comportamentoCasa" name="comportamentoCasa" rows="3" class="form-textarea"></textarea>
+            </div>
+          </div>
+          <div class="form-group full-width">
+            <label for="comunidade">Comunidade</label>
+            <div class="textarea-wrapper">
+              <textarea id="comunidade" [(ngModel)]="anamnese.comunidade" name="comunidade" rows="3" class="form-textarea"></textarea>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="possuiRelatorioEscola">Possui Relatório Escolar</label>
+            <div class="input-wrapper">
+              <input id="possuiRelatorioEscola" type="text" [(ngModel)]="anamnese.possuiRelatorioEscola" name="possuiRelatorioEscola" class="form-input" />
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="possuiPdi">Possui PDI</label>
+            <div class="input-wrapper">
+              <input id="possuiPdi" type="text" [(ngModel)]="anamnese.possuiPdi" name="possuiPdi" class="form-input" />
+            </div>
+          </div>
+          <div class="form-group full-width">
+            <label for="interesseAtividades">Interesse em Atividades</label>
+            <div class="textarea-wrapper">
+              <textarea id="interesseAtividades" [(ngModel)]="anamnese.interesseAtividades" name="interesseAtividades" rows="3" class="form-textarea"></textarea>
+            </div>
+          </div>
+          <div class="form-group full-width">
+            <label for="lidaComRegras">Lida com Regras</label>
+            <div class="textarea-wrapper">
+              <textarea id="lidaComRegras" [(ngModel)]="anamnese.lidaComRegras" name="lidaComRegras" rows="3" class="form-textarea"></textarea>
+            </div>
+          </div>
+          <div class="form-group full-width">
+            <label for="pontuacaoProfessora">Pontuação da Professora</label>
+            <div class="textarea-wrapper">
+              <textarea id="pontuacaoProfessora" [(ngModel)]="anamnese.pontuacaoProfessora" name="pontuacaoProfessora" rows="3" class="form-textarea"></textarea>
+            </div>
+          </div>
+          <div class="form-group full-width">
+            <label for="habilidadesMotFinas">Habilidades Motoras Finas</label>
+            <div class="textarea-wrapper">
+              <textarea id="habilidadesMotFinas" [(ngModel)]="anamnese.habilidadesMotFinas" name="habilidadesMotFinas" rows="3" class="form-textarea"></textarea>
+            </div>
+          </div>
+          <div class="form-group full-width">
+            <label for="habilidadesMotGrossas">Habilidades Motoras Grossas</label>
+            <div class="textarea-wrapper">
+              <textarea id="habilidadesMotGrossas" [(ngModel)]="anamnese.habilidadesMotGrossas" name="habilidadesMotGrossas" rows="3" class="form-textarea"></textarea>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section 6 - Acompanhamento -->
+    <section class="form-section">
+      <div class="form-card">
+        <div class="card-header">
+          <div class="card-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M22 12h-4l-3 9L9 3l-3 9H2"/>
+            </svg>
+          </div>
+          <h2>6 - Acompanhamento</h2>
+        </div>
+        <div class="form-grid">
+          <div class="form-group full-width">
+            <label for="fazAcompanhamento">Faz Acompanhamento</label>
+            <div class="textarea-wrapper">
+              <textarea id="fazAcompanhamento" [(ngModel)]="anamnese.fazAcompanhamento" name="fazAcompanhamento" rows="3" class="form-textarea"></textarea>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section 7 - Cognição/Aprendizagem -->
+    <section class="form-section">
+      <div class="form-card">
+        <div class="card-header">
+          <div class="card-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M9 3H5a2 2 0 00-2 2v4m6-6h10a2 2 0 012 2v4M9 3v18m0 0h10a2 2 0 002-2V9M9 21H5a2 2 0 01-2-2V9m0 0h18"/>
+            </svg>
+          </div>
+          <h2>7 - Cognição / Aprendizagem</h2>
+        </div>
+        <div class="form-grid">
+          <div class="form-group full-width">
+            <label for="memoria">Memória</label>
+            <div class="textarea-wrapper">
+              <textarea id="memoria" [(ngModel)]="anamnese.memoria" name="memoria" rows="3" class="form-textarea"></textarea>
+            </div>
+          </div>
+          <div class="form-group full-width">
+            <label for="atencao">Atenção</label>
+            <div class="textarea-wrapper">
+              <textarea id="atencao" [(ngModel)]="anamnese.atencao" name="atencao" rows="3" class="form-textarea"></textarea>
+            </div>
+          </div>
+          <div class="form-group full-width">
+            <label for="compreensao">Compreensão</label>
+            <div class="textarea-wrapper">
+              <textarea id="compreensao" [(ngModel)]="anamnese.compreensao" name="compreensao" rows="3" class="form-textarea"></textarea>
+            </div>
+          </div>
+          <div class="form-group full-width">
+            <label for="linguagemCognicao">Linguagem / Cognição</label>
+            <div class="textarea-wrapper">
+              <textarea id="linguagemCognicao" [(ngModel)]="anamnese.linguagemCognicao" name="linguagemCognicao" rows="3" class="form-textarea"></textarea>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section 8 - Potencialidades e Déficits -->
+    <section class="form-section">
+      <div class="form-card">
+        <div class="card-header">
+          <div class="card-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26 12,2"/>
+            </svg>
+          </div>
+          <h2>8 - Potencialidades e Déficits</h2>
+        </div>
+        <div class="form-grid">
+          <div class="form-group full-width">
+            <label for="desafios">Desafios</label>
+            <div class="textarea-wrapper">
+              <textarea id="desafios" [(ngModel)]="anamnese.desafios" name="desafios" rows="3" class="form-textarea"></textarea>
+            </div>
+          </div>
+          <div class="form-group full-width">
+            <label for="potencialidades">Potencialidades</label>
+            <div class="textarea-wrapper">
+              <textarea id="potencialidades" [(ngModel)]="anamnese.potencialidades" name="potencialidades" rows="3" class="form-textarea"></textarea>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section 9 - Socialização -->
+    <section class="form-section">
+      <div class="form-card">
+        <div class="card-header">
+          <div class="card-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/>
+              <circle cx="9" cy="7" r="4"/>
+              <path d="M23 21v-2a4 4 0 00-3-3.87"/>
+              <path d="M16 3.13a4 4 0 010 7.75"/>
+            </svg>
+          </div>
+          <h2>9 - Socialização</h2>
+        </div>
+        <div class="form-grid">
+          <div class="form-group full-width">
+            <label for="pessoaQueSeIdentifica">Pessoa que se Identifica</label>
+            <div class="textarea-wrapper">
+              <textarea id="pessoaQueSeIdentifica" [(ngModel)]="anamnese.pessoaQueSeIdentifica" name="pessoaQueSeIdentifica" rows="3" class="form-textarea"></textarea>
+            </div>
+          </div>
+          <div class="form-group full-width">
+            <label for="brincaComCriancas">Brinca com Crianças</label>
+            <div class="textarea-wrapper">
+              <textarea id="brincaComCriancas" [(ngModel)]="anamnese.brincaComCriancas" name="brincaComCriancas" rows="3" class="form-textarea"></textarea>
+            </div>
+          </div>
+          <div class="form-group full-width">
+            <label for="preferenciaBrinquedos">Preferência de Brinquedos</label>
+            <div class="textarea-wrapper">
+              <textarea id="preferenciaBrinquedos" [(ngModel)]="anamnese.preferenciaBrinquedos" name="preferenciaBrinquedos" rows="3" class="form-textarea"></textarea>
+            </div>
+          </div>
+          <div class="form-group full-width">
+            <label for="sonoAtual">Sono Atual</label>
+            <div class="textarea-wrapper">
+              <textarea id="sonoAtual" [(ngModel)]="anamnese.sonoAtual" name="sonoAtual" rows="3" class="form-textarea"></textarea>
+            </div>
+          </div>
+          <div class="form-group full-width">
+            <label for="atividadesVidaDiaria">Atividades de Vida Diária</label>
+            <div class="textarea-wrapper">
+              <textarea id="atividadesVidaDiaria" [(ngModel)]="anamnese.atividadesVidaDiaria" name="atividadesVidaDiaria" rows="3" class="form-textarea"></textarea>
+            </div>
+          </div>
+          <div class="form-group full-width">
+            <label for="oQueFazPede">O que faz / pede</label>
+            <div class="textarea-wrapper">
+              <textarea id="oQueFazPede" [(ngModel)]="anamnese.oQueFazPede" name="oQueFazPede" rows="3" class="form-textarea"></textarea>
+            </div>
+          </div>
+          <div class="form-group full-width">
+            <label for="rotinaCuidados">Rotina de Cuidados</label>
+            <div class="textarea-wrapper">
+              <textarea id="rotinaCuidados" [(ngModel)]="anamnese.rotinaCuidados" name="rotinaCuidados" rows="3" class="form-textarea"></textarea>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="tempoTela">Tempo de Tela</label>
+            <div class="input-wrapper">
+              <input id="tempoTela" type="text" [(ngModel)]="anamnese.tempoTela" name="tempoTela" class="form-input" />
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="rendaFamiliar">Renda Familiar</label>
+            <div class="input-wrapper">
+              <input id="rendaFamiliar" type="text" [(ngModel)]="anamnese.rendaFamiliar" name="rendaFamiliar" class="form-input" />
+            </div>
+          </div>
+          <div class="form-group full-width">
+            <label for="relacaoFamiliar">Relação Familiar</label>
+            <div class="textarea-wrapper">
+              <textarea id="relacaoFamiliar" [(ngModel)]="anamnese.relacaoFamiliar" name="relacaoFamiliar" rows="3" class="form-textarea"></textarea>
+            </div>
+          </div>
+          <div class="form-group full-width">
+            <label for="observacoes">Observações</label>
+            <div class="textarea-wrapper">
+              <textarea id="observacoes" [(ngModel)]="anamnese.observacoes" name="observacoes" rows="3" class="form-textarea"></textarea>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Botões de Ação -->
+    <section class="form-actions">
+      <button type="button" class="btn-secondary" (click)="cancelar()">
+        Cancelar
+      </button>
+      <button
+        type="submit"
+        class="btn-primary"
+        [disabled]="anamneseForm.invalid || saving"
+      >
+        <span *ngIf="saving" class="loading-spinner"></span>
+        {{ saving ? 'Salvando...' : 'Salvar Anamnese' }}
+      </button>
+    </section>
+  </form>
+</div>

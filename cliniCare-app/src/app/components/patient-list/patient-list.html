@@ -1,0 +1,69 @@
+<div class="geral">
+  <h1>Pacientes</h1>
+
+  <section class="area painel-pesquisa">
+    <div class="card filtro">
+      <p>Pesquisa</p>
+      <div class="filtro-input">
+        <input
+          type="text"
+          placeholder="Filtrar por nome"
+          [(ngModel)]="filtroNome"
+          aria-label="Filtrar por nome"
+        />
+        <button type="button" class="btn-search" aria-label="Buscar paciente">
+          🔍
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <section class="area lista-pacientes">
+    <div class="card tabela">
+      <div class="tabela-header">
+        <span>Nome</span>
+        <span>Idade</span>
+        <div class="acoes-header">
+          <button class="btn-add" type="button" (click)="novoPaciente()">+</button>
+        </div>
+      </div>
+
+      <ng-container *ngIf="pacientesFiltrados.length; else vazio">
+        <div
+          class="linha"
+          *ngFor="let patient of pacientesFiltrados; trackBy: trackByPatient"
+          (click)="patient.id && visualizarPaciente(patient.id)"
+        >
+          <span class="nome">{{ patient.nome }}</span>
+          <span>{{ calcularIdade(patient.dataNascimento) }} anos</span>
+          <div class="acoes">
+            <button
+              type="button"
+              class="btn-icon btn-edit"
+              (click)="$event.stopPropagation(); patient.id && editarPaciente(patient.id)"
+              aria-label="Editar paciente"
+            >
+              ✏️
+            </button>
+            <button
+              type="button"
+              class="btn-icon btn-delete"
+              (click)="$event.stopPropagation(); patient.id && deletar(patient.id)"
+              aria-label="Excluir paciente"
+            >
+              🗑
+            </button>
+          </div>
+        </div>
+      </ng-container>
+
+      <ng-template #vazio>
+        <div class="linha vazio">
+          Nenhum paciente encontrado.
+        </div>
+      </ng-template>
+    </div>
+  </section>
+</div>
+
+

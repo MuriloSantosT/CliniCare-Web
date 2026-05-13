@@ -1,0 +1,662 @@
+.patient-container {
+  margin: 30px 0;
+  width: 100%;
+  padding: 0;
+}
+
+.patient-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+}
+
+.patient-header h1 {
+  font-size: 2rem;
+  margin: 0;
+  color: #0f172a;
+  font-weight: 700;
+  min-width: 0;
+  flex-shrink: 1;
+}
+
+.header-buttons {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+}
+
+.btn-action {
+  border: none;
+  padding: 9px 16px;
+  border-radius: 10px;
+  font-size: 0.875rem;
+  cursor: pointer;
+  font-weight: 600;
+  transition: all 0.2s ease;
+}
+
+.btn-evolution {
+  background: #f0fdf4;
+  color: #16a34a;
+  border: 1px solid #bbf7d0;
+}
+
+.btn-evolution:hover {
+  background: #dcfce7;
+  transform: translateY(-1px);
+}
+
+.btn-report {
+  background: #eff6ff;
+  color: #2563eb;
+  border: 1px solid #bfdbfe;
+}
+
+.btn-report:hover {
+  background: #dbeafe;
+  transform: translateY(-1px);
+}
+
+.edit-btn {
+  background: #3b82f6;
+  color: white;
+  border: none;
+  padding: 9px 18px;
+  border-radius: 10px;
+  font-size: 0.875rem;
+  cursor: pointer;
+  font-weight: 600;
+  transition: all 0.2s ease;
+}
+
+.edit-btn:hover {
+  background: #2563eb;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+}
+
+.gallery-btn {
+  background: #f1f5f9;
+  border: 1px solid #e2e8f0;
+  color: #475569;
+  padding: 9px 18px;
+  border-radius: 10px;
+  font-size: 0.875rem;
+  cursor: pointer;
+  font-weight: 600;
+  transition: all 0.15s ease;
+}
+
+.gallery-btn:hover {
+  background: #e2e8f0;
+  color: #0f172a;
+}
+
+.patient-info-label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #64748b;
+  font-size: 0.95rem;
+  margin-bottom: 20px;
+}
+
+.edit-icon {
+  font-size: 0.9rem;
+  cursor: pointer;
+}
+
+/* GALLERY */
+.gallery-area {
+  width: 100%;
+  height: 300px;
+  background: #f1f5f9;
+  border-radius: 18px;
+  display: grid;
+  place-items: center;
+  margin-bottom: 28px;
+  position: relative;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.gallery-area:hover {
+  background: #e2e8f0;
+}
+
+.gallery-placeholder {
+  color: #94a3b8;
+  font-size: 1.1rem;
+}
+
+.gallery-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.6);
+  border-radius: 18px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.lock-icon {
+  font-size: 2rem;
+  opacity: 0.8;
+}
+
+.coming-soon {
+  color: #ffffff;
+  font-size: 0.9rem;
+  font-weight: 500;
+  opacity: 0.9;
+}
+
+/* INFO CARD */
+.info-card {
+  background: #ffffff;
+  border-radius: 18px;
+  padding: 28px;
+  box-shadow: 0 8px 24px rgba(15, 23, 42, 0.06);
+  margin-bottom: 28px;
+}
+
+.info-card h2 {
+  font-size: 1.25rem;
+  margin: 0 0 20px;
+  color: #0f172a;
+  font-weight: 700;
+  padding-bottom: 14px;
+  border-bottom: 2px solid #f1f5f9;
+}
+
+.section-title {
+  font-size: 0.95rem;
+  font-weight: 700;
+  margin: 24px 0 14px;
+  color: #3b82f6;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.section-title::before {
+  content: '';
+  display: block;
+  width: 3px;
+  height: 14px;
+  background: #3b82f6;
+  border-radius: 2px;
+}
+
+.info-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 16px;
+}
+
+.info-item {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 12px 14px;
+  background: #f8fafc;
+  border-radius: 10px;
+  border: 1px solid #f1f5f9;
+}
+
+.info-item label {
+  font-weight: 600;
+  color: #94a3b8;
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.info-item p {
+  color: #0f172a;
+  margin: 0;
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+
+/* RESPONSÁVEIS */
+.responsaveis-list {
+  display: grid;
+  gap: 10px;
+  margin-top: 4px;
+}
+
+.responsavel-item {
+  padding: 14px 16px;
+  background: #f8fafc;
+  border-radius: 12px;
+  border-left: 4px solid #3b82f6;
+}
+
+.responsavel-item strong {
+  display: block;
+  color: #0f172a;
+  font-weight: 600;
+  margin-bottom: 4px;
+}
+
+.responsavel-item p {
+  color: #64748b;
+  font-size: 0.875rem;
+  margin: 2px 0;
+}
+
+/* DOCUMENTS */
+.documents-section {
+  margin-bottom: 24px;
+}
+
+.btn-appointment {
+  background: #f0fdf4;
+  color: #16a34a;
+  border: 1px solid #bbf7d0;
+}
+
+.btn-appointment:hover {
+  background: #dcfce7;
+  transform: translateY(-1px);
+}
+
+.btn-nova-consulta {
+  background: #f0fdf4;
+  color: #16a34a;
+  border: 1px solid #bbf7d0;
+}
+
+.btn-nova-consulta:hover {
+  background: #dcfce7;
+  transform: translateY(-1px);
+}
+
+.btn-anamnese {
+  background: #fdf4ff;
+  color: #9333ea;
+  border: 1px solid #e9d5ff;
+}
+
+.btn-anamnese:hover {
+  background: #f3e8ff;
+  transform: translateY(-1px);
+}
+
+.dropdown-trigger {
+  margin-bottom: 0;
+  position: relative;
+}
+
+.dropdown-btn {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 20px;
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 18px;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #0f172a;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.dropdown-btn:hover {
+  background: #f8fafc;
+  border-color: #cbd5e1;
+}
+
+.dropdown-btn.active {
+  background: #f1f5f9;
+  border-color: #3b82f6;
+  color: #3b82f6;
+}
+
+.dropdown-icon {
+  font-size: 0.8rem;
+  transition: transform 0.2s ease;
+}
+
+.dropdown-btn.active .dropdown-icon {
+  transform: rotate(180deg);
+}
+
+.document-type-menu {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-top: none;
+  border-radius: 0 0 18px 18px;
+  overflow: hidden;
+  z-index: 10;
+  box-shadow: 0 4px 12px rgba(15, 23, 42, 0.08);
+  animation: slideDown 0.2s ease;
+}
+
+.document-type-option {
+  width: 100%;
+  padding: 12px 20px;
+  background: none;
+  border: none;
+  text-align: left;
+  color: #0f172a;
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  border-bottom: 1px solid #f1f5f9;
+  font-family: inherit;
+}
+
+.document-type-option:last-child {
+  border-bottom: none;
+}
+
+.document-type-option:hover {
+  background: #f1f5f9;
+  color: #3b82f6;
+}
+
+.document-type-option.selected {
+  background: #dbeafe;
+  color: #3b82f6;
+  font-weight: 600;
+}
+
+.documents-list {
+  display: grid;
+  gap: 10px;
+  margin-top: 12px;
+  animation: slideDown 0.3s ease;
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.document-card {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 14px;
+  padding: 16px;
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 14px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  align-items: center;
+}
+
+.document-card:hover {
+  background: #f8fafc;
+  border-color: #cbd5e1;
+  box-shadow: 0 4px 12px rgba(15, 23, 42, 0.06);
+  transform: translateY(-1px);
+}
+
+.doc-icon {
+  display: flex;
+  align-items: center;
+  font-size: 1.6rem;
+  min-width: 44px;
+  justify-content: center;
+  background: #f1f5f9;
+  width: 44px;
+  height: 44px;
+  border-radius: 10px;
+}
+
+.doc-content {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.doc-content strong {
+  color: #0f172a;
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+.doc-description {
+  color: #94a3b8;
+  font-size: 0.82rem;
+  margin: 0;
+  line-height: 1.4;
+}
+
+.loading {
+  text-align: center;
+  padding: 40px 20px;
+  color: #94a3b8;
+  font-size: 1rem;
+}
+
+@media (max-width: 768px) {
+  .patient-container {
+    width: calc(100vw - 24px);
+    margin: 20px 12px;
+  }
+
+  .patient-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+  }
+
+  .patient-header h1 {
+    font-size: 1.6rem;
+  }
+
+  .info-card {
+    padding: 20px;
+  }
+
+  .info-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .gallery-area {
+    height: 200px;
+  }
+
+  .consulta-form-row {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* MODAL NOVA CONSULTA */
+.consulta-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(15, 23, 42, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  backdrop-filter: blur(2px);
+}
+
+.consulta-modal-content {
+  background: #ffffff;
+  border-radius: 18px;
+  width: 90%;
+  max-width: 520px;
+  max-height: 90vh;
+  overflow-y: auto;
+  box-shadow: 0 20px 60px rgba(15, 23, 42, 0.2);
+  animation: consultaModalIn 0.2s ease;
+}
+
+@keyframes consultaModalIn {
+  from { opacity: 0; transform: scale(0.96) translateY(-8px); }
+  to   { opacity: 1; transform: scale(1) translateY(0); }
+}
+
+.consulta-modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: 24px 24px 0;
+  margin-bottom: 22px;
+}
+
+.consulta-modal-header h3 {
+  margin: 0 0 4px;
+  font-size: 1.2rem;
+  color: #0f172a;
+  font-weight: 700;
+}
+
+.consulta-paciente-nome {
+  font-size: 0.875rem;
+  color: #3b82f6;
+  font-weight: 600;
+}
+
+.close-btn {
+  background: #f1f5f9;
+  border: none;
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  font-size: 1.1rem;
+  cursor: pointer;
+  color: #64748b;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.15s ease;
+  flex-shrink: 0;
+}
+
+.close-btn:hover {
+  background: #e2e8f0;
+  color: #0f172a;
+}
+
+.consulta-form {
+  padding: 0 24px 24px;
+}
+
+.consulta-form-group {
+  margin-bottom: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.consulta-form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+}
+
+.consulta-form-group label {
+  font-weight: 600;
+  color: #334155;
+  font-size: 0.875rem;
+}
+
+.consulta-form-group input,
+.consulta-form-group select,
+.consulta-form-group textarea {
+  padding: 11px 14px;
+  border: 1px solid #e2e8f0;
+  border-radius: 10px;
+  font-size: 0.95rem;
+  transition: all 0.2s ease;
+  background: #ffffff;
+  font-family: inherit;
+  width: 100%;
+}
+
+.consulta-form-group input:focus,
+.consulta-form-group select:focus,
+.consulta-form-group textarea:focus {
+  outline: none;
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+.consulta-form-group textarea {
+  resize: none;
+  height: 88px;
+  overflow-y: auto;
+}
+
+.consulta-form-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  margin-top: 22px;
+  padding-top: 18px;
+  border-top: 1px solid #f1f5f9;
+}
+
+.btn-cancel {
+  background: #ffffff;
+  color: #64748b;
+  border: 2px solid #e2e8f0;
+  padding: 10px 22px;
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  font-weight: 600;
+  transition: all 0.2s ease;
+}
+
+.btn-cancel:hover {
+  background: #f8fafc;
+  border-color: #cbd5e1;
+}
+
+.btn-save {
+  background: #3b82f6;
+  color: white;
+  border: none;
+  padding: 10px 22px;
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  font-weight: 600;
+  transition: all 0.2s ease;
+}
+
+.btn-save:hover {
+  background: #2563eb;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+}
+
+.btn-save:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}

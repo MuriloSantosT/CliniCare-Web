@@ -1,0 +1,33 @@
+<aside class="sidebar">
+  <div class="logo">
+    <span class="brand">Clini<span class="accent">Care</span></span>
+    <span class="brand-sub">Agente de Saúde</span>
+  </div>
+
+  <nav class="menu">
+    @for (item of menu; track item.label) {
+      <a
+        [routerLink]="item.route"
+        routerLinkActive="active"
+        class="menu-item"
+      >
+        <span class="icon">{{ item.icon }}</span>
+        <span class="label">{{ item.label }}</span>
+      </a>
+    }
+  </nav>
+
+  <div class="sidebar-footer">
+    <div class="footer-divider"></div>
+    <div class="footer-user">
+      <div class="avatar">{{ userInitials }}</div>
+      <div class="user-info">
+        <span class="user-name">{{ currentUser?.nome ?? 'Usuário' }}</span>
+        <span class="user-role">Agente de Saúde</span>
+      </div>
+    </div>
+    <button class="logout-btn" (click)="logout()">
+      <span>↩</span> Sair
+    </button>
+  </div>
+</aside>

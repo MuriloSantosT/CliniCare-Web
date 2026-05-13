@@ -1,0 +1,1063 @@
+<div class="new-patient-container">
+  <header class="page-header">
+    <h1>Novo Paciente</h1>
+  </header>
+
+  <!-- Informações Básicas -->
+  <section class="form-section">
+    <div class="form-card">
+      <div class="card-header">
+        <div class="card-icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+            <circle cx="12" cy="7" r="4"/>
+          </svg>
+        </div>
+        <h2>Informações Básicas</h2>
+      </div>
+      <div class="form-grid">
+        <div class="form-group">
+          <label for="nome">Nome *</label>
+          <input
+            id="nome"
+            type="text"
+            [(ngModel)]="patient.nome"
+            placeholder="Digite o nome completo"
+            required
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="cpf">CPF *</label>
+          <input
+            id="cpf"
+            type="text"
+            [(ngModel)]="patient.cpf"
+            placeholder="000.000.000-00"
+            required
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="dataNascimento">Data de Nascimento *</label>
+          <input
+            id="dataNascimento"
+            type="date"
+            [(ngModel)]="patient.dataNascimento"
+            required
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="sexo">Sexo</label>
+          <select id="sexo" [(ngModel)]="patient.sexo">
+            <option value="">Selecione</option>
+            <option value="Masculino">Masculino</option>
+            <option value="Feminino">Feminino</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="telefoneEmergencia">Telefone de Emergência</label>
+          <input
+            id="telefoneEmergencia"
+            type="tel"
+            [(ngModel)]="patient.telefoneEmergencia"
+            placeholder="(00) 00000-0000"
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="convenio">Convênio</label>
+          <input
+            id="convenio"
+            type="text"
+            [(ngModel)]="patient.convenio"
+            placeholder="Nome do convênio"
+          />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Informações Médicas -->
+  <section class="form-section">
+    <div class="form-card">
+      <div class="card-header">
+        <div class="card-icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/>
+          </svg>
+        </div>
+        <h2>Informações Médicas</h2>
+      </div>
+      <div class="form-grid">
+        <div class="form-group full-width">
+          <label for="alergias">Alergias</label>
+          <textarea
+            id="alergias"
+            [(ngModel)]="patient.alergias"
+           
+            rows="3"
+          ></textarea>
+        </div>
+
+        <div class="form-group full-width">
+          <label for="observacoesGerais">Observações Gerais</label>
+          <textarea
+            id="observacoesGerais"
+            [(ngModel)]="patient.observacoesGerais"
+           
+            rows="3"
+          ></textarea>
+        </div>
+
+        <div class="form-group full-width">
+          <label for="medicamentos">Medicamentos</label>
+          <textarea
+            id="medicamentos"
+            [(ngModel)]="patient.medicamentos"
+           
+            rows="3"
+          ></textarea>
+        </div>
+
+        <div class="form-group full-width">
+          <label for="acompanhamentoProfissional">Acompanhamento Profissional</label>
+          <textarea
+            id="acompanhamentoProfissional"
+            [(ngModel)]="patient.acompanhamentoProfissional"
+           
+            rows="3"
+          ></textarea>
+        </div>
+
+        <div class="form-group full-width">
+          <label for="cirurgiasPrevias">Cirurgias Prévias</label>
+          <textarea
+            id="cirurgiasPrevias"
+            [(ngModel)]="patient.cirurgiasPrevias"
+           
+            rows="3"
+          ></textarea>
+        </div>
+
+        <div class="form-group full-width">
+          <label for="deficienciaTranstorno">Deficiência / Transtorno</label>
+          <textarea
+            id="deficienciaTranstorno"
+            [(ngModel)]="patient.deficienciaTranstorno"
+           
+            rows="3"
+          ></textarea>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Histórico de Gestação -->
+  <section class="form-section">
+    <div class="form-card">
+      <div class="card-header">
+        <div class="card-icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="10"/>
+            <path d="M12 8v4l3 3"/>
+          </svg>
+        </div>
+        <h2>Histórico de Gestação</h2>
+      </div>
+      <div class="form-grid">
+
+        <div class="form-group">
+          <label>Gravidez Planejada</label>
+          <div class="radio-group">
+            <label class="radio-item">
+              <input type="radio" [(ngModel)]="patient.gravidezPlanejada" name="gravidezPlanejada" value="sim" />
+              Sim
+            </label>
+            <label class="radio-item">
+              <input type="radio" [(ngModel)]="patient.gravidezPlanejada" name="gravidezPlanejada" value="não" />
+              Não
+            </label>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label>Fez Pré-Natal</label>
+          <div class="radio-group">
+            <label class="radio-item">
+              <input type="radio" [(ngModel)]="patient.fezPreNatal" name="fezPreNatal" value="sim" />
+              Sim
+            </label>
+            <label class="radio-item">
+              <input type="radio" [(ngModel)]="patient.fezPreNatal" name="fezPreNatal" value="não" />
+              Não
+            </label>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="idadeGravidez">Idade na Gravidez</label>
+          <input
+            id="idadeGravidez"
+            type="text"
+            [(ngModel)]="patient.idadeGravidez"
+           
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="pontuacaoApgar">Pontuação Apgar</label>
+          <input
+            id="pontuacaoApgar"
+            type="text"
+            [(ngModel)]="patient.pontuacaoApgar"
+           
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="duracaoParto">Duração do Parto</label>
+          <input
+            id="duracaoParto"
+            type="text"
+            [(ngModel)]="patient.duracaoParto"
+           
+          />
+        </div>
+
+        <div class="form-group full-width">
+          <label for="usoBebidasAlcoolicas">Uso de Bebidas Alcoólicas</label>
+          <textarea
+            id="usoBebidasAlcoolicas"
+            [(ngModel)]="patient.usoBebidasAlcoolicas"
+           
+            rows="3"
+          ></textarea>
+        </div>
+
+        <div class="form-group full-width">
+          <label for="gestacaoParto">Gestação / Parto</label>
+          <textarea
+            id="gestacaoParto"
+            [(ngModel)]="patient.gestacaoParto"
+           
+            rows="3"
+          ></textarea>
+        </div>
+
+        <div class="form-group full-width">
+          <label for="usoMedicamentosGestacao">Uso de Medicamentos na Gestação</label>
+          <textarea
+            id="usoMedicamentosGestacao"
+            [(ngModel)]="patient.usoMedicamentosGestacao"
+           
+            rows="3"
+          ></textarea>
+        </div>
+
+        <div class="form-group full-width">
+          <label for="partoPrematuro">Parto Prematuro</label>
+          <textarea
+            id="partoPrematuro"
+            [(ngModel)]="patient.partoPrematuro"
+           
+            rows="3"
+          ></textarea>
+        </div>
+
+        <div class="form-group full-width">
+          <label for="condicoesBebe">Condições do Bebê ao Nascer</label>
+          <textarea
+            id="condicoesBebe"
+            [(ngModel)]="patient.condicoesBebe"
+           
+            rows="3"
+          ></textarea>
+        </div>
+
+        <div class="form-group full-width">
+          <label for="usouForceps">Usou Fórceps</label>
+          <textarea
+            id="usouForceps"
+            [(ngModel)]="patient.usouForceps"
+           
+            rows="3"
+          ></textarea>
+        </div>
+
+        <div class="form-group full-width">
+          <label for="triagemNeonatal">Triagem Neonatal</label>
+          <textarea
+            id="triagemNeonatal"
+            [(ngModel)]="patient.triagemNeonatal"
+           
+            rows="3"
+          ></textarea>
+        </div>
+
+        <div class="form-group full-width">
+          <label for="bebeRecebeuVacinas">Bebê Recebeu Vacinas</label>
+          <textarea
+            id="bebeRecebeuVacinas"
+            [(ngModel)]="patient.bebeRecebeuVacinas"
+           
+            rows="3"
+          ></textarea>
+        </div>
+
+        <div class="form-group full-width">
+          <label for="problemaSaudeNascimento">Problema de Saúde ao Nascer</label>
+          <textarea
+            id="problemaSaudeNascimento"
+            [(ngModel)]="patient.problemaSaudeNascimento"
+           
+            rows="3"
+          ></textarea>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Histórico e Desenvolvimento do Bebê -->
+  <section class="form-section">
+    <div class="form-card">
+      <div class="card-header">
+        <div class="card-icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 2a5 5 0 100 10A5 5 0 0012 2z"/>
+            <path d="M6 20v-2a4 4 0 014-4h4a4 4 0 014 4v2"/>
+          </svg>
+        </div>
+        <h2>Histórico e Desenvolvimento do Bebê</h2>
+      </div>
+      <div class="form-grid">
+
+        <div class="form-group">
+          <label for="pesoBebe">Peso ao Nascer</label>
+          <input
+            id="pesoBebe"
+            type="text"
+            [(ngModel)]="patient.pesoBebe"
+           
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="tamanhoBebe">Tamanho ao Nascer</label>
+          <input
+            id="tamanhoBebe"
+            type="text"
+            [(ngModel)]="patient.tamanhoBebe"
+           
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="inicioEngatinhar">Início do Engatinhar</label>
+          <input
+            id="inicioEngatinhar"
+            type="text"
+            [(ngModel)]="patient.inicioEngatinhar"
+           
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="inicioRodar">Início do Rolar</label>
+          <input
+            id="inicioRodar"
+            type="text"
+            [(ngModel)]="patient.inicioRodar"
+           
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="inicioSentar">Início do Sentar</label>
+          <input
+            id="inicioSentar"
+            type="text"
+            [(ngModel)]="patient.inicioSentar"
+           
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="inicioAndar">Início do Andar</label>
+          <input
+            id="inicioAndar"
+            type="text"
+            [(ngModel)]="patient.inicioAndar"
+           
+          />
+        </div>
+
+        <div class="form-group full-width">
+          <label for="alimentacaoPrimeirosMeses">Alimentação nos Primeiros Meses</label>
+          <textarea
+            id="alimentacaoPrimeirosMeses"
+            [(ngModel)]="patient.alimentacaoPrimeirosMeses"
+           
+            rows="3"
+          ></textarea>
+        </div>
+
+        <div class="form-group full-width">
+          <label for="sonoPrimeirosMeses">Sono nos Primeiros Meses</label>
+          <textarea
+            id="sonoPrimeirosMeses"
+            [(ngModel)]="patient.sonoPrimeirosMeses"
+           
+            rows="3"
+          ></textarea>
+        </div>
+
+        <div class="form-group full-width">
+          <label for="interacaoAmbiente">Interação com o Ambiente</label>
+          <textarea
+            id="interacaoAmbiente"
+            [(ngModel)]="patient.interacaoAmbiente"
+           
+            rows="3"
+          ></textarea>
+        </div>
+
+        <div class="form-group full-width">
+          <label for="contatoVisual">Contato Visual</label>
+          <textarea
+            id="contatoVisual"
+            [(ngModel)]="patient.contatoVisual"
+           
+            rows="3"
+          ></textarea>
+        </div>
+
+        <div class="form-group full-width">
+          <label for="sorria">Sorria</label>
+          <textarea
+            id="sorria"
+            [(ngModel)]="patient.sorria"
+           
+            rows="3"
+          ></textarea>
+        </div>
+
+        <div class="form-group full-width">
+          <label for="deitava">Deitava</label>
+          <textarea
+            id="deitava"
+            [(ngModel)]="patient.deitava"
+           
+            rows="3"
+          ></textarea>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Linguagem e Comunicação -->
+  <section class="form-section">
+    <div class="form-card">
+      <div class="card-header">
+        <div class="card-icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/>
+          </svg>
+        </div>
+        <h2>Linguagem e Comunicação</h2>
+      </div>
+      <div class="form-grid">
+
+        <div class="form-group full-width">
+          <label for="primeiraspalavras">Primeiras Palavras</label>
+          <textarea id="primeiraspalavras" [(ngModel)]="patient.primeiraspalavras" rows="3"></textarea>
+        </div>
+
+        <div class="form-group full-width">
+          <label for="primeirasFrases">Primeiras Frases</label>
+          <textarea id="primeirasFrases" [(ngModel)]="patient.primeirasFrases" rows="3"></textarea>
+        </div>
+
+        <div class="form-group full-width">
+          <label for="quandoApontou">Quando Apontou</label>
+          <textarea id="quandoApontou" [(ngModel)]="patient.quandoApontou" rows="3"></textarea>
+        </div>
+
+        <div class="form-group full-width">
+          <label for="alimentacaoBebeCrianca">Alimentação Bebê / Criança</label>
+          <textarea id="alimentacaoBebeCrianca" [(ngModel)]="patient.alimentacaoBebeCrianca" rows="3"></textarea>
+        </div>
+
+        <div class="form-group full-width">
+          <label>Tipo de Bebê</label>
+          <div class="radio-group">
+            <label class="radio-item">
+              <input type="radio" [(ngModel)]="patient.tipoBebe" name="tipoBebe" value="tranquilo" />
+              Tranquilo
+            </label>
+            <label class="radio-item">
+              <input type="radio" [(ngModel)]="patient.tipoBebe" name="tipoBebe" value="choroso" />
+              Choroso
+            </label>
+            <label class="radio-item">
+              <input type="radio" [(ngModel)]="patient.tipoBebe" name="tipoBebe" value="agitado" />
+              Agitado
+            </label>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Ambiente Escolar e Social -->
+  <section class="form-section">
+    <div class="form-card">
+      <div class="card-header">
+        <div class="card-icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/>
+            <polyline points="9,22 9,12 15,12 15,22"/>
+          </svg>
+        </div>
+        <h2>Ambiente Escolar e Social</h2>
+      </div>
+      <div class="form-grid">
+
+        <div class="form-group full-width">
+          <label for="comportamentoCasa">Comportamento em Casa</label>
+          <textarea id="comportamentoCasa" [(ngModel)]="patient.comportamentoCasa" rows="3"></textarea>
+        </div>
+
+        <div class="form-group full-width">
+          <label for="comunidade">Comunidade</label>
+          <textarea id="comunidade" [(ngModel)]="patient.comunidade" rows="3"></textarea>
+        </div>
+
+        <div class="form-group">
+          <label>Possui Relatório Escolar</label>
+          <div class="radio-group">
+            <label class="radio-item">
+              <input type="radio" [(ngModel)]="patient.possuiRelatorioEscola" name="possuiRelatorioEscola" value="sim" />
+              Sim
+            </label>
+            <label class="radio-item">
+              <input type="radio" [(ngModel)]="patient.possuiRelatorioEscola" name="possuiRelatorioEscola" value="não" />
+              Não
+            </label>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label>Possui PDI</label>
+          <div class="radio-group">
+            <label class="radio-item">
+              <input type="radio" [(ngModel)]="patient.possuiPdi" name="possuiPdi" value="sim" />
+              Sim
+            </label>
+            <label class="radio-item">
+              <input type="radio" [(ngModel)]="patient.possuiPdi" name="possuiPdi" value="não" />
+              Não
+            </label>
+          </div>
+        </div>
+
+        <div class="form-group full-width">
+          <label for="interesseAtividades">Interesse em Atividades</label>
+          <textarea id="interesseAtividades" [(ngModel)]="patient.interesseAtividades" rows="3"></textarea>
+        </div>
+
+        <div class="form-group full-width">
+          <label for="lidaComRegras">Lida com Regras</label>
+          <textarea id="lidaComRegras" [(ngModel)]="patient.lidaComRegras" rows="3"></textarea>
+        </div>
+
+        <div class="form-group full-width">
+          <label for="pontuacaoProfessora">Pontuação da Professora</label>
+          <textarea id="pontuacaoProfessora" [(ngModel)]="patient.pontuacaoProfessora" rows="3"></textarea>
+        </div>
+
+        <div class="form-group full-width">
+          <label for="habilidadesMotFinas">Habilidades Motoras Finas</label>
+          <textarea id="habilidadesMotFinas" [(ngModel)]="patient.habilidadesMotFinas" rows="3"></textarea>
+        </div>
+
+        <div class="form-group full-width">
+          <label for="habilidadesMotGrossas">Habilidades Motoras Grossas</label>
+          <textarea id="habilidadesMotGrossas" [(ngModel)]="patient.habilidadesMotGrossas" rows="3"></textarea>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Cognição -->
+  <section class="form-section">
+    <div class="form-card">
+      <div class="card-header">
+        <div class="card-icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M9 3H5a2 2 0 00-2 2v4m6-6h10a2 2 0 012 2v4M9 3v18m0 0h10a2 2 0 002-2V9M9 21H5a2 2 0 01-2-2V9m0 0h18"/>
+          </svg>
+        </div>
+        <h2>Cognição</h2>
+      </div>
+      <div class="form-grid">
+
+        <div class="form-group full-width">
+          <label for="memoria">Memória</label>
+          <textarea id="memoria" [(ngModel)]="patient.memoria" rows="3"></textarea>
+        </div>
+
+        <div class="form-group full-width">
+          <label for="atencao">Atenção</label>
+          <textarea id="atencao" [(ngModel)]="patient.atencao" rows="3"></textarea>
+        </div>
+
+        <div class="form-group full-width">
+          <label for="compreensao">Compreensão</label>
+          <textarea id="compreensao" [(ngModel)]="patient.compreensao" rows="3"></textarea>
+        </div>
+
+        <div class="form-group full-width">
+          <label for="linguagemCognicao">Linguagem</label>
+          <textarea id="linguagemCognicao" [(ngModel)]="patient.linguagemCognicao" rows="3"></textarea>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Potencialidades e Déficits -->
+  <section class="form-section">
+    <div class="form-card">
+      <div class="card-header">
+        <div class="card-icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26 12,2"/>
+          </svg>
+        </div>
+        <h2>Potencialidades e Déficits</h2>
+      </div>
+      <div class="form-grid">
+
+        <div class="form-group full-width">
+          <label for="desafios">Desafios</label>
+          <textarea id="desafios" [(ngModel)]="patient.desafios" rows="3"></textarea>
+        </div>
+
+        <div class="form-group full-width">
+          <label for="potencialidades">Potencialidades</label>
+          <textarea id="potencialidades" [(ngModel)]="patient.potencialidades" rows="3"></textarea>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Socialização -->
+  <section class="form-section">
+    <div class="form-card">
+      <div class="card-header">
+        <div class="card-icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/>
+            <circle cx="9" cy="7" r="4"/>
+            <path d="M23 21v-2a4 4 0 00-3-3.87"/>
+            <path d="M16 3.13a4 4 0 010 7.75"/>
+          </svg>
+        </div>
+        <h2>Socialização</h2>
+      </div>
+      <div class="form-grid">
+
+        <div class="form-group full-width">
+          <label for="pessoaQueSeIdentifica">Pessoa que se Identifica</label>
+          <textarea id="pessoaQueSeIdentifica" [(ngModel)]="patient.pessoaQueSeIdentifica" rows="3"></textarea>
+        </div>
+
+        <div class="form-group full-width">
+          <label for="brincaComCriancas">Brinca com Crianças</label>
+          <textarea id="brincaComCriancas" [(ngModel)]="patient.brincaComCriancas" rows="3"></textarea>
+        </div>
+
+        <div class="form-group full-width">
+          <label for="preferenciaBrinquedos">Preferência de Brinquedos</label>
+          <textarea id="preferenciaBrinquedos" [(ngModel)]="patient.preferenciaBrinquedos" rows="3"></textarea>
+        </div>
+
+        <div class="form-group full-width">
+          <label for="sonoAtual">Sono Atual</label>
+          <textarea id="sonoAtual" [(ngModel)]="patient.sonoAtual" rows="3"></textarea>
+        </div>
+
+        <div class="form-group full-width">
+          <label for="atividadesVidaDiaria">Atividades de Vida Diária</label>
+          <textarea id="atividadesVidaDiaria" [(ngModel)]="patient.atividadesVidaDiaria" rows="3"></textarea>
+        </div>
+
+        <div class="form-group full-width">
+          <label for="oQueFazPede">O que Faz / Pede</label>
+          <textarea id="oQueFazPede" [(ngModel)]="patient.oQueFazPede" rows="3"></textarea>
+        </div>
+
+        <div class="form-group full-width">
+          <label for="rotinaCuidados">Rotina de Cuidados</label>
+          <textarea id="rotinaCuidados" [(ngModel)]="patient.rotinaCuidados" rows="3"></textarea>
+        </div>
+
+        <div class="form-group full-width">
+          <label for="relacaoFamiliar">Relação Familiar</label>
+          <textarea id="relacaoFamiliar" [(ngModel)]="patient.relacaoFamiliar" rows="3"></textarea>
+        </div>
+
+        <div class="form-group">
+          <label for="tempoTela">Tempo de Tela</label>
+          <input id="tempoTela" type="text" [(ngModel)]="patient.tempoTela" />
+        </div>
+
+        <div class="form-group">
+          <label for="rendaFamiliar">Renda Familiar</label>
+          <input id="rendaFamiliar" type="text" [(ngModel)]="patient.rendaFamiliar" />
+        </div>
+
+        <div class="form-group full-width">
+          <label for="observacoes">Observações</label>
+          <textarea id="observacoes" [(ngModel)]="patient.observacoes" rows="3"></textarea>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Informações Escolares -->
+  <section class="form-section">
+    <div class="form-card">
+      <div class="card-header">
+        <div class="card-icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/>
+            <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/>
+          </svg>
+        </div>
+        <h2>Informações Escolares</h2>
+      </div>
+      <div class="form-grid">
+        <div class="form-group">
+          <label for="nomeEscola">Nome da Escola</label>
+          <input
+            id="nomeEscola"
+            type="text"
+            [(ngModel)]="patient.nomeEscola"
+           
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="telefoneEscola">Telefone da Escola</label>
+          <input
+            id="telefoneEscola"
+            type="tel"
+            [(ngModel)]="patient.telefoneEscola"
+           
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="ano">Ano/Série</label>
+          <input
+            id="ano"
+            type="text"
+            [(ngModel)]="patient.ano"
+           
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="periodo">Período</label>
+          <select id="periodo" [(ngModel)]="patient.periodo">
+            <option value="">Selecione</option>
+            <option value="Manhã">Manhã</option>
+            <option value="Tarde">Tarde</option>
+            <option value="Noite">Noite</option>
+            <option value="Integral">Integral</option>
+          </select>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Informações dos Pais (somente para menores de idade) -->
+  @if (isMenorDeIdade) {
+  <section class="form-section">
+    <div class="form-card">
+      <div class="card-header">
+        <div class="card-icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+            <circle cx="9" cy="7" r="4"/>
+            <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
+            <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+          </svg>
+        </div>
+        <h2>Informações dos Pais</h2>
+      </div>
+      <div class="form-grid">
+        <div class="form-group">
+          <label for="nomeMae">Nome da Mãe</label>
+          <input
+            id="nomeMae"
+            type="text"
+            [(ngModel)]="patient.nomeMae"
+           
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="idadeMae">Idade da Mãe</label>
+          <input
+            id="idadeMae"
+            type="text"
+            [(ngModel)]="patient.idadeMae"
+           
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="profissaoMae">Profissão da Mãe</label>
+          <input
+            id="profissaoMae"
+            type="text"
+            [(ngModel)]="patient.profissaoMae"
+           
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="nomePai">Nome do Pai</label>
+          <input
+            id="nomePai"
+            type="text"
+            [(ngModel)]="patient.nomePai"
+           
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="idadePai">Idade do Pai</label>
+          <input
+            id="idadePai"
+            type="text"
+            [(ngModel)]="patient.idadePai"
+           
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="profissaoPai">Profissão do Pai</label>
+          <input
+            id="profissaoPai"
+            type="text"
+            [(ngModel)]="patient.profissaoPai"
+           
+          />
+        </div>
+      </div>
+    </div>
+  </section>
+  }
+
+  <!-- Endereço -->
+  <section class="form-section">
+    <div class="form-card">
+      <div class="card-header">
+        <div class="card-icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
+            <circle cx="12" cy="10" r="3"/>
+          </svg>
+        </div>
+        <h2>Endereço</h2>
+      </div>
+      <div class="form-grid">
+        <div class="form-group">
+          <label for="cep">CEP</label>
+          <input
+            id="cep"
+            type="text"
+            [(ngModel)]="patient.cep"
+           
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="rua">Rua</label>
+          <input
+            id="rua"
+            type="text"
+            [(ngModel)]="patient.rua"
+           
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="numero">Número</label>
+          <input
+            id="numero"
+            type="text"
+            [(ngModel)]="patient.numero"
+           
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="complemento">Complemento</label>
+          <input
+            id="complemento"
+            type="text"
+            [(ngModel)]="patient.complemento"
+           
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="bairro">Bairro</label>
+          <input
+            id="bairro"
+            type="text"
+            [(ngModel)]="patient.bairro"
+           
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="cidade">Cidade</label>
+          <input
+            id="cidade"
+            type="text"
+            [(ngModel)]="patient.cidade"
+           
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="estado">Estado</label>
+          <input
+            id="estado"
+            type="text"
+            [(ngModel)]="patient.estado"
+           
+          />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Responsáveis -->
+  <section class="form-section">
+    <div class="form-card">
+      <div class="card-header">
+        <div class="card-icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+            <circle cx="9" cy="7" r="4"/>
+            <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
+            <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+          </svg>
+        </div>
+        <h2>Responsáveis</h2>
+      </div>
+
+      <!-- Lista de Responsáveis -->
+      @if (patient.responsaveis && patient.responsaveis.length) {
+      <div class="responsaveis-list">
+        @for (resp of patient.responsaveis; track $index; let i = $index) {
+        <div class="responsavel-item">
+          <div class="responsavel-info">
+            <strong>{{ resp.nome }}</strong>
+            <p>CPF: {{ resp.cpf }}</p>
+            @if (resp.telefone) {
+            <p>Telefone: {{ resp.telefone }}</p>
+            }
+          </div>
+          <button type="button" class="btn-remove" (click)="removerResponsavel(i)" title="Remover responsável">
+            ✕
+          </button>
+        </div>
+        }
+      </div>
+      }
+
+      <!-- Formulário para adicionar responsável -->
+      <div class="add-responsavel-form">
+        <h3>Adicionar Responsável</h3>
+        <div class="form-grid">
+          <div class="form-group">
+            <label for="respNome">Nome *</label>
+            <input
+              id="respNome"
+              type="text"
+              [(ngModel)]="novoResponsavel.nome"
+             
+            />
+          </div>
+
+          <div class="form-group">
+            <label for="respCpf">CPF *</label>
+            <input
+              id="respCpf"
+              type="text"
+              [(ngModel)]="novoResponsavel.cpf"
+             
+            />
+          </div>
+
+          <div class="form-group">
+            <label for="respTelefone">Telefone</label>
+            <input
+              id="respTelefone"
+              type="tel"
+              [(ngModel)]="novoResponsavel.telefone"
+             
+            />
+          </div>
+
+          <div class="form-group">
+            <button
+              type="button"
+              class="btn-add-responsavel"
+              (click)="adicionarResponsavel()"
+              [disabled]="!novoResponsavel.nome || !novoResponsavel.cpf"
+            >
+              Adicionar
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Botões de Ação -->
+  <section class="form-actions">
+    <div class="form-group checkbox-group">
+      <label for="adicionarAnamnese" class="checkbox-label">
+        <input
+          id="adicionarAnamnese"
+          type="checkbox"
+          [(ngModel)]="adicionarAnamnese"
+        />
+        Adicionar Anamnese após salvar
+      </label>
+    </div>
+    <button type="button" class="btn-cancel" (click)="cancelar()">
+      Cancelar
+    </button>
+    <button type="button" class="btn-save" (click)="salvarPaciente()">
+      Salvar Paciente
+    </button>
+  </section>
+</div>

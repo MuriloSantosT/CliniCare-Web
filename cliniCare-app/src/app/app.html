@@ -1,0 +1,11 @@
+<body>
+  <div class="layout">
+    @if (!isAuthPage()) {
+      <app-sidebar></app-sidebar>
+    }
+
+    <div [class]="isAuthPage() ? 'content-full' : 'content'">
+      <router-outlet></router-outlet>
+    </div>
+  </div>
+</body>

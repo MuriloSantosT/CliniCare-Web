@@ -1,0 +1,115 @@
+<div class="auth-page">
+
+  <!-- Left decorative panel -->
+  <div class="auth-left">
+    <header class="left-header">
+      <span class="brand-name">Clini<span class="brand-accent">Care</span></span>
+    </header>
+
+    <div class="left-center">
+      <p class="welcome-sub">Comece sua jornada</p>
+      <h1 class="welcome-title">CRIE SUA<br>CONTA!</h1>
+      <p class="welcome-desc">
+        Cadastre-se e tenha acesso completo ao sistema
+        de gestão clínica de fonoaudiologia.
+      </p>
+    </div>
+
+    <div class="deco-circle deco-1"></div>
+    <div class="deco-circle deco-2"></div>
+    <div class="deco-circle deco-3"></div>
+  </div>
+
+  <!-- Right form panel -->
+  <div class="auth-right">
+    <div class="form-wrapper">
+      <h2 class="title">Criar Conta</h2>
+      <p class="subtitle">Preencha seus dados para começar</p>
+
+      <form [formGroup]="signupForm" (ngSubmit)="onSubmit()" novalidate>
+        <div class="field">
+          <input
+            id="nome"
+            type="text"
+            formControlName="nome"
+            placeholder="Nome completo"
+            [class.input-error]="signupForm.get('nome')?.invalid && signupForm.get('nome')?.touched"
+          />
+          @if (signupForm.get('nome')?.invalid && signupForm.get('nome')?.touched) {
+            <span class="field-error">Nome deve ter ao menos 3 caracteres</span>
+          }
+        </div>
+
+        <div class="field">
+          <input
+            id="email"
+            type="email"
+            formControlName="email"
+            placeholder="Email"
+            [class.input-error]="signupForm.get('email')?.invalid && signupForm.get('email')?.touched"
+          />
+          @if (signupForm.get('email')?.invalid && signupForm.get('email')?.touched) {
+            <span class="field-error">Informe um email válido</span>
+          }
+        </div>
+
+        <div class="field">
+          <div class="password-field">
+            <input
+              id="senha"
+              [type]="showPassword ? 'text' : 'password'"
+              formControlName="senha"
+              placeholder="Senha (mínimo 6 caracteres)"
+              [class.input-error]="signupForm.get('senha')?.invalid && signupForm.get('senha')?.touched"
+            />
+            <button type="button" class="toggle-pw" (click)="showPassword = !showPassword" tabindex="-1">
+              @if (showPassword) {
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17.94 17.94A10.07 10.07 0 0112 20c-7 0-11-8-11-8a18.45 18.45 0 015.06-5.94"/><path d="M9.9 4.24A9.12 9.12 0 0112 4c7 0 11 8 11 8a18.5 18.5 0 01-2.16 3.19"/><line x1="1" y1="1" x2="23" y2="23"/></svg>
+              } @else {
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+              }
+            </button>
+          </div>
+          @if (signupForm.get('senha')?.invalid && signupForm.get('senha')?.touched) {
+            <span class="field-error">Senha deve ter ao menos 6 caracteres</span>
+          }
+        </div>
+
+        <div class="field">
+          <div class="password-field">
+            <input
+              id="confirma"
+              [type]="showConfirm ? 'text' : 'password'"
+              formControlName="confirmaSenha"
+              placeholder="Confirmar senha"
+              [class.input-error]="(signupForm.get('confirmaSenha')?.invalid && signupForm.get('confirmaSenha')?.touched) || mismatch"
+            />
+            <button type="button" class="toggle-pw" (click)="showConfirm = !showConfirm" tabindex="-1">
+              @if (showConfirm) {
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17.94 17.94A10.07 10.07 0 0112 20c-7 0-11-8-11-8a18.45 18.45 0 015.06-5.94"/><path d="M9.9 4.24A9.12 9.12 0 0112 4c7 0 11 8 11 8a18.5 18.5 0 01-2.16 3.19"/><line x1="1" y1="1" x2="23" y2="23"/></svg>
+              } @else {
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+              }
+            </button>
+          </div>
+          @if (mismatch) {
+            <span class="field-error">As senhas não coincidem</span>
+          }
+        </div>
+
+        @if (errorMsg) {
+          <div class="alert-error">{{ errorMsg }}</div>
+        }
+
+        <button type="submit" class="btn-primary" [disabled]="loading">
+          {{ loading ? 'Criando conta...' : 'CADASTRAR' }}
+        </button>
+      </form>
+
+      <p class="login-link">
+        Já possui conta? <a routerLink="/login">Entrar</a>
+      </p>
+    </div>
+  </div>
+
+</div>

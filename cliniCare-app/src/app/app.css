@@ -1,0 +1,29 @@
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #f8f8f8;
+  height: 100vh;
+}
+
+.layout {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  width: 100%;
+  min-height: 100vh;
+}
+
+.content {
+  width: calc(100% - 15vw);
+  margin-left: 15vw;
+  padding: 0 2.5vw;
+  box-sizing: border-box;
+  background-color: #f8f8f8;
+}
+
+.content-full {
+  flex: 1;
+  display: flex;
+  min-height: 100vh;
+  overflow: hidden;
+}

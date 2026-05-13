@@ -1,0 +1,95 @@
+<section class="home-container">
+  <div class="home-header">
+    <div>
+      <h1>Olá, Giulia Santos!</h1>
+      <p>Fonoaudióloga</p>
+    </div>
+  </div>
+
+  <div class="metrics-row">
+    <article class="metric-card">
+      <div class="metric-content">
+        <span class="metric-label">Consultas Totais</span>
+        <strong>{{ totalConsultas }}</strong>
+      </div>
+      <span class="metric-icon">📅</span>
+    </article>
+
+    <article class="metric-card green">
+      <div class="metric-content">
+        <span class="metric-label">Pacientes Cadastrados</span>
+        <strong>{{ pacientesCadastrados }}</strong>
+      </div>
+      <span class="metric-icon">👤</span>
+    </article>
+
+    <article class="metric-card violet">
+      <div class="metric-content">
+        <span class="metric-label">Prontuários</span>
+        <strong>{{ prontuarios }}</strong>
+      </div>
+      <span class="metric-icon">📄</span>
+    </article>
+  </div>
+
+  <section class="large-card next-appointment-card">
+    <div>
+      <span class="label">Próximo Atendimento</span>
+      <h2>João Pietro da Silva Cardoso</h2>
+    </div>
+    <span class="badge">Ficha de Evolução</span>
+  </section>
+
+  <section class="large-card aniversariantes-card">
+    <div class="card-header">
+      <div>
+        <strong>Aniversariantes do Mês</strong>
+        <p>Pacientes que fazem aniversário em Agosto</p>
+      </div>
+    </div>
+
+    <div class="table-wrapper">
+      <table>
+        <thead>
+          <tr>
+            <th>Nome</th>
+            <th>Data</th>
+            <th>Idade</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let patient of aniversariantesDoMes">
+            <td>{{ patient.nome }}</td>
+            <td>{{ formatarData(patient.dataNascimento) }}</td>
+            <td>{{ calcularIdade(patient.dataNascimento) }} anos</td>
+          </tr>
+          <tr *ngIf="!aniversariantesDoMes.length">
+            <td colspan="3" class="empty-row">Nenhum aniversariante encontrado.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <div class="bottom-row">
+    <article class="bottom-card">
+      <strong>Pacientes do dia</strong>
+      <span>{{ pacientesDoDia }}</span>
+      <div class="icon-circle">🩺</div>
+    </article>
+
+    <article class="bottom-card">
+      <strong>Próximo atendimento</strong>
+      <span>{{ proximoAtendimentoHorario }}</span>
+      <div class="icon-circle purple">⏰</div>
+    </article>
+
+    <article class="bottom-card notes-card">
+      <div class="notes-header">
+        <strong>Notas</strong>
+        <span class="edit-icon">✏️</span>
+      </div>
+      <p>{{ notas }}</p>
+    </article>
+  </div>
+</section>

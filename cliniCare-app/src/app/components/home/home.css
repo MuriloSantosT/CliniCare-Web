@@ -1,0 +1,308 @@
+.home-container {
+  margin: 30px 0;
+  width: 100%;
+  display: grid;
+  gap: 22px;
+}
+
+.home-header h1 {
+  font-size: 2rem;
+  margin: 0;
+  color: #0f172a;
+  font-weight: 700;
+}
+
+.home-header p {
+  margin: 6px 0 0;
+  color: #64748b;
+  font-size: 0.95rem;
+  font-weight: 500;
+}
+
+/* METRIC CARDS */
+.metrics-row {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.metric-card {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: center;
+  padding: 20px 22px;
+  border-radius: 18px;
+  background: #ffffff;
+  box-shadow: 0 8px 24px rgba(15, 23, 42, 0.06);
+  min-height: 100px;
+  gap: 16px;
+  border-top: 3px solid #3b82f6;
+  transition: box-shadow 0.2s ease, transform 0.2s ease;
+}
+
+.metric-card:hover {
+  box-shadow: 0 12px 32px rgba(15, 23, 42, 0.1);
+  transform: translateY(-2px);
+}
+
+.metric-card.green {
+  border-top-color: #22c55e;
+}
+
+.metric-card.violet {
+  border-top-color: #a855f7;
+}
+
+.metric-card::before {
+  display: none;
+}
+
+.metric-content {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.metric-label {
+  color: #64748b;
+  font-size: 0.875rem;
+  margin: 0;
+  font-weight: 500;
+  letter-spacing: 0.2px;
+}
+
+.metric-card strong {
+  display: block;
+  font-size: 2rem;
+  color: #0f172a;
+  line-height: 1;
+  font-weight: 700;
+}
+
+.metric-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 46px;
+  height: 46px;
+  border-radius: 14px;
+  background: #eff6ff;
+  font-size: 1.15rem;
+}
+
+.metric-card.green .metric-icon {
+  background: #f0fdf4;
+}
+
+.metric-card.violet .metric-icon {
+  background: #faf5ff;
+}
+
+/* LARGE CARDS */
+.next-appointment-card,
+.aniversariantes-card,
+.bottom-card,
+.notes-card {
+  background: #ffffff;
+  border-radius: 18px;
+  padding: 24px;
+  box-shadow: 0 8px 24px rgba(15, 23, 42, 0.06);
+}
+
+.next-appointment-card {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-left: 4px solid #22c55e;
+}
+
+.next-appointment-card .label {
+  color: #64748b;
+  font-size: 0.875rem;
+  font-weight: 500;
+}
+
+.next-appointment-card h2 {
+  margin: 8px 0 0;
+  font-size: 1.35rem;
+  color: #0f172a;
+  font-weight: 700;
+}
+
+.badge {
+  background: #f0fdf4;
+  color: #16a34a;
+  border-radius: 9999px;
+  padding: 8px 18px;
+  font-size: 0.875rem;
+  font-weight: 600;
+  border: 1px solid #bbf7d0;
+  white-space: nowrap;
+}
+
+/* ANIVERSARIANTES */
+.aniversariantes-card .card-header {
+  margin-bottom: 18px;
+}
+
+.aniversariantes-card strong {
+  font-size: 1rem;
+  color: #0f172a;
+  font-weight: 700;
+}
+
+.aniversariantes-card p {
+  margin: 5px 0 0;
+  color: #64748b;
+  font-size: 0.875rem;
+}
+
+.table-wrapper {
+  overflow-x: auto;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+thead th {
+  text-align: left;
+  color: #475569;
+  padding-bottom: 12px;
+  font-weight: 600;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  border-bottom: 2px solid #f1f5f9;
+}
+
+tbody tr {
+  border-top: 1px solid #f1f5f9;
+  transition: background 0.15s ease;
+}
+
+tbody tr:hover {
+  background: #f8fafc;
+}
+
+tbody td {
+  padding: 14px 0;
+  color: #334155;
+  font-size: 0.95rem;
+}
+
+tbody td:first-child {
+  width: 50%;
+  font-weight: 500;
+}
+
+.empty-row {
+  text-align: center;
+  color: #94a3b8;
+  padding: 28px 0;
+  font-style: italic;
+}
+
+/* BOTTOM ROW */
+.bottom-row {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.bottom-card {
+  min-height: 160px;
+  display: grid;
+  gap: 14px;
+  transition: box-shadow 0.2s ease, transform 0.2s ease;
+}
+
+.bottom-card:hover {
+  box-shadow: 0 12px 32px rgba(15, 23, 42, 0.1);
+  transform: translateY(-2px);
+}
+
+.bottom-card strong {
+  font-size: 0.95rem;
+  display: block;
+  color: #64748b;
+  font-weight: 600;
+  letter-spacing: 0.2px;
+}
+
+.bottom-card span {
+  font-size: 1.9rem;
+  color: #0f172a;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.icon-circle {
+  width: 68px;
+  height: 68px;
+  border-radius: 16px;
+  background: rgba(34, 197, 94, 0.12);
+  display: grid;
+  place-items: center;
+  font-size: 1.8rem;
+  margin-top: auto;
+}
+
+.icon-circle.purple {
+  background: rgba(168, 85, 247, 0.12);
+}
+
+.notes-card {
+  display: grid;
+  gap: 12px;
+}
+
+.notes-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.notes-header strong {
+  font-size: 0.95rem;
+  color: #64748b;
+  font-weight: 600;
+}
+
+.edit-icon {
+  font-size: 0.95rem;
+  color: #94a3b8;
+  cursor: pointer;
+  transition: opacity 0.15s ease;
+}
+
+.edit-icon:hover {
+  opacity: 0.7;
+}
+
+.notes-card p {
+  margin: 0;
+  color: #475569;
+  line-height: 1.6;
+  font-size: 0.9rem;
+}
+
+@media (max-width: 980px) {
+  .metrics-row,
+  .bottom-row {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 680px) {
+  .home-container {
+    width: calc(100vw - 24px);
+  }
+
+  .next-appointment-card,
+  .aniversariantes-card,
+  .bottom-card {
+    padding: 18px;
+  }
+}
