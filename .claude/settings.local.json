@@ -1,0 +1,8 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(/home/murilo/.m2/wrapper/dists/apache-maven-3.9.12/6068d197/bin/mvn compile *)",
+      "Bash(xargs cat)"
+    ]
+  }
+}
