@@ -1,95 +1,159 @@
 <section class="home-container">
+
+  <!-- HEADER -->
   <div class="home-header">
     <div>
-      <h1>Olá, Giulia Santos!</h1>
-      <p>Fonoaudióloga</p>
+      <h1>Olá, {{ primeiroNome('Giulia Santos') }}! 👋</h1>
+      <p>Aqui está o resumo da sua clínica hoje.</p>
     </div>
+    <span class="header-date">{{ dataHoje }}</span>
   </div>
 
+  <!-- 4 METRIC CARDS -->
   <div class="metrics-row">
     <article class="metric-card">
-      <div class="metric-content">
-        <span class="metric-label">Consultas Totais</span>
-        <strong>{{ totalConsultas }}</strong>
-      </div>
-      <span class="metric-icon">📅</span>
+      <span class="metric-label">Pacientes cadastrados</span>
+      <strong>{{ pacientesCadastrados }}</strong>
+      <a routerLink="/pacientes" class="metric-link">Ver pacientes</a>
     </article>
 
-    <article class="metric-card green">
-      <div class="metric-content">
-        <span class="metric-label">Pacientes Cadastrados</span>
-        <strong>{{ pacientesCadastrados }}</strong>
-      </div>
-      <span class="metric-icon">👤</span>
+    <article class="metric-card">
+      <span class="metric-label">Pacientes do dia</span>
+      <strong>{{ pacientesDoDia }}</strong>
+      <a routerLink="/agenda" class="metric-link">Ver agenda</a>
     </article>
 
-    <article class="metric-card violet">
-      <div class="metric-content">
-        <span class="metric-label">Prontuários</span>
-        <strong>{{ prontuarios }}</strong>
-      </div>
-      <span class="metric-icon">📄</span>
+    <article class="metric-card">
+      <span class="metric-label">Prontuários</span>
+      <strong>{{ prontuarios }}</strong>
+      <span class="metric-link">Ver prontuários</span>
+    </article>
+
+    <article class="metric-card">
+      <span class="metric-label">Total de consultas</span>
+      <strong>{{ totalConsultas }}</strong>
+      <span class="metric-link">Ver relatórios</span>
     </article>
   </div>
 
-  <section class="large-card next-appointment-card">
-    <div>
-      <span class="label">Próximo Atendimento</span>
-      <h2>João Pietro da Silva Cardoso</h2>
-    </div>
-    <span class="badge">Ficha de Evolução</span>
-  </section>
-
-  <section class="large-card aniversariantes-card">
-    <div class="card-header">
-      <div>
-        <strong>Aniversariantes do Mês</strong>
-        <p>Pacientes que fazem aniversário em Agosto</p>
-      </div>
-    </div>
-
-    <div class="table-wrapper">
-      <table>
-        <thead>
-          <tr>
-            <th>Nome</th>
-            <th>Data</th>
-            <th>Idade</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let patient of aniversariantesDoMes">
-            <td>{{ patient.nome }}</td>
-            <td>{{ formatarData(patient.dataNascimento) }}</td>
-            <td>{{ calcularIdade(patient.dataNascimento) }} anos</td>
-          </tr>
-          <tr *ngIf="!aniversariantesDoMes.length">
-            <td colspan="3" class="empty-row">Nenhum aniversariante encontrado.</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-  </section>
-
+  <!-- BOTTOM: 2 COLUNAS -->
   <div class="bottom-row">
-    <article class="bottom-card">
-      <strong>Pacientes do dia</strong>
-      <span>{{ pacientesDoDia }}</span>
-      <div class="icon-circle">🩺</div>
-    </article>
 
-    <article class="bottom-card">
-      <strong>Próximo atendimento</strong>
-      <span>{{ proximoAtendimentoHorario }}</span>
-      <div class="icon-circle purple">⏰</div>
-    </article>
+    <!-- ESQUERDA: Agenda de hoje + Aniversariantes -->
+    <div class="left-col">
+      <section class="panel-card agenda-panel">
+        <div class="panel-header">
+          <strong>Agenda de hoje</strong>
+          <a routerLink="/agenda" class="panel-link">Ver agenda completa</a>
+        </div>
 
-    <article class="bottom-card notes-card">
-      <div class="notes-header">
-        <strong>Notas</strong>
-        <span class="edit-icon">✏️</span>
-      </div>
-      <p>{{ notas }}</p>
-    </article>
+        <div class="agenda-list">
+          <div class="agenda-item">
+            <span class="agenda-time">{{ proximoAtendimentoHorario }}</span>
+            <div class="agenda-info">
+              <span class="agenda-name">Próximo paciente</span>
+              <span class="agenda-type">Consulta agendada</span>
+            </div>
+          </div>
+          @if (pacientesDoDia === 0) {
+            <div class="agenda-empty">Nenhum atendimento agendado para hoje.</div>
+          }
+        </div>
+      </section>
+
+      <section class="panel-card aniversariantes-panel">
+        <div class="panel-header">
+          <strong>Aniversariantes do mês</strong>
+          <p class="panel-sub">{{ mesAtual }}</p>
+        </div>
+
+        <div class="table-wrapper">
+          <table>
+            <thead>
+              <tr>
+                <th>Nome</th>
+                <th>Data</th>
+                <th>Idade</th>
+              </tr>
+            </thead>
+            <tbody>
+              @for (patient of aniversariantesDoMes; track patient.nome) {
+                <tr>
+                  <td>{{ patient.nome }}</td>
+                  <td>{{ formatarData(patient.dataNascimento) }}</td>
+                  <td>{{ calcularIdade(patient.dataNascimento) }} anos</td>
+                </tr>
+              }
+              @if (!aniversariantesDoMes.length) {
+                <tr><td colspan="3" class="empty-row">Nenhum aniversariante encontrado.</td></tr>
+              }
+            </tbody>
+          </table>
+        </div>
+      </section>
+    </div>
+
+    <!-- DIREITA: Gráfico de evolução + Notas -->
+    <div class="right-col">
+      <section class="panel-card chart-panel">
+        <div class="panel-header">
+          <strong>Evolução dos atendimentos</strong>
+          <span class="panel-sub">Este ano</span>
+        </div>
+
+        <div class="chart-area">
+          <svg viewBox="0 0 420 160" preserveAspectRatio="none" class="chart-svg">
+            <defs>
+              <linearGradient id="chartGrad" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stop-color="#22c55e" stop-opacity="0.18"/>
+                <stop offset="100%" stop-color="#22c55e" stop-opacity="0"/>
+              </linearGradient>
+            </defs>
+            <!-- Grid lines -->
+            <line x1="0" y1="32"  x2="420" y2="32"  stroke="#f1f5f9" stroke-width="1"/>
+            <line x1="0" y1="64"  x2="420" y2="64"  stroke="#f1f5f9" stroke-width="1"/>
+            <line x1="0" y1="96"  x2="420" y2="96"  stroke="#f1f5f9" stroke-width="1"/>
+            <line x1="0" y1="128" x2="420" y2="128" stroke="#f1f5f9" stroke-width="1"/>
+            <!-- Area fill -->
+            <polygon
+              points="0,120 35,110 70,100 105,95 140,105 175,90 210,75 245,65 280,60 315,50 350,45 385,40 420,35 420,160 0,160"
+              fill="url(#chartGrad)"
+            />
+            <!-- Line -->
+            <polyline
+              points="0,120 35,110 70,100 105,95 140,105 175,90 210,75 245,65 280,60 315,50 350,45 385,40 420,35"
+              fill="none"
+              stroke="#22c55e"
+              stroke-width="2.5"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+            <!-- Dots -->
+            <circle cx="0"   cy="120" r="3.5" fill="#22c55e"/>
+            <circle cx="70"  cy="100" r="3.5" fill="#22c55e"/>
+            <circle cx="140" cy="105" r="3.5" fill="#22c55e"/>
+            <circle cx="210" cy="75"  r="3.5" fill="#22c55e"/>
+            <circle cx="280" cy="60"  r="3.5" fill="#22c55e"/>
+            <circle cx="350" cy="45"  r="3.5" fill="#22c55e"/>
+            <circle cx="420" cy="35"  r="3.5" fill="#22c55e"/>
+          </svg>
+          <!-- X axis labels -->
+          <div class="chart-x-labels">
+            <span>Jan</span><span>Fev</span><span>Mar</span><span>Abr</span>
+            <span>Mai</span><span>Jun</span><span>Jul</span><span>Ago</span>
+            <span>Set</span><span>Out</span><span>Nov</span><span>Dez</span>
+          </div>
+        </div>
+      </section>
+
+      <section class="panel-card notes-panel">
+        <div class="panel-header">
+          <strong>Notas</strong>
+          <span class="edit-icon">✏️</span>
+        </div>
+        <p class="notes-text">{{ notas }}</p>
+      </section>
+    </div>
+
   </div>
 </section>

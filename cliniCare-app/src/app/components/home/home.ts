@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { RouterLink } from '@angular/router';
 import { PatientService, Patient } from '../../services/patient.service';
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, RouterLink],
   templateUrl: './home.html',
   styleUrls: ['./home.css'],
 })
@@ -18,6 +19,13 @@ export class Home implements OnInit {
   pacientesDoDia = 4;
   proximoAtendimentoHorario = '16:30';
   notas = 'Guardar alguns minutos para pesquisar novas dinâmicas';
+
+  readonly dataHoje = new Date().toLocaleDateString('pt-BR', { day: 'numeric', month: 'long', year: 'numeric' });
+  readonly mesAtual = new Date().toLocaleDateString('pt-BR', { month: 'long' });
+
+  primeiroNome(nomeCompleto: string): string {
+    return nomeCompleto.trim().split(' ')[0];
+  }
 
   constructor(private patientService: PatientService) {}
 

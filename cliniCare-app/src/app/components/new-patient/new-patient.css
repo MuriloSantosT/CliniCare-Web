@@ -45,7 +45,7 @@
   justify-content: center;
   width: 40px;
   height: 40px;
-  background: linear-gradient(135deg, #3b82f6, #1d4ed8);
+  background: linear-gradient(135deg, #22c55e, #16a34a);
   border-radius: 10px;
   color: white;
   flex-shrink: 0;
@@ -101,8 +101,8 @@
 .form-group select:focus,
 .form-group textarea:focus {
   outline: none;
-  border-color: #3b82f6;
-  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+  border-color: #22c55e;
+  box-shadow: 0 0 0 3px rgba(34, 197, 94, 0.1);
 }
 
 .form-group textarea {
@@ -127,7 +127,7 @@
   padding: 16px;
   background: #f8fafc;
   border-radius: 12px;
-  border-left: 4px solid #3b82f6;
+  border-left: 4px solid #22c55e;
 }
 
 .responsavel-info strong {
@@ -217,7 +217,7 @@
 }
 
 .btn-save {
-  background: #3b82f6;
+  background: #22c55e;
   color: white;
   border: none;
   padding: 14px 28px;
@@ -229,9 +229,9 @@
 }
 
 .btn-save:hover {
-  background: #2563eb;
+  background: #16a34a;
   transform: translateY(-1px);
-  box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+  box-shadow: 0 4px 12px rgba(34, 197, 94, 0.25);
 }
 
 /* Radio group */
@@ -254,7 +254,7 @@
 .radio-item input[type="radio"] {
   width: 16px;
   height: 16px;
-  accent-color: #3b82f6;
+  accent-color: #22c55e;
   cursor: pointer;
 }
 
@@ -279,7 +279,7 @@
 .checkbox-label input[type="checkbox"] {
   width: 18px;
   height: 18px;
-  accent-color: #3b82f6;
+  accent-color: #22c55e;
   cursor: pointer;
 }
 

@@ -2,23 +2,41 @@ body {
   margin: 0;
   padding: 0;
   background-color: #f8f8f8;
-  height: 100vh;
+  min-height: 100vh;
 }
 
 .layout {
-  margin: 0;
-  padding: 0;
   display: flex;
   width: 100%;
   min-height: 100vh;
 }
 
+/* Desktop */
 .content {
-  width: calc(100% - 15vw);
-  margin-left: 15vw;
+  width: calc(100% - 220px);
+  margin-left: 220px;
   padding: 0 2.5vw;
   box-sizing: border-box;
   background-color: #f8f8f8;
+  min-height: 100vh;
+}
+
+/* Tablet — sidebar compacta de 64px */
+@media (max-width: 1024px) and (min-width: 769px) {
+  .content {
+    width: calc(100% - 64px);
+    margin-left: 64px;
+    padding: 0 24px;
+  }
+}
+
+/* Mobile — sem sidebar fixa, espaço para hamburger */
+@media (max-width: 768px) {
+  .content {
+    width: 100%;
+    margin-left: 0;
+    padding: 72px 16px 24px;
+  }
 }
 
 .content-full {

@@ -42,6 +42,10 @@ export class Dashboard implements OnInit {
     return this.authService.getCurrentUser()?.nome ?? 'Usuário';
   }
 
+  get primeiroNome(): string {
+    return this.nomeUsuario.trim().split(' ')[0];
+  }
+
   get pacientesCadastrados(): number {
     return this.pacientes.length;
   }

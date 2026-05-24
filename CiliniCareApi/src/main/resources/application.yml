@@ -1,8 +1,8 @@
 spring:
   datasource:
-    url: jdbc:mysql://nozomi.proxy.rlwy.net:47471/railway
+    url: jdbc:mysql://kodama.proxy.rlwy.net:48304/railway
     username: root
-    password: pNqTCxbIWrPUXlTmevtutanHwfvyWfhr
+    password: fFuyQfEXHuOIFxkhDhxyukiznGNIoZcs
 
     hikari:
       maximum-pool-size: 5

@@ -1,4 +1,16 @@
-<aside class="sidebar">
+<!-- Hamburger (mobile only) -->
+<button class="hamburger-btn" (click)="toggleMenu()" [class.open]="isOpen" aria-label="Abrir menu">
+  <span></span>
+  <span></span>
+  <span></span>
+</button>
+
+<!-- Overlay (mobile) -->
+@if (isOpen) {
+  <div class="sidebar-overlay" (click)="closeMenu()"></div>
+}
+
+<aside class="sidebar" [class.open]="isOpen">
   <div class="logo">
     <span class="brand">Clini<span class="accent">Care</span></span>
     <span class="brand-sub">Agente de Saúde</span>
@@ -10,8 +22,9 @@
         [routerLink]="item.route"
         routerLinkActive="active"
         class="menu-item"
+        (click)="closeMenu()"
       >
-        <span class="icon">{{ item.icon }}</span>
+        <img class="icon" [src]="item.icon" [alt]="item.label">
         <span class="label">{{ item.label }}</span>
       </a>
     }

@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
-import { RouterModule, Router } from '@angular/router';
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { RouterModule, Router, NavigationEnd } from '@angular/router';
+import { filter, Subscription } from 'rxjs';
 import { AuthService } from '../../services/auth.service';
 
 @Component({
@@ -9,14 +10,30 @@ import { AuthService } from '../../services/auth.service';
   styleUrl: './sidebar.css',
   standalone: true
 })
-export class Sidebar {
+export class Sidebar implements OnInit, OnDestroy {
   menu = [
-    { label: 'Painel', icon: '🏠', route: '/dashboard' },
-    { label: 'Agenda', icon: '📅', route: '/agenda' },
-    { label: 'Pacientes', icon: '👥', route: '/patients' }
+    { label: 'Painel', icon: 'dashboard.png', route: '/dashboard' },
+    { label: 'Agenda', icon: 'calendar.png', route: '/agenda' },
+    { label: 'Pacientes', icon: 'group.png', route: '/patients' }
   ];
 
+  isOpen = false;
+  private routerSub?: Subscription;
+
   constructor(private authService: AuthService, private router: Router) {}
+
+  ngOnInit() {
+    this.routerSub = this.router.events
+      .pipe(filter(e => e instanceof NavigationEnd))
+      .subscribe(() => (this.isOpen = false));
+  }
+
+  ngOnDestroy() {
+    this.routerSub?.unsubscribe();
+  }
+
+  toggleMenu() { this.isOpen = !this.isOpen; }
+  closeMenu()  { this.isOpen = false; }
 
   get currentUser() {
     return this.authService.getCurrentUser();
