@@ -21,6 +21,11 @@ public class EvolutionController {
         return evolutionService.save(evolution);
     }
 
+    @GetMapping("/{id}")
+    public Evolution getById(@PathVariable Long id) {
+        return evolutionService.findById(id);
+    }
+
     @GetMapping("/patient/{patientId}")
     public List<Evolution> listByPatient(@PathVariable Long patientId) {
         return evolutionService.listByPatient(patientId);
@@ -29,6 +34,11 @@ public class EvolutionController {
     @GetMapping("/user/{userId}")
     public List<Evolution> listByUser(@PathVariable Long userId) {
         return evolutionService.listByUser(userId);
+    }
+
+    @PutMapping("/atualizar/{id}")
+    public Evolution update(@PathVariable Long id, @RequestBody Evolution evolution) {
+        return evolutionService.update(id, evolution);
     }
 
     @DeleteMapping("/delete/{id}")

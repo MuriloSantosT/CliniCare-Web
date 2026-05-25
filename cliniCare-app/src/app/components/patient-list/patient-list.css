@@ -163,7 +163,6 @@ h1 {
   border: none;
   background: #f1f5f9;
   cursor: pointer;
-  font-size: 0.9rem;
   width: 30px;
   height: 30px;
   border-radius: 8px;
@@ -171,6 +170,12 @@ h1 {
   align-items: center;
   justify-content: center;
   transition: all 0.15s ease;
+}
+
+.btn-icon img {
+  width: 16px;
+  height: 16px;
+  object-fit: contain;
 }
 
 .btn-icon:hover {

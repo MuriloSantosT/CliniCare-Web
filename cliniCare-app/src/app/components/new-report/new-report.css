@@ -1,4 +1,4 @@
-.evolution-container {
+.report-container {
   padding: 30px 0;
   width: 100%;
   display: flex;
@@ -8,21 +8,21 @@
 }
 
 /* HEADER */
-.evo-header {
+.report-header {
   display: flex;
   align-items: flex-start;
   gap: 20px;
   margin-bottom: 28px;
 }
 
-.evo-header h1 {
+.report-header h1 {
   margin: 0;
   font-size: 2rem;
   font-weight: 700;
   color: #0f172a;
 }
 
-.evo-patient {
+.report-patient {
   margin: 4px 0 0;
   font-size: 1rem;
   color: #64748b;
@@ -48,7 +48,7 @@
 }
 
 /* FORM */
-.evo-form {
+.report-form {
   flex: 1;
   display: flex;
   flex-direction: column;
@@ -66,7 +66,7 @@
   gap: 8px;
 }
 
-.evo-text-group {
+.report-text-group {
   flex: 1;
   display: flex;
   flex-direction: column;
@@ -106,8 +106,7 @@
   box-shadow: 0 0 0 3px rgba(34, 197, 94, 0.1);
 }
 
-/* Large evolution textarea */
-.evo-textarea {
+.report-textarea {
   flex: 1;
   min-height: 55vh;
   padding: 14px;
@@ -122,28 +121,7 @@
   box-sizing: border-box;
 }
 
-.evo-textarea:focus {
-  outline: none;
-  border-color: #22c55e;
-  box-shadow: 0 0 0 3px rgba(34, 197, 94, 0.1);
-}
-
-/* Smaller plan textarea */
-.plano-textarea {
-  min-height: 100px;
-  padding: 11px 14px;
-  border: 1px solid #e2e8f0;
-  border-radius: 10px;
-  font-size: 0.95rem;
-  background: #ffffff;
-  font-family: inherit;
-  resize: vertical;
-  line-height: 1.5;
-  transition: all 0.2s ease;
-  box-sizing: border-box;
-}
-
-.plano-textarea:focus {
+.report-textarea:focus {
   outline: none;
   border-color: #22c55e;
   box-shadow: 0 0 0 3px rgba(34, 197, 94, 0.1);
@@ -201,32 +179,15 @@
 }
 
 @media (max-width: 768px) {
-  .evolution-container {
-    padding: 20px 0;
-  }
-
-  .evo-header {
-    flex-wrap: wrap;
-    gap: 12px;
-  }
-
-  .evo-header h1 { font-size: 1.5rem; }
-
-  .evo-form { padding: 20px; }
-
-  .form-actions {
-    flex-direction: column-reverse;
-  }
-
-  .btn-primary,
-  .btn-secondary {
-    width: 100%;
-    justify-content: center;
-  }
-
-  .evo-textarea { min-height: 35vh; }
+  .report-container { padding: 20px 0; }
+  .report-header { flex-wrap: wrap; gap: 12px; }
+  .report-header h1 { font-size: 1.5rem; }
+  .report-form { padding: 20px; }
+  .form-actions { flex-direction: column-reverse; }
+  .btn-primary, .btn-secondary { width: 100%; }
+  .report-textarea { min-height: 35vh; }
 }
 
 @media (max-width: 480px) {
-  .evo-header h1 { font-size: 1.2rem; }
+  .report-header h1 { font-size: 1.2rem; }
 }

@@ -75,7 +75,9 @@
   height: 46px;
   border-radius: 14px;
   background: #f0fdf4;
-  font-size: 1.15rem;
+  object-fit: contain;
+  padding: 10px;
+  box-sizing: border-box;
 }
 
 .metric-card.green  .metric-icon { background: #f0fdf4; }
@@ -239,8 +241,13 @@ tbody td:first-child {
   background: rgba(34, 197, 94, 0.12);
   display: grid;
   place-items: center;
-  font-size: 1.8rem;
   margin-top: auto;
+}
+
+.icon-circle img {
+  width: 36px;
+  height: 36px;
+  object-fit: contain;
 }
 
 .icon-circle.purple {
@@ -340,6 +347,7 @@ tbody td:first-child {
   color: #475569;
   line-height: 1.6;
   font-size: 0.9rem;
+  white-space: pre-wrap;
 }
 
 .notes-placeholder {

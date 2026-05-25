@@ -44,6 +44,7 @@
             id="dataNascimento"
             type="date"
             [(ngModel)]="patient.dataNascimento"
+            [max]="today"
             required
           />
         </div>
@@ -1043,16 +1044,6 @@
 
   <!-- Botões de Ação -->
   <section class="form-actions">
-    <div class="form-group checkbox-group">
-      <label for="adicionarAnamnese" class="checkbox-label">
-        <input
-          id="adicionarAnamnese"
-          type="checkbox"
-          [(ngModel)]="adicionarAnamnese"
-        />
-        Adicionar Anamnese após salvar
-      </label>
-    </div>
     <button type="button" class="btn-cancel" (click)="cancelar()">
       Cancelar
     </button>

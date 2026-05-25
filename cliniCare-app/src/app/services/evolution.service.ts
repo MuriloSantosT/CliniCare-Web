@@ -16,4 +16,12 @@ export class EvolutionService {
   listByPatient(patientId: number): Observable<Evolution[]> {
     return this.http.get<Evolution[]>(`${this.apiUrl}/patient/${patientId}`);
   }
+
+  getById(id: number): Observable<Evolution> {
+    return this.http.get<Evolution>(`${this.apiUrl}/${id}`);
+  }
+
+  update(id: number, evolution: Partial<Evolution>): Observable<Evolution> {
+    return this.http.put<Evolution>(`${this.apiUrl}/atualizar/${id}`, evolution);
+  }
 }

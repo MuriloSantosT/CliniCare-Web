@@ -1,0 +1,44 @@
+<div class="report-container">
+
+  <div class="report-header">
+    <button class="btn-back" (click)="voltar()">&#8592; Voltar</button>
+    <div>
+      <h1>Novo Relatório</h1>
+      @if (patientName) {
+        <p class="report-patient">{{ patientName }}</p>
+      }
+    </div>
+  </div>
+
+  <form class="report-form" (ngSubmit)="salvar()">
+
+    <div class="form-group">
+      <label>Título <span class="hint">(opcional)</span></label>
+      <input
+        type="text"
+        [(ngModel)]="titulo"
+        name="titulo"
+        placeholder="Ex.: Relatório para escola"
+      />
+    </div>
+
+    <div class="form-group report-text-group">
+      <label>Relatório <span class="required">*</span></label>
+      <textarea
+        [(ngModel)]="descricao"
+        name="descricao"
+        class="report-textarea"
+        placeholder="Descreva o relatório do paciente..."
+        required
+      ></textarea>
+    </div>
+
+    <div class="form-actions">
+      <button type="button" class="btn-secondary" (click)="voltar()">Cancelar</button>
+      <button type="submit" class="btn-primary" [disabled]="!descricao.trim() || saving">
+        {{ saving ? 'Salvando...' : 'Salvar Relatório' }}
+      </button>
+    </div>
+
+  </form>
+</div>

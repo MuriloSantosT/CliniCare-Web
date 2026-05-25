@@ -46,13 +46,23 @@ export const routes: Routes = [
     loadComponent: () => import('./components/edit-patient/edit-patient').then(m => m.EditPatient)
   },
   {
-    path: 'patients/:patientId/anamnese/new',
-    canActivate: [authGuard],
-    loadComponent: () => import('./components/new-anamnese/new-anamnese').then(m => m.NewAnamnese)
-  },
-  {
     path: 'evolution/new',
     canActivate: [authGuard],
     loadComponent: () => import('./components/new-evolution/new-evolution').then(m => m.NewEvolution)
+  },
+  {
+    path: 'report/new',
+    canActivate: [authGuard],
+    loadComponent: () => import('./components/new-report/new-report').then(m => m.NewReport)
+  },
+  {
+    path: 'evolution/view',
+    canActivate: [authGuard],
+    loadComponent: () => import('./components/view-evolution/view-evolution').then(m => m.ViewEvolution)
+  },
+  {
+    path: 'report/view',
+    canActivate: [authGuard],
+    loadComponent: () => import('./components/view-report/view-report').then(m => m.ViewReport)
   }
 ];

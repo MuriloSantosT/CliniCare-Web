@@ -1,11 +1,14 @@
 <div class="evolution-container">
 
   <div class="evo-header">
-    <button class="btn-back" (click)="cancelar()">&#8592; Voltar</button>
+    <button class="btn-back" (click)="voltar()">&#8592; Voltar</button>
     <div>
-      <h1>Nova Evolução</h1>
+      <h1>{{ viewMode ? 'Ficha de Evolução' : 'Nova Evolução' }}</h1>
       @if (patientName) {
         <p class="evo-patient">{{ patientName }}</p>
+      }
+      @if (viewMode && data) {
+        <p class="evo-date">{{ data | date: 'dd/MM/yyyy' }}</p>
       }
     </div>
   </div>
@@ -19,17 +22,19 @@
         [(ngModel)]="titulo"
         name="titulo"
         placeholder="Ex.: Sessão de avaliação fonoaudiológica"
+        [disabled]="viewMode"
       />
     </div>
 
     <div class="form-group evo-text-group">
-      <label>Evolução <span class="required">*</span></label>
+      <label>Evolução <span [class.required]="!viewMode">*</span></label>
       <textarea
         [(ngModel)]="texto"
         name="texto"
         class="evo-textarea"
         placeholder="Descreva a evolução do paciente nesta sessão..."
-        required
+        [disabled]="viewMode"
+        [required]="!viewMode"
       ></textarea>
     </div>
 
@@ -40,15 +45,18 @@
         name="planoProximaSessao"
         class="plano-textarea"
         placeholder="Objetivos e atividades planejadas para a próxima sessão..."
+        [disabled]="viewMode"
       ></textarea>
     </div>
 
-    <div class="form-actions">
-      <button type="button" class="btn-secondary" (click)="cancelar()">Cancelar</button>
-      <button type="submit" class="btn-primary" [disabled]="!texto.trim() || saving">
-        {{ saving ? 'Salvando...' : 'Salvar Evolução' }}
-      </button>
-    </div>
+    @if (!viewMode) {
+      <div class="form-actions">
+        <button type="button" class="btn-secondary" (click)="voltar()">Cancelar</button>
+        <button type="submit" class="btn-primary" [disabled]="!texto.trim() || saving">
+          {{ saving ? 'Salvando...' : 'Salvar Evolução' }}
+        </button>
+      </div>
+    }
 
   </form>
 </div>

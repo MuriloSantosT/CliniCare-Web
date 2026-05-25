@@ -23,7 +23,7 @@ interface ProximoAtendimento {
 export class Dashboard implements OnInit {
   pacientes: Patient[] = [];
   appointments: Appointment[] = [];
-  prontuarios = 0;
+  fichasEvolucao = 0;
 
   proximoAtendimento: ProximoAtendimento | null = null;
 
@@ -112,8 +112,8 @@ export class Dashboard implements OnInit {
   }
 
   carregarStats(userId: number): void {
-    this.http.get<{ totalProntuarios: number }>(`http://localhost:8080/dashboard/stats/${userId}`).subscribe({
-      next: stats => (this.prontuarios = stats.totalProntuarios),
+    this.http.get<{ totalEvolucoes: number }>(`http://localhost:8080/dashboard/stats/${userId}`).subscribe({
+      next: stats => (this.fichasEvolucao = stats.totalEvolucoes),
       error: err => console.error('Erro ao buscar stats', err),
     });
   }

@@ -1,4 +1,4 @@
-.evolution-container {
+.view-evo-container {
   padding: 30px 0;
   width: 100%;
   display: flex;
@@ -8,25 +8,11 @@
 }
 
 /* HEADER */
-.evo-header {
+.view-evo-header {
   display: flex;
-  align-items: flex-start;
-  gap: 20px;
+  align-items: center;
+  justify-content: space-between;
   margin-bottom: 28px;
-}
-
-.evo-header h1 {
-  margin: 0;
-  font-size: 2rem;
-  font-weight: 700;
-  color: #0f172a;
-}
-
-.evo-patient {
-  margin: 4px 0 0;
-  font-size: 1rem;
-  color: #64748b;
-  font-weight: 500;
 }
 
 .btn-back {
@@ -47,7 +33,100 @@
   color: #0f172a;
 }
 
-/* FORM */
+.btn-edit {
+  background: #f0fdf4;
+  border: 1.5px solid #bbf7d0;
+  color: #16a34a;
+  padding: 8px 18px;
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  font-weight: 600;
+  transition: all 0.15s ease;
+}
+
+.btn-edit:hover {
+  background: #dcfce7;
+  border-color: #86efac;
+}
+
+/* CARD DE VISUALIZAÇÃO */
+.evo-card {
+  background: #ffffff;
+  border-radius: 18px;
+  padding: 36px 32px;
+  box-shadow: 0 8px 24px rgba(15, 23, 42, 0.06);
+  border: 1px solid #e2e8f0;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.evo-meta {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.evo-patient {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #64748b;
+}
+
+.evo-date {
+  font-size: 0.85rem;
+  color: #94a3b8;
+  background: #f1f5f9;
+  padding: 3px 10px;
+  border-radius: 20px;
+}
+
+.evo-title {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #0f172a;
+  margin: 0;
+  line-height: 1.2;
+}
+
+.evo-divider {
+  height: 2px;
+  background: linear-gradient(to right, #22c55e22, transparent);
+  border-radius: 2px;
+}
+
+.evo-section {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.evo-plano {
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  padding: 16px 20px;
+}
+
+.section-label {
+  font-size: 0.78rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: #94a3b8;
+}
+
+.evo-text {
+  font-size: 1rem;
+  color: #334155;
+  line-height: 1.8;
+  white-space: pre-wrap;
+  margin: 0;
+}
+
+/* FORMULÁRIO DE EDIÇÃO */
 .evo-form {
   flex: 1;
   display: flex;
@@ -106,10 +185,9 @@
   box-shadow: 0 0 0 3px rgba(34, 197, 94, 0.1);
 }
 
-/* Large evolution textarea */
 .evo-textarea {
   flex: 1;
-  min-height: 55vh;
+  min-height: 40vh;
   padding: 14px;
   border: 1px solid #e2e8f0;
   border-radius: 10px;
@@ -128,7 +206,6 @@
   box-shadow: 0 0 0 3px rgba(34, 197, 94, 0.1);
 }
 
-/* Smaller plan textarea */
 .plano-textarea {
   min-height: 100px;
   padding: 11px 14px;
@@ -149,7 +226,6 @@
   box-shadow: 0 0 0 3px rgba(34, 197, 94, 0.1);
 }
 
-/* ACTIONS */
 .form-actions {
   display: flex;
   justify-content: flex-end;
@@ -201,32 +277,15 @@
 }
 
 @media (max-width: 768px) {
-  .evolution-container {
-    padding: 20px 0;
-  }
-
-  .evo-header {
-    flex-wrap: wrap;
-    gap: 12px;
-  }
-
-  .evo-header h1 { font-size: 1.5rem; }
-
+  .view-evo-container { padding: 20px 0; }
+  .evo-card { padding: 24px 20px; }
+  .evo-title { font-size: 1.5rem; }
   .evo-form { padding: 20px; }
-
-  .form-actions {
-    flex-direction: column-reverse;
-  }
-
-  .btn-primary,
-  .btn-secondary {
-    width: 100%;
-    justify-content: center;
-  }
-
-  .evo-textarea { min-height: 35vh; }
+  .form-actions { flex-direction: column-reverse; }
+  .btn-primary, .btn-secondary { width: 100%; }
+  .evo-textarea { min-height: 30vh; }
 }
 
 @media (max-width: 480px) {
-  .evo-header h1 { font-size: 1.2rem; }
+  .evo-title { font-size: 1.2rem; }
 }

@@ -69,6 +69,16 @@
   cursor: pointer;
   font-weight: 600;
   transition: all 0.2s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.edit-btn img {
+  width: 16px;
+  height: 16px;
+  object-fit: contain;
+  filter: brightness(0) invert(1);
 }
 
 .edit-btn:hover {
@@ -275,6 +285,15 @@
   background: #f0fdf4;
   color: #16a34a;
   border: 1px solid #bbf7d0;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.btn-nova-consulta img {
+  width: 16px;
+  height: 16px;
+  object-fit: contain;
 }
 
 .btn-nova-consulta:hover {

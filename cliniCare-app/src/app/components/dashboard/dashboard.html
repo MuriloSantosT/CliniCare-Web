@@ -14,7 +14,7 @@
         <span class="metric-label">Consultas do Mês</span>
         <strong>{{ consultasDoMes }}</strong>
       </div>
-      <span class="metric-icon">📅</span>
+      <img class="metric-icon" src="calendar.png" alt="Consultas do Mês">
     </article>
 
     <article class="metric-card green">
@@ -27,10 +27,10 @@
 
     <article class="metric-card violet">
       <div class="metric-content">
-        <span class="metric-label">Prontuários</span>
-        <strong>{{ prontuarios }}</strong>
+        <span class="metric-label">Fichas de Evolução</span>
+        <strong>{{ fichasEvolucao }}</strong>
       </div>
-      <span class="metric-icon">📄</span>
+      <img class="metric-icon" src="google-docs.png" alt="Fichas de Evolução">
     </article>
   </div>
 
@@ -93,13 +93,13 @@
     <article class="bottom-card">
       <strong>Pacientes do dia</strong>
       <span class="bottom-value">{{ pacientesDoDia }}</span>
-      <div class="icon-circle">🩺</div>
+      <div class="icon-circle"><img src="stethoscope.png" alt="Pacientes do dia"></div>
     </article>
 
     <article class="bottom-card">
       <strong>Próximo atendimento</strong>
       <span class="bottom-value">{{ proximoAtendimento?.horario ?? '--:--' }}</span>
-      <div class="icon-circle purple">⏰</div>
+      <div class="icon-circle purple"><img src="circular-alarm-clock-tool.png" alt="Próximo atendimento"></div>
     </article>
 
     <article class="bottom-card notes-card">
