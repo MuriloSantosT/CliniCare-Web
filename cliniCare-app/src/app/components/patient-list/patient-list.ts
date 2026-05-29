@@ -62,7 +62,9 @@ export class PatientList implements OnInit {
   }
 
   deletar(id: number) {
-    this.patientService.deletar(id).subscribe(() => {
+    const user = this.authService.getCurrentUser();
+    if (!user) return;
+    this.patientService.deletar(id, user.id).subscribe(() => {
       this.carregarPacientes();
     });
   }

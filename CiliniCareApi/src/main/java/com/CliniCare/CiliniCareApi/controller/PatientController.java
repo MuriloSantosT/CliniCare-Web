@@ -40,10 +40,12 @@ public class PatientController {
     }
 
     @PutMapping("/{id}")
-    public Patient updatePatient(@PathVariable Long id, @RequestBody Patient patient) {
-        return patientService.updateById(id, patient);
+    public Patient updatePatient(@PathVariable Long id, @RequestParam Long userId, @RequestBody Patient patient) {
+        return patientService.updateById(id, patient, userId);
     }
 
     @DeleteMapping("/{id}")
-    public void deletePatient(@PathVariable Long id){ patientService.deleteById(id);}
+    public void deletePatient(@PathVariable Long id, @RequestParam Long userId) {
+        patientService.deleteById(id, userId);
+    }
 }
