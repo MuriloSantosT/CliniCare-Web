@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  apiUrl: 'https://COLOQUE-A-URL-DA-SUA-API-AQUI',
+  apiUrl: 'https://clinicare-web-production.up.railway.app',
 };
