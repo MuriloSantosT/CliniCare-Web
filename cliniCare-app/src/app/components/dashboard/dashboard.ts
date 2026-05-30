@@ -108,7 +108,11 @@ export class Dashboard implements OnInit {
   }
 
   get agendamentosCancelados(): number {
-    return this.appointments.filter(a => a.status === 'Cancelado').length;
+    const agora = new Date();
+    return this.appointments.filter(a => {
+      const d = new Date(a.dataInicio);
+      return a.status === 'Cancelado' && d.getMonth() === agora.getMonth() && d.getFullYear() === agora.getFullYear();
+    }).length;
   }
 
   private resolverProximoAtendimento(appointments: Appointment[]): ProximoAtendimento | null {
