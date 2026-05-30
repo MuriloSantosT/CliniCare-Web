@@ -142,8 +142,8 @@ testar() {
   });
 }
 
-  getById(id: number): Observable<Patient> {
-    return this.http.get<Patient>(`${this.api}/${id}`);
+  getById(id: number, userId: number): Observable<Patient> {
+    return this.http.get<Patient>(`${this.api}/${id}?userId=${userId}`);
   }
 
   adicionar(patient: Patient): Observable<Patient> {

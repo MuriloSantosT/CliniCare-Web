@@ -30,8 +30,8 @@ public class PatientController {
     }
 
     @GetMapping("/{id}")
-    public Patient getById(@PathVariable Long id) {
-        return patientService.getById(id);
+    public Patient getById(@PathVariable Long id, @RequestParam Long userId) {
+        return patientService.getById(id, userId);
     }
 
     @PostMapping("/criar")

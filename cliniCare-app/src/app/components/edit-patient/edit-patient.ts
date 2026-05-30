@@ -29,8 +29,10 @@ export class EditPatient implements OnInit {
 
   ngOnInit() {
     const id = this.route.snapshot.params['id'];
+    const user = this.authService.getCurrentUser();
+    if (!user) { this.router.navigate(['/login']); return; }
     if (id) {
-      this.patientService.getById(+id).subscribe({
+      this.patientService.getById(+id, user.id).subscribe({
         next: (patient) => {
           this.patient = patient;
           if (!this.patient.responsaveis) {
@@ -38,9 +40,12 @@ export class EditPatient implements OnInit {
           }
         },
         error: (erro) => {
-          console.error('Erro ao carregar paciente:', erro);
-          alert('Erro ao carregar paciente.');
-          this.router.navigate(['/patients']);
+          if (erro.status === 403 || erro.status === 404) {
+            this.router.navigate(['/patients']);
+          } else {
+            console.error('Erro ao carregar paciente:', erro);
+            this.router.navigate(['/patients']);
+          }
         }
       });
     }

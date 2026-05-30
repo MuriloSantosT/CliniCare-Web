@@ -60,14 +60,21 @@ export class PatientComponent implements OnInit {
   }
 
   carregarPaciente(id: number) {
-    this.patientService.getById(id).subscribe({
+    const user = this.authService.getCurrentUser();
+    if (!user) { this.router.navigate(['/login']); return; }
+
+    this.patientService.getById(id, user.id).subscribe({
       next: (patient) => {
         this.patient = patient;
         this.carregarEvolucoes(id);
         this.carregarRelatorios(id);
       },
       error: (erro) => {
-        console.error('Erro ao buscar paciente', erro);
+        if (erro.status === 403 || erro.status === 404) {
+          this.router.navigate(['/patients']);
+        } else {
+          console.error('Erro ao buscar paciente', erro);
+        }
       },
     });
   }

@@ -63,7 +63,7 @@ export class Dashboard implements OnInit {
     const ano = agora.getFullYear();
     return this.appointments.filter(a => {
       const d = new Date(a.dataInicio);
-      return d.getMonth() === mes && d.getFullYear() === ano;
+      return a.status === 'Realizado' && d.getMonth() === mes && d.getFullYear() === ano;
     }).length;
   }
 
