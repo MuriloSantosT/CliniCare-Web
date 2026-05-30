@@ -1,5 +1,6 @@
 {
   "buildCommand": "ng build",
   "outputDirectory": "dist/cliniCare-app/browser",
-  "rewrites": [{ "source": "/(.*)", "destination": "/index.html" }]
+  "rewrites": [{ "source": "/(.*)", "destination": "/index.html" }],
+  "nodeVersion": "22"
 }
