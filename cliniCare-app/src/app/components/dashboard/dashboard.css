@@ -37,7 +37,6 @@
   box-shadow: 0 8px 24px rgba(15, 23, 42, 0.06);
   min-height: 100px;
   gap: 16px;
-  border-top: 3px solid #3b82f6;
   transition: box-shadow 0.2s ease, transform 0.2s ease;
 }
 
@@ -46,8 +45,6 @@
   transform: translateY(-2px);
 }
 
-.metric-card.green  { border-top-color: #22c55e; }
-.metric-card.violet { border-top-color: #a855f7; }
 
 .metric-content {
   display: flex;
@@ -77,8 +74,10 @@
   width: 46px;
   height: 46px;
   border-radius: 14px;
-  background: #eff6ff;
-  font-size: 1.15rem;
+  background: #f0fdf4;
+  object-fit: contain;
+  padding: 10px;
+  box-sizing: border-box;
 }
 
 .metric-card.green  .metric-icon { background: #f0fdf4; }
@@ -97,7 +96,6 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  border-left: 4px solid #22c55e;
 }
 
 .next-appointment-info .label {
@@ -243,8 +241,13 @@ tbody td:first-child {
   background: rgba(34, 197, 94, 0.12);
   display: grid;
   place-items: center;
-  font-size: 1.8rem;
   margin-top: auto;
+}
+
+.icon-circle img {
+  width: 36px;
+  height: 36px;
+  object-fit: contain;
 }
 
 .icon-circle.purple {
@@ -344,6 +347,7 @@ tbody td:first-child {
   color: #475569;
   line-height: 1.6;
   font-size: 0.9rem;
+  white-space: pre-wrap;
 }
 
 .notes-placeholder {
@@ -355,19 +359,31 @@ tbody td:first-child {
 
 /* RESPONSIVO */
 @media (max-width: 980px) {
-  .metrics-row,
+  .metrics-row {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
   .bottom-row {
     grid-template-columns: 1fr;
   }
 }
 
-@media (max-width: 680px) {
-  .dashboard-container {
-    width: calc(100vw - 24px);
+@media (max-width: 600px) {
+  .metrics-row,
+  .bottom-row {
+    grid-template-columns: 1fr;
+  }
+
+  .dashboard-header h1 {
+    font-size: 1.5rem;
   }
 
   .large-card,
   .bottom-card {
     padding: 18px;
+  }
+
+  .metric-card strong {
+    font-size: 1.6rem;
   }
 }

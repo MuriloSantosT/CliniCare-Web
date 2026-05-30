@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { PatientService, Patient, Guardian } from '../../services/patient.service';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-edit-patient',
@@ -21,14 +22,17 @@ export class EditPatient implements OnInit {
 
   constructor(
     private patientService: PatientService,
+    private authService: AuthService,
     private router: Router,
     private route: ActivatedRoute
   ) {}
 
   ngOnInit() {
     const id = this.route.snapshot.params['id'];
+    const user = this.authService.getCurrentUser();
+    if (!user) { this.router.navigate(['/login']); return; }
     if (id) {
-      this.patientService.getById(+id).subscribe({
+      this.patientService.getById(+id, user.id).subscribe({
         next: (patient) => {
           this.patient = patient;
           if (!this.patient.responsaveis) {
@@ -36,9 +40,12 @@ export class EditPatient implements OnInit {
           }
         },
         error: (erro) => {
-          console.error('Erro ao carregar paciente:', erro);
-          alert('Erro ao carregar paciente.');
-          this.router.navigate(['/patients']);
+          if (erro.status === 403 || erro.status === 404) {
+            this.router.navigate(['/patients']);
+          } else {
+            console.error('Erro ao carregar paciente:', erro);
+            this.router.navigate(['/patients']);
+          }
         }
       });
     }
@@ -65,6 +72,9 @@ export class EditPatient implements OnInit {
   }
 
   salvarPaciente() {
+    const user = this.authService.getCurrentUser();
+    if (!user) { alert('Sessão expirada. Faça login novamente.'); return; }
+
     if (this.patient.id && this.patient.nome && this.patient.cpf && this.patient.dataNascimento) {
       const pacienteParaEnviar = {
         nome: this.patient.nome || '',
@@ -93,7 +103,7 @@ export class EditPatient implements OnInit {
 
       console.log('Dados enviados:', pacienteParaEnviar);
       
-      this.patientService.atualizar(this.patient.id, pacienteParaEnviar as Patient).subscribe({
+      this.patientService.atualizar(this.patient.id, pacienteParaEnviar as Patient, user.id).subscribe({
         next: (pacienteSalvo) => {
           console.log('Paciente atualizado com sucesso:', pacienteSalvo);
           this.router.navigate(['/patients']);

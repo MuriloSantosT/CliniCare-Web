@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, tap } from 'rxjs';
+import { environment } from '../../environments/environment';
 
 export interface LoginRequest {
   email: string;
@@ -21,7 +22,7 @@ export interface UserResponse {
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
-  private readonly api = 'http://localhost:8080/user';
+  private readonly api = `${environment.apiUrl}/user`;
   private readonly STORAGE_KEY = 'clinicare_user';
 
   constructor(private http: HttpClient) {}

@@ -46,12 +46,27 @@ public class EvolutionService {
         return saved;
     }
 
+    public Evolution findById(Long id) {
+        return evolutionRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Evolução não encontrada: " + id));
+    }
+
     public List<Evolution> listByPatient(Long patientId) {
         return evolutionRepository.findByPatientId(patientId);
     }
 
     public List<Evolution> listByUser(Long userId) {
         return evolutionRepository.findByUserId(userId);
+    }
+
+    public Evolution update(Long id, Evolution updated) {
+        return evolutionRepository.findById(id).map(existing -> {
+            existing.setTitulo(updated.getTitulo());
+            existing.setTexto(updated.getTexto());
+            existing.setPlanoProximaSessao(updated.getPlanoProximaSessao());
+            if (updated.getData() != null) existing.setData(updated.getData());
+            return evolutionRepository.save(existing);
+        }).orElseThrow(() -> new RuntimeException("Evolução não encontrada: " + id));
     }
 
     public void delete(Long id) {

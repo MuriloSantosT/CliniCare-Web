@@ -6,6 +6,7 @@ import { PatientService, Patient } from '../../services/patient.service';
 import { AppointmentService } from '../../services/appointment.service';
 import { AuthService } from '../../services/auth.service';
 import { Appointment } from '../../models/appointment.model';
+import { environment } from '../../../environments/environment';
 
 interface ProximoAtendimento {
   pacienteId?: number;
@@ -23,7 +24,7 @@ interface ProximoAtendimento {
 export class Dashboard implements OnInit {
   pacientes: Patient[] = [];
   appointments: Appointment[] = [];
-  prontuarios = 0;
+  fichasEvolucao = 0;
 
   proximoAtendimento: ProximoAtendimento | null = null;
 
@@ -40,6 +41,10 @@ export class Dashboard implements OnInit {
 
   get nomeUsuario(): string {
     return this.authService.getCurrentUser()?.nome ?? 'Usuário';
+  }
+
+  get primeiroNome(): string {
+    return this.nomeUsuario.trim().split(' ')[0];
   }
 
   get pacientesCadastrados(): number {
@@ -59,7 +64,7 @@ export class Dashboard implements OnInit {
     const ano = agora.getFullYear();
     return this.appointments.filter(a => {
       const d = new Date(a.dataInicio);
-      return d.getMonth() === mes && d.getFullYear() === ano;
+      return a.status === 'Realizado' && d.getMonth() === mes && d.getFullYear() === ano;
     }).length;
   }
 
@@ -108,8 +113,8 @@ export class Dashboard implements OnInit {
   }
 
   carregarStats(userId: number): void {
-    this.http.get<{ totalProntuarios: number }>(`http://localhost:8080/dashboard/stats/${userId}`).subscribe({
-      next: stats => (this.prontuarios = stats.totalProntuarios),
+    this.http.get<{ totalEvolucoes: number }>(`${environment.apiUrl}/dashboard/stats/${userId}`).subscribe({
+      next: stats => (this.fichasEvolucao = stats.totalEvolucoes),
       error: err => console.error('Erro ao buscar stats', err),
     });
   }

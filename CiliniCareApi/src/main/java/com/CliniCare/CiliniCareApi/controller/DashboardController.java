@@ -30,6 +30,9 @@ public class DashboardController {
         long evolucoes = evolutionRepository.countByUserId(userId);
         long relatorios = reportRepository.countByUserId(userId);
 
-        return Map.of("totalProntuarios", anamneses + evolucoes + relatorios);
+        return Map.of(
+            "totalProntuarios", anamneses + evolucoes + relatorios,
+            "totalEvolucoes", evolucoes
+        );
     }
 }

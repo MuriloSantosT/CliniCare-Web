@@ -3,8 +3,12 @@ import { CommonModule, DatePipe } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { PatientService, Patient } from '../../services/patient.service';
-import { AnamneseService } from '../../services/anamnese.service';
 import { AppointmentService } from '../../services/appointment.service';
+import { EvolutionService } from '../../services/evolution.service';
+import { ReportService } from '../../services/report.service';
+import { AuthService } from '../../services/auth.service';
+import { Evolution } from '../../models/evolution.model';
+import { Report } from '../../models/report.model';
 import { Appointment } from '../../models/appointment.model';
 
 interface DocumentItem {
@@ -23,14 +27,14 @@ interface DocumentItem {
 })
 export class PatientComponent implements OnInit {
   patient: Patient | null = null;
-  activeTab: 'evolution' | 'reports' | null = null;
   showGallery = false;
 
   evolutionFiles: DocumentItem[] = [];
   reportFiles: DocumentItem[] = [];
-  anamneseFiles: DocumentItem[] = [];
+  private evolucoes: Evolution[] = [];
+  private relatorios: Report[] = [];
 
-  documentType: 'evolution' | 'reports' | 'anamnese' = 'evolution';
+  documentType: 'evolution' | 'reports' = 'evolution';
   showDocumentTypeMenu = false;
 
   showConsultaForm = false;
@@ -40,8 +44,10 @@ export class PatientComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private patientService: PatientService,
-    private anamneseService: AnamneseService,
-    private appointmentService: AppointmentService
+    private evolutionService: EvolutionService,
+    private reportService: ReportService,
+    private appointmentService: AppointmentService,
+    private authService: AuthService
   ) {}
 
   ngOnInit() {
@@ -54,99 +60,74 @@ export class PatientComponent implements OnInit {
   }
 
   carregarPaciente(id: number) {
-    this.patientService.getById(id).subscribe({
+    const user = this.authService.getCurrentUser();
+    if (!user) { this.router.navigate(['/login']); return; }
+
+    this.patientService.getById(id, user.id).subscribe({
       next: (patient) => {
         this.patient = patient;
-        if (this.patient) {
-          this.carregarDocumentos();
-          this.carregarAnamneses(id);
+        this.carregarEvolucoes(id);
+        this.carregarRelatorios(id);
+      },
+      error: (erro) => {
+        if (erro.status === 403 || erro.status === 404) {
+          this.router.navigate(['/patients']);
+        } else {
+          console.error('Erro ao buscar paciente', erro);
         }
       },
-      error: (erro) => {
-        console.error('Erro ao buscar paciente', erro);
-      },
     });
   }
 
-  carregarDocumentos() {
-    // TODO: Substituir por chamadas API reais quando disponível
-    this.evolutionFiles = [
-      {
-        id: 1,
-        title: 'Consulta do dia 12/08',
-        date: '12/08/2024',
-        description: 'Algum comentário que eu não tenho a menor ideia se vai ser necessário ou não, tenho que lembrar de perguntar pro Gu.',
-      },
-      {
-        id: 2,
-        title: 'Consulta do dia 08/08',
-        date: '08/08/2024',
-        description: 'Algum comentário que eu não tenho a menor ideia se vai ser necessário ou não, tenho que lembrar de perguntar pro Gu.',
-      },
-    ];
-
-    this.reportFiles = [
-      {
-        id: 1,
-        title: 'Relatório parental 08/08',
-        date: '08/08/2024',
-        description: 'Algum comentário que eu não tenho a menor ideia se vai ser necessário ou não, tenho que lembrar de perguntar pro Gu.',
-      },
-      {
-        id: 2,
-        title: 'Relatório 23/07',
-        date: '23/07/2024',
-        description: 'Algum comentário que eu não tenho a menor ideia se vai ser necessário ou não, tenho que lembrar de perguntar pro Gu.',
-      },
-    ];
-  }
-
-  carregarAnamneses(patientId: number) {
-    this.anamneseService.listarPorPaciente(patientId).subscribe({
-      next: (anamneses) => {
-        this.anamneseFiles = anamneses.map((a) => ({
-          id: a.id ?? 0,
-          title: `Anamnese — ${a.data ?? ''}`,
-          date: a.data ?? '',
-          description: a.resumo ?? 'Sem resumo.',
+  carregarEvolucoes(patientId: number) {
+    this.evolutionService.listByPatient(patientId).subscribe({
+      next: (evolucoes) => {
+        this.evolucoes = evolucoes;
+        this.evolutionFiles = evolucoes.map(e => ({
+          id: e.id ?? 0,
+          title: e.titulo || `Evolução — ${e.data ?? ''}`,
+          date: e.data ?? '',
+          description: (e.texto ?? '').substring(0, 120) + ((e.texto ?? '').length > 120 ? '…' : ''),
         }));
       },
-      error: (erro) => {
-        console.error('Erro ao carregar anamneses', erro);
-        this.anamneseFiles = [];
-      },
+      error: (err) => console.error('Erro ao carregar evoluções:', err),
     });
   }
 
-  toggleTab(tab: 'evolution' | 'reports') {
-    this.activeTab = this.activeTab === tab ? null : tab;
+  carregarRelatorios(patientId: number) {
+    this.reportService.listByPatient(patientId).subscribe({
+      next: (relatorios: Report[]) => {
+        this.relatorios = relatorios;
+        this.reportFiles = relatorios.map(r => ({
+          id: r.id ?? 0,
+          title: r.titulo || `Relatório — ${r.data ?? ''}`,
+          date: r.data ?? r.createdAt ?? '',
+          description: (r.descricao ?? '').substring(0, 120) + ((r.descricao ?? '').length > 120 ? '…' : ''),
+        }));
+      },
+      error: (err) => console.error('Erro ao carregar relatórios:', err),
+    });
   }
 
   toggleDocumentMenu() {
     this.showDocumentTypeMenu = !this.showDocumentTypeMenu;
   }
 
-  selectDocumentType(type: 'evolution' | 'reports' | 'anamnese') {
+  selectDocumentType(type: 'evolution' | 'reports') {
     this.documentType = type;
     this.showDocumentTypeMenu = false;
   }
 
   get documentTypeTitle(): string {
-    if (this.documentType === 'evolution') return 'Ficha de Evolução';
-    if (this.documentType === 'reports') return 'Relatórios';
-    return 'Anamneses';
+    return this.documentType === 'evolution' ? 'Ficha de Evolução' : 'Relatórios';
   }
 
   get documentIcon(): string {
-    if (this.documentType === 'evolution') return '📄';
-    if (this.documentType === 'reports') return '📋';
-    return '🩺';
+    return this.documentType === 'evolution' ? '📄' : '📋';
   }
 
   get currentDocuments(): DocumentItem[] {
-    if (this.documentType === 'evolution') return this.evolutionFiles;
-    if (this.documentType === 'reports') return this.reportFiles;
-    return this.anamneseFiles;
+    return this.documentType === 'evolution' ? this.evolutionFiles : this.reportFiles;
   }
 
   editarPaciente() {
@@ -155,21 +136,19 @@ export class PatientComponent implements OnInit {
     }
   }
 
-  novaAnamnese() {
-    if (this.patient) {
-      this.router.navigate([`/patients/${this.patient.id}/anamnese/new`]);
-    }
-  }
-
   novaFichaEvolucao() {
     if (this.patient) {
-      this.router.navigate([`/patients/${this.patient.id}/evolution/new`]);
+      this.router.navigate(['/evolution/new'], {
+        queryParams: { patientId: this.patient.id, patientName: this.patient.nome }
+      });
     }
   }
 
   novoRelatorio() {
     if (this.patient) {
-      this.router.navigate([`/patients/${this.patient.id}/report/new`]);
+      this.router.navigate(['/report/new'], {
+        queryParams: { patientId: this.patient.id, patientName: this.patient.nome }
+      });
     }
   }
 
@@ -201,6 +180,8 @@ export class PatientComponent implements OnInit {
 
   salvarConsulta() {
     if (!this.novaConsulta.dataInicio || !this.novaConsulta.dataFim || !this.patient) return;
+    const user = this.authService.getCurrentUser();
+    if (!user) return;
     const payload: Appointment = {
       dataInicio: this.withSeconds(this.novaConsulta.dataInicio),
       dataFim: this.withSeconds(this.novaConsulta.dataFim),
@@ -209,7 +190,7 @@ export class PatientComponent implements OnInit {
       valor: this.novaConsulta.valor,
       formaPagamento: this.novaConsulta.formaPagamento,
       patient: { id: this.patient.id },
-      user: { id: 1 },
+      user: { id: user.id },
     };
     this.appointmentService.create(payload).subscribe({
       next: () => this.fecharNovaConsulta(),
@@ -242,8 +223,19 @@ export class PatientComponent implements OnInit {
   }
 
   abrirDocumento(documento: DocumentItem) {
-    console.log('Abrindo documento:', documento);
-    // TODO: Implementar lógica para abrir documento
+    if (this.documentType === 'evolution') {
+      const evo = this.evolucoes.find(e => e.id === documento.id);
+      this.router.navigate(['/evolution/view'], {
+        queryParams: { patientId: this.patient?.id, patientName: this.patient?.nome },
+        state: { evolution: evo }
+      });
+    } else {
+      const rel = this.relatorios.find(r => r.id === documento.id);
+      this.router.navigate(['/report/view'], {
+        queryParams: { patientId: this.patient?.id, patientName: this.patient?.nome },
+        state: { report: rel }
+      });
+    }
   }
 
   get enderecoCompleto(): string {

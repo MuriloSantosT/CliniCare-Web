@@ -103,6 +103,10 @@ export class NewPatient {
     observacoes: ''
   };
 
+  get today(): string {
+    return new Date().toISOString().split('T')[0];
+  }
+
   get isMenorDeIdade(): boolean {
     if (!this.patient.dataNascimento) return false;
     const nascimento = new Date(this.patient.dataNascimento);
@@ -117,8 +121,6 @@ export class NewPatient {
     telefone: ''
   };
 
-  adicionarAnamnese: boolean = false;
-
   constructor(
     private patientService: PatientService,
     private authService: AuthService,
@@ -127,13 +129,18 @@ export class NewPatient {
 
   adicionarResponsavel() {
     if (this.novoResponsavel.nome && this.novoResponsavel.cpf) {
+      const cpfDigits = (this.novoResponsavel.cpf || '').replace(/\D/g, '');
+      if (cpfDigits.length !== 11) {
+        alert('CPF do responsável inválido. Informe exatamente 11 dígitos.');
+        return;
+      }
       if (!this.patient.responsaveis) {
         this.patient.responsaveis = [];
       }
       this.patient.responsaveis.push({
         nome: this.novoResponsavel.nome,
-        cpf: (this.novoResponsavel.cpf || '').replace(/\D/g, ''), // Remove formatação
-        telefone: (this.novoResponsavel.telefone || '').replace(/\D/g, '') // Remove formatação
+        cpf: cpfDigits,
+        telefone: (this.novoResponsavel.telefone || '').replace(/\D/g, '')
       });
       this.novoResponsavel = { nome: '', cpf: '', telefone: '' };
     }
@@ -151,8 +158,27 @@ export class NewPatient {
       alert('Sessão expirada. Faça login novamente.');
       return;
     }
-    if (this.patient.nome && this.patient.cpf && this.patient.dataNascimento) {
-      const pacienteParaEnviar = {
+
+    if (!this.patient.nome || !this.patient.cpf || !this.patient.dataNascimento) {
+      alert('Por favor, preencha os campos obrigatórios: Nome, CPF e Data de Nascimento.');
+      return;
+    }
+
+    const cpfDigits = (this.patient.cpf || '').replace(/\D/g, '');
+    if (cpfDigits.length !== 11) {
+      alert('CPF inválido. O CPF deve conter exatamente 11 dígitos.');
+      return;
+    }
+
+    const dataNasc = new Date(this.patient.dataNascimento + 'T00:00:00');
+    const hoje = new Date();
+    hoje.setHours(23, 59, 59, 999);
+    if (dataNasc > hoje) {
+      alert('Data de nascimento inválida. A data não pode ser posterior à data atual.');
+      return;
+    }
+
+    const pacienteParaEnviar = {
         nome: this.patient.nome || '',
         cpf: (this.patient.cpf || '').replace(/\D/g, ''),
         dataNascimento: this.patient.dataNascimento || '',
@@ -240,16 +266,8 @@ export class NewPatient {
       };
       
       this.patientService.adicionar(pacienteParaEnviar as Patient).subscribe({
-        next: (pacienteSalvo) => {
-          
-          // Verifica se deve adicionar anamnese
-          if (this.adicionarAnamnese) {
-            // Redireciona para o componente de criação de anamnese
-            this.router.navigate(['/patients', pacienteSalvo.id, 'anamnese', 'new']);
-          } else {
-            // Redireciona para a lista de pacientes
-            this.router.navigate(['/patients']);
-          }
+        next: () => {
+          this.router.navigate(['/patients']);
         },
         error: (erro) => {
           console.error('Erro ao salvar paciente:', erro);
@@ -257,9 +275,6 @@ export class NewPatient {
           alert('Erro ao salvar paciente. Verifique os dados e tente novamente.');
         }
       });
-    } else {
-      alert('Por favor, preencha os campos obrigatórios: Nome, CPF e Data de Nascimento.');
-    }
   }
 
   cancelar() {

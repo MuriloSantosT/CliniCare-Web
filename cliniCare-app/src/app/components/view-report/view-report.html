@@ -1,0 +1,62 @@
+<div class="view-report-container">
+
+  <div class="view-report-header">
+    <button class="btn-back" (click)="voltar()">&#8592; Voltar</button>
+    @if (!editMode) {
+      <button class="btn-edit" (click)="entrarEdicao()">✏️ Editar</button>
+    }
+  </div>
+
+  @if (!editMode) {
+    <div class="report-card">
+      <div class="report-meta">
+        @if (patientName) {
+          <span class="report-patient">{{ patientName }}</span>
+        }
+        @if (data) {
+          <span class="report-date">{{ data | date:'dd/MM/yyyy' }}</span>
+        }
+      </div>
+
+      <h1 class="report-title">{{ titulo || 'Relatório' }}</h1>
+
+      <div class="report-divider"></div>
+
+      <div class="report-body">
+        <p>{{ descricao }}</p>
+      </div>
+    </div>
+  }
+
+  @if (editMode) {
+    <form class="report-form" (ngSubmit)="salvar()">
+      <div class="form-group">
+        <label>Título <span class="hint">(opcional)</span></label>
+        <input
+          type="text"
+          [(ngModel)]="titulo"
+          name="titulo"
+          placeholder="Ex.: Relatório para escola"
+        />
+      </div>
+
+      <div class="form-group report-text-group">
+        <label>Relatório <span class="required">*</span></label>
+        <textarea
+          [(ngModel)]="descricao"
+          name="descricao"
+          class="report-textarea"
+          required
+        ></textarea>
+      </div>
+
+      <div class="form-actions">
+        <button type="button" class="btn-secondary" (click)="cancelarEdicao()">Cancelar</button>
+        <button type="submit" class="btn-primary" [disabled]="!descricao.trim() || saving">
+          {{ saving ? 'Salvando...' : 'Salvar Alterações' }}
+        </button>
+      </div>
+    </form>
+  }
+
+</div>

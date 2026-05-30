@@ -31,6 +31,11 @@ public class ReportController {
         return reportService.listByUser(userId);
     }
 
+    @PutMapping("/atualizar/{id}")
+    public Report update(@PathVariable Long id, @RequestBody Report report) {
+        return reportService.update(id, report);
+    }
+
     @DeleteMapping("/deletar/{id}")
     public void delete(@PathVariable Long id) {
         reportService.delete(id);

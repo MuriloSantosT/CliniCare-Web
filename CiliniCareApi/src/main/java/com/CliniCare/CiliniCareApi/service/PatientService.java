@@ -9,6 +9,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.util.Objects;
+
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -37,7 +39,18 @@ public class PatientService {
     // =========================
     // GET BY ID
     // =========================
-    public Patient getById(Long id) {
+    public Patient getById(Long id, Long userId) {
+        Patient patient = patientRepository.findById(id)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Paciente não encontrado com ID: " + id));
+
+        if (patient.getUser() == null || !Objects.equals(patient.getUser().getId(), userId)) {
+            throw new ResponseStatusException(HttpStatus.FORBIDDEN, "Acesso negado: paciente pertence a outro profissional");
+        }
+
+        return patient;
+    }
+
+    private Patient findByIdInternal(Long id) {
         return patientRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Paciente não encontrado com ID: " + id));
     }
@@ -72,9 +85,13 @@ public class PatientService {
     // =========================
     // UPDATE BY ID
     // =========================
-    public Patient updateById(Long id, Patient updatedPatient) {
+    public Patient updateById(Long id, Patient updatedPatient, Long userId) {
 
-        Patient existingPatient = getById(id);
+        Patient existingPatient = findByIdInternal(id);
+
+        if (existingPatient.getUser() == null || !Objects.equals(existingPatient.getUser().getId(), userId)) {
+            throw new ResponseStatusException(HttpStatus.FORBIDDEN, "Acesso negado: paciente pertence a outro profissional");
+        }
 
         // =========================
         // Dados pessoais
@@ -130,10 +147,14 @@ public class PatientService {
     // =========================
     // DELETE BY ID
     // =========================
-    public void deleteById(Long id) {
-        if (!patientRepository.existsById(id)) {
-            throw new RuntimeException("Paciente não encontrado com ID: " + id);
+    public void deleteById(Long id, Long userId) {
+        Patient patient = patientRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Paciente não encontrado com ID: " + id));
+
+        if (patient.getUser() == null || !Objects.equals(patient.getUser().getId(), userId)) {
+            throw new ResponseStatusException(HttpStatus.FORBIDDEN, "Acesso negado: paciente pertence a outro profissional");
         }
+
         patientRepository.deleteById(id);
     }
 }

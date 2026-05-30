@@ -37,6 +37,15 @@ yarn-error.log
 testem.log
 /typings
 
+# Test files
+**/*.spec.ts
+**/*.spec.js
+karma.conf.js
+jest.config.*
+/e2e
+cypress.config.*
+/cypress
+
 # System files
 .DS_Store
 Thumbs.db

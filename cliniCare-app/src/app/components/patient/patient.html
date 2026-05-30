@@ -10,14 +10,11 @@
         <button class="btn-action btn-report" (click)="novoRelatorio()">
           + Relatório
         </button>
-        <button class="btn-action btn-anamnese" (click)="novaAnamnese()">
-          + Anamnese
-        </button>
-        <button class="edit-btn" (click)="editarPaciente()">
-          ✏️ Editar
+<button class="edit-btn" (click)="editarPaciente()">
+          <img src="pencil.png" alt="Editar"> Editar
         </button>
         <button class="btn-action btn-nova-consulta" (click)="abrirNovaConsulta()">
-          📅 Nova Consulta
+          <img src="calendar.png" alt="Nova Consulta"> Nova Consulta
         </button>
       </div>
     </header>
@@ -48,20 +45,296 @@
           <p>{{ patient?.sexo || '-' }}</p>
         </div>
         <div class="info-item">
-          <label>Alergias</label>
-          <p>{{ patient?.alergias || '-' }}</p>
+          <label>Telefone de Emergência</label>
+          <p>{{ patient?.telefoneEmergencia || '-' }}</p>
         </div>
         <div class="info-item">
           <label>Convênio</label>
           <p>{{ patient?.convenio || '-' }}</p>
         </div>
+      </div>
+
+      <h3 class="section-title">Informações Médicas</h3>
+      <div class="info-grid">
         <div class="info-item">
-          <label>Telefone</label>
-          <p>{{ patient?.telefoneEmergencia || '-' }}</p>
+          <label>Alergias</label>
+          <p>{{ patient?.alergias || '-' }}</p>
         </div>
         <div class="info-item">
           <label>Observações Gerais</label>
           <p>{{ patient?.observacoesGerais || '-' }}</p>
+        </div>
+        <div class="info-item">
+          <label>Medicamentos</label>
+          <p>{{ patient?.medicamentos || '-' }}</p>
+        </div>
+        <div class="info-item">
+          <label>Acompanhamento Profissional</label>
+          <p>{{ patient?.acompanhamentoProfissional || '-' }}</p>
+        </div>
+        <div class="info-item">
+          <label>Cirurgias Prévias</label>
+          <p>{{ patient?.cirurgiasPrevias || '-' }}</p>
+        </div>
+        <div class="info-item">
+          <label>Deficiência / Transtorno</label>
+          <p>{{ patient?.deficienciaTranstorno || '-' }}</p>
+        </div>
+      </div>
+
+      <h3 class="section-title">Histórico de Gestação</h3>
+      <div class="info-grid">
+        <div class="info-item">
+          <label>Gravidez Planejada</label>
+          <p>{{ patient?.gravidezPlanejada || '-' }}</p>
+        </div>
+        <div class="info-item">
+          <label>Fez Pré-Natal</label>
+          <p>{{ patient?.fezPreNatal || '-' }}</p>
+        </div>
+        <div class="info-item">
+          <label>Idade na Gravidez</label>
+          <p>{{ patient?.idadeGravidez || '-' }}</p>
+        </div>
+        <div class="info-item">
+          <label>Pontuação Apgar</label>
+          <p>{{ patient?.pontuacaoApgar || '-' }}</p>
+        </div>
+        <div class="info-item">
+          <label>Duração do Parto</label>
+          <p>{{ patient?.duracaoParto || '-' }}</p>
+        </div>
+        <div class="info-item">
+          <label>Uso de Bebidas Alcoólicas</label>
+          <p>{{ patient?.usoBebidasAlcoolicas || '-' }}</p>
+        </div>
+        <div class="info-item">
+          <label>Gestação / Parto</label>
+          <p>{{ patient?.gestacaoParto || '-' }}</p>
+        </div>
+        <div class="info-item">
+          <label>Uso de Medicamentos na Gestação</label>
+          <p>{{ patient?.usoMedicamentosGestacao || '-' }}</p>
+        </div>
+        <div class="info-item">
+          <label>Parto Prematuro</label>
+          <p>{{ patient?.partoPrematuro || '-' }}</p>
+        </div>
+        <div class="info-item">
+          <label>Condições do Bebê ao Nascer</label>
+          <p>{{ patient?.condicoesBebe || '-' }}</p>
+        </div>
+        <div class="info-item">
+          <label>Usou Fórceps</label>
+          <p>{{ patient?.usouForceps || '-' }}</p>
+        </div>
+        <div class="info-item">
+          <label>Triagem Neonatal</label>
+          <p>{{ patient?.triagemNeonatal || '-' }}</p>
+        </div>
+        <div class="info-item">
+          <label>Bebê Recebeu Vacinas</label>
+          <p>{{ patient?.bebeRecebeuVacinas || '-' }}</p>
+        </div>
+        <div class="info-item">
+          <label>Problema de Saúde ao Nascer</label>
+          <p>{{ patient?.problemaSaudeNascimento || '-' }}</p>
+        </div>
+      </div>
+
+      <h3 class="section-title">Histórico e Desenvolvimento do Bebê</h3>
+      <div class="info-grid">
+        <div class="info-item">
+          <label>Peso ao Nascer</label>
+          <p>{{ patient?.pesoBebe || '-' }}</p>
+        </div>
+        <div class="info-item">
+          <label>Tamanho ao Nascer</label>
+          <p>{{ patient?.tamanhoBebe || '-' }}</p>
+        </div>
+        <div class="info-item">
+          <label>Início do Engatinhar</label>
+          <p>{{ patient?.inicioEngatinhar || '-' }}</p>
+        </div>
+        <div class="info-item">
+          <label>Início do Rolar</label>
+          <p>{{ patient?.inicioRodar || '-' }}</p>
+        </div>
+        <div class="info-item">
+          <label>Início do Sentar</label>
+          <p>{{ patient?.inicioSentar || '-' }}</p>
+        </div>
+        <div class="info-item">
+          <label>Início do Andar</label>
+          <p>{{ patient?.inicioAndar || '-' }}</p>
+        </div>
+        <div class="info-item">
+          <label>Alimentação nos Primeiros Meses</label>
+          <p>{{ patient?.alimentacaoPrimeirosMeses || '-' }}</p>
+        </div>
+        <div class="info-item">
+          <label>Sono nos Primeiros Meses</label>
+          <p>{{ patient?.sonoPrimeirosMeses || '-' }}</p>
+        </div>
+        <div class="info-item">
+          <label>Interação com o Ambiente</label>
+          <p>{{ patient?.interacaoAmbiente || '-' }}</p>
+        </div>
+        <div class="info-item">
+          <label>Contato Visual</label>
+          <p>{{ patient?.contatoVisual || '-' }}</p>
+        </div>
+        <div class="info-item">
+          <label>Sorria</label>
+          <p>{{ patient?.sorria || '-' }}</p>
+        </div>
+        <div class="info-item">
+          <label>Deitava</label>
+          <p>{{ patient?.deitava || '-' }}</p>
+        </div>
+      </div>
+
+      <h3 class="section-title">Linguagem e Comunicação</h3>
+      <div class="info-grid">
+        <div class="info-item">
+          <label>Primeiras Palavras</label>
+          <p>{{ patient?.primeiraspalavras || '-' }}</p>
+        </div>
+        <div class="info-item">
+          <label>Primeiras Frases</label>
+          <p>{{ patient?.primeirasFrases || '-' }}</p>
+        </div>
+        <div class="info-item">
+          <label>Quando Apontou</label>
+          <p>{{ patient?.quandoApontou || '-' }}</p>
+        </div>
+        <div class="info-item">
+          <label>Alimentação Bebê / Criança</label>
+          <p>{{ patient?.alimentacaoBebeCrianca || '-' }}</p>
+        </div>
+        <div class="info-item">
+          <label>Tipo de Bebê</label>
+          <p>{{ patient?.tipoBebe || '-' }}</p>
+        </div>
+      </div>
+
+      <h3 class="section-title">Ambiente Escolar e Social</h3>
+      <div class="info-grid">
+        <div class="info-item">
+          <label>Comportamento em Casa</label>
+          <p>{{ patient?.comportamentoCasa || '-' }}</p>
+        </div>
+        <div class="info-item">
+          <label>Comunidade</label>
+          <p>{{ patient?.comunidade || '-' }}</p>
+        </div>
+        <div class="info-item">
+          <label>Possui Relatório Escolar</label>
+          <p>{{ patient?.possuiRelatorioEscola || '-' }}</p>
+        </div>
+        <div class="info-item">
+          <label>Possui PDI</label>
+          <p>{{ patient?.possuiPdi || '-' }}</p>
+        </div>
+        <div class="info-item">
+          <label>Interesse em Atividades</label>
+          <p>{{ patient?.interesseAtividades || '-' }}</p>
+        </div>
+        <div class="info-item">
+          <label>Lida com Regras</label>
+          <p>{{ patient?.lidaComRegras || '-' }}</p>
+        </div>
+        <div class="info-item">
+          <label>Pontuação da Professora</label>
+          <p>{{ patient?.pontuacaoProfessora || '-' }}</p>
+        </div>
+        <div class="info-item">
+          <label>Habilidades Motoras Finas</label>
+          <p>{{ patient?.habilidadesMotFinas || '-' }}</p>
+        </div>
+        <div class="info-item">
+          <label>Habilidades Motoras Grossas</label>
+          <p>{{ patient?.habilidadesMotGrossas || '-' }}</p>
+        </div>
+      </div>
+
+      <h3 class="section-title">Cognição</h3>
+      <div class="info-grid">
+        <div class="info-item">
+          <label>Memória</label>
+          <p>{{ patient?.memoria || '-' }}</p>
+        </div>
+        <div class="info-item">
+          <label>Atenção</label>
+          <p>{{ patient?.atencao || '-' }}</p>
+        </div>
+        <div class="info-item">
+          <label>Compreensão</label>
+          <p>{{ patient?.compreensao || '-' }}</p>
+        </div>
+        <div class="info-item">
+          <label>Linguagem</label>
+          <p>{{ patient?.linguagemCognicao || '-' }}</p>
+        </div>
+      </div>
+
+      <h3 class="section-title">Potencialidades e Déficits</h3>
+      <div class="info-grid">
+        <div class="info-item">
+          <label>Desafios</label>
+          <p>{{ patient?.desafios || '-' }}</p>
+        </div>
+        <div class="info-item">
+          <label>Potencialidades</label>
+          <p>{{ patient?.potencialidades || '-' }}</p>
+        </div>
+      </div>
+
+      <h3 class="section-title">Socialização</h3>
+      <div class="info-grid">
+        <div class="info-item">
+          <label>Pessoa que se Identifica</label>
+          <p>{{ patient?.pessoaQueSeIdentifica || '-' }}</p>
+        </div>
+        <div class="info-item">
+          <label>Brinca com Crianças</label>
+          <p>{{ patient?.brincaComCriancas || '-' }}</p>
+        </div>
+        <div class="info-item">
+          <label>Preferência de Brinquedos</label>
+          <p>{{ patient?.preferenciaBrinquedos || '-' }}</p>
+        </div>
+        <div class="info-item">
+          <label>Sono Atual</label>
+          <p>{{ patient?.sonoAtual || '-' }}</p>
+        </div>
+        <div class="info-item">
+          <label>Atividades de Vida Diária</label>
+          <p>{{ patient?.atividadesVidaDiaria || '-' }}</p>
+        </div>
+        <div class="info-item">
+          <label>O que Faz / Pede</label>
+          <p>{{ patient?.oQueFazPede || '-' }}</p>
+        </div>
+        <div class="info-item">
+          <label>Rotina de Cuidados</label>
+          <p>{{ patient?.rotinaCuidados || '-' }}</p>
+        </div>
+        <div class="info-item">
+          <label>Relação Familiar</label>
+          <p>{{ patient?.relacaoFamiliar || '-' }}</p>
+        </div>
+        <div class="info-item">
+          <label>Tempo de Tela</label>
+          <p>{{ patient?.tempoTela || '-' }}</p>
+        </div>
+        <div class="info-item">
+          <label>Renda Familiar</label>
+          <p>{{ patient?.rendaFamiliar || '-' }}</p>
+        </div>
+        <div class="info-item">
+          <label>Observações</label>
+          <p>{{ patient?.observacoes || '-' }}</p>
         </div>
       </div>
 
@@ -82,6 +355,36 @@
         <div class="info-item">
           <label>Período</label>
           <p>{{ patient?.periodo || '-' }}</p>
+        </div>
+      </div>
+
+      <div *ngIf="patient.nomeMae || patient.nomePai">
+        <h3 class="section-title">Informações dos Pais</h3>
+        <div class="info-grid">
+          <div class="info-item">
+            <label>Nome da Mãe</label>
+            <p>{{ patient?.nomeMae || '-' }}</p>
+          </div>
+          <div class="info-item">
+            <label>Idade da Mãe</label>
+            <p>{{ patient?.idadeMae || '-' }}</p>
+          </div>
+          <div class="info-item">
+            <label>Profissão da Mãe</label>
+            <p>{{ patient?.profissaoMae || '-' }}</p>
+          </div>
+          <div class="info-item">
+            <label>Nome do Pai</label>
+            <p>{{ patient?.nomePai || '-' }}</p>
+          </div>
+          <div class="info-item">
+            <label>Idade do Pai</label>
+            <p>{{ patient?.idadePai || '-' }}</p>
+          </div>
+          <div class="info-item">
+            <label>Profissão do Pai</label>
+            <p>{{ patient?.profissaoPai || '-' }}</p>
+          </div>
         </div>
       </div>
 
@@ -129,7 +432,7 @@
       </div>
     </section>
 
-    <!-- Dropdown de Documentos (Ficha de Evolução / Relatórios / Anamneses) -->
+    <!-- Dropdown de Documentos (Ficha de Evolução / Relatórios) -->
     <section class="documents-section">
       <div class="dropdown-trigger">
         <button
@@ -140,8 +443,7 @@
           <span>{{ documentTypeTitle }}</span>
           <span class="dropdown-icon">{{ showDocumentTypeMenu ? '▼' : '▶' }}</span>
         </button>
-        
-        <!-- Menu de seleção de tipo -->
+
         <div class="document-type-menu" *ngIf="showDocumentTypeMenu">
           <button
             class="document-type-option"
@@ -157,16 +459,9 @@
           >
             📋 Relatórios
           </button>
-          <button
-            class="document-type-option"
-            (click)="selectDocumentType('anamnese')"
-            [class.selected]="documentType === 'anamnese'"
-          >
-            🩺 Anamneses
-          </button>
         </div>
       </div>
-      
+
       <div class="documents-list">
         <div
           class="document-card"
@@ -176,9 +471,7 @@
           <div class="doc-icon">{{ documentIcon }}</div>
           <div class="doc-content">
             <strong>{{ doc.title }}</strong>
-            <p class="doc-description">
-              {{ doc.description }}
-            </p>
+            <p class="doc-description">{{ doc.description }}</p>
           </div>
         </div>
       </div>

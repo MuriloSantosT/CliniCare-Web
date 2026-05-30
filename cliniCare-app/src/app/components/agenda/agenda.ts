@@ -253,6 +253,18 @@ export class Agenda implements OnInit {
     });
   }
 
+  cancelAppointment(apt: Appointment) {
+    if (!apt.id) return;
+    this.appointmentService.updateStatus(apt.id, 'Cancelado').subscribe({
+      next: (updated) => {
+        const idx = this.appointments.findIndex(a => a.id === apt.id);
+        if (idx !== -1) this.appointments[idx] = updated;
+        this.closeDetail();
+      },
+      error: (err) => console.error('Erro ao cancelar compromisso:', err),
+    });
+  }
+
   // ── Helpers ───────────────────────────────────────────────────────────────
 
   private hasConflict(startStr: string, endStr: string): boolean {
@@ -284,8 +296,6 @@ export class Agenda implements OnInit {
       dataFim: '',
       status: 'Agendado',
       observacoes: '',
-      valor: null,
-      formaPagamento: '',
       patientId: null,
     };
   }

@@ -43,7 +43,7 @@
               (click)="$event.stopPropagation(); patient.id && editarPaciente(patient.id)"
               aria-label="Editar paciente"
             >
-              ✏️
+              <img src="pencil.png" alt="Editar">
             </button>
             <button
               type="button"
@@ -51,7 +51,7 @@
               (click)="$event.stopPropagation(); patient.id && deletar(patient.id)"
               aria-label="Excluir paciente"
             >
-              🗑
+              <img src="delete.png" alt="Excluir">
             </button>
           </div>
         </div>

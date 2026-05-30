@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { environment } from '../../environments/environment';
 
 export interface Guardian {
   id?: number;
@@ -124,7 +125,7 @@ export interface Patient {
 
 export class PatientService {
 
-  private api = 'http://localhost:8080/patient';
+  private api = `${environment.apiUrl}/patient`;
 
   constructor(private http: HttpClient) {}
 
@@ -142,8 +143,8 @@ testar() {
   });
 }
 
-  getById(id: number): Observable<Patient> {
-    return this.http.get<Patient>(`${this.api}/${id}`);
+  getById(id: number, userId: number): Observable<Patient> {
+    return this.http.get<Patient>(`${this.api}/${id}?userId=${userId}`);
   }
 
   adicionar(patient: Patient): Observable<Patient> {
@@ -164,9 +165,9 @@ testar() {
     return this.http.post<Patient>(`${this.api}/criar`, pacienteParaEnviar);
   }
 
-  atualizar(id: number, patient: Patient): Observable<Patient> {
+  atualizar(id: number, patient: Patient, userId: number): Observable<Patient> {
     const pacienteParaEnviar: Partial<Patient> = { ...patient };
-    
+
     Object.keys(pacienteParaEnviar).forEach(key => {
       const field = key as keyof Patient;
       const value = pacienteParaEnviar[field];
@@ -176,10 +177,10 @@ testar() {
       }
     });
 
-    return this.http.put<Patient>(`${this.api}/${id}`, pacienteParaEnviar);
+    return this.http.put<Patient>(`${this.api}/${id}?userId=${userId}`, pacienteParaEnviar);
   }
 
-  deletar(id: number) {
-    return this.http.delete(`${this.api}/${id}`);
+  deletar(id: number, userId: number) {
+    return this.http.delete(`${this.api}/${id}?userId=${userId}`);
   }
 }

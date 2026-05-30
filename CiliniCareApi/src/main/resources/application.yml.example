@@ -1,8 +1,8 @@
 spring:
   datasource:
-    url: jdbc:mysql://nozomi.proxy.rlwy.net:47471/railway
-    username: root
-    password: pNqTCxbIWrPUXlTmevtutanHwfvyWfhr
+    url: jdbc:mysql://HOST:PORT/DATABASE
+    username: DB_USERNAME
+    password: DB_PASSWORD
 
     hikari:
       maximum-pool-size: 5
@@ -13,7 +13,8 @@ spring:
   jpa:
     hibernate:
       ddl-auto: update
-    show-sql: true
+    show-sql: false
     database-platform: org.hibernate.dialect.MySQLDialect
 
-
+cors:
+  allowed-origins: http://localhost:4200,https://SEU-DOMINIO.vercel.app

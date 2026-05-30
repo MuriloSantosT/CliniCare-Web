@@ -1,6 +1,7 @@
 package com.CliniCare.CiliniCareApi.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
@@ -24,6 +25,10 @@ public class Report {
     @JoinColumn(name = "patient_id")
     @JsonIgnore
     private Patient patient;
+
+    @Transient
+    @JsonProperty("patientId")
+    private Long patientIdInput;
 
     @ManyToOne
     @JoinColumn(name = "user_id")
@@ -91,6 +96,14 @@ public class Report {
 
     public void setPatient(Patient patient) {
         this.patient = patient;
+    }
+
+    public Long getPatientIdInput() {
+        return patientIdInput;
+    }
+
+    public void setPatientIdInput(Long patientIdInput) {
+        this.patientIdInput = patientIdInput;
     }
 
     public User getUser() {
