@@ -1,12 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { RouterLink } from '@angular/router';
-import { HttpClient } from '@angular/common/http';
 import { PatientService, Patient } from '../../services/patient.service';
 import { AppointmentService } from '../../services/appointment.service';
 import { AuthService } from '../../services/auth.service';
 import { Appointment } from '../../models/appointment.model';
-import { environment } from '../../../environments/environment';
 
 interface ProximoAtendimento {
   pacienteId?: number;
@@ -24,7 +22,6 @@ interface ProximoAtendimento {
 export class Dashboard implements OnInit {
   pacientes: Patient[] = [];
   appointments: Appointment[] = [];
-  fichasEvolucao = 0;
 
   proximoAtendimento: ProximoAtendimento | null = null;
 
@@ -36,7 +33,6 @@ export class Dashboard implements OnInit {
     private patientService: PatientService,
     private appointmentService: AppointmentService,
     private authService: AuthService,
-    private http: HttpClient,
   ) {}
 
   get nomeUsuario(): string {
@@ -91,7 +87,6 @@ export class Dashboard implements OnInit {
     if (!user) return;
     this.carregarPacientes(user.id);
     this.carregarAppointments(user.id);
-    this.carregarStats(user.id);
     this.notas = localStorage.getItem(this.notasKey()) ?? '';
   }
 
@@ -112,11 +107,8 @@ export class Dashboard implements OnInit {
     });
   }
 
-  carregarStats(userId: number): void {
-    this.http.get<{ totalEvolucoes: number }>(`${environment.apiUrl}/dashboard/stats/${userId}`).subscribe({
-      next: stats => (this.fichasEvolucao = stats.totalEvolucoes),
-      error: err => console.error('Erro ao buscar stats', err),
-    });
+  get agendamentosCancelados(): number {
+    return this.appointments.filter(a => a.status === 'Cancelado').length;
   }
 
   private resolverProximoAtendimento(appointments: Appointment[]): ProximoAtendimento | null {
