@@ -2,10 +2,11 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Evolution } from '../models/evolution.model';
+import { environment } from '../../environments/environment';
 
 @Injectable({ providedIn: 'root' })
 export class EvolutionService {
-  private apiUrl = 'http://localhost:8080/evolution';
+  private apiUrl = `${environment.apiUrl}/evolution`;
 
   constructor(private http: HttpClient) {}
 

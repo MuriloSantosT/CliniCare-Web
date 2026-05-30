@@ -15,3 +15,6 @@ spring:
       ddl-auto: update
     show-sql: false
     database-platform: org.hibernate.dialect.MySQLDialect
+
+cors:
+  allowed-origins: http://localhost:4200,https://SEU-DOMINIO.vercel.app

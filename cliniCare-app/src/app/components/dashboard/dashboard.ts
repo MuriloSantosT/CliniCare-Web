@@ -6,6 +6,7 @@ import { PatientService, Patient } from '../../services/patient.service';
 import { AppointmentService } from '../../services/appointment.service';
 import { AuthService } from '../../services/auth.service';
 import { Appointment } from '../../models/appointment.model';
+import { environment } from '../../../environments/environment';
 
 interface ProximoAtendimento {
   pacienteId?: number;
@@ -112,7 +113,7 @@ export class Dashboard implements OnInit {
   }
 
   carregarStats(userId: number): void {
-    this.http.get<{ totalEvolucoes: number }>(`http://localhost:8080/dashboard/stats/${userId}`).subscribe({
+    this.http.get<{ totalEvolucoes: number }>(`${environment.apiUrl}/dashboard/stats/${userId}`).subscribe({
       next: stats => (this.fichasEvolucao = stats.totalEvolucoes),
       error: err => console.error('Erro ao buscar stats', err),
     });
