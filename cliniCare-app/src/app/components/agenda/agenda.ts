@@ -191,6 +191,10 @@ export class Agenda implements OnInit {
   }
 
   saveAppointment() {
+    if (!this.newAppointment.patientId) {
+      this.errorMsg = 'Selecione um paciente para continuar.';
+      return;
+    }
     if (!this.newAppointment.dataInicio || !this.newAppointment.dataFim) return;
     const currentUser = this.authService.getCurrentUser();
     if (!currentUser) return;

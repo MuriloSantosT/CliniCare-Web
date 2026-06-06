@@ -131,8 +131,8 @@
         <form class="appointment-form" (ngSubmit)="saveAppointment()">
 
           <div class="form-group">
-            <label>Paciente</label>
-            <select [(ngModel)]="newAppointment.patientId" name="patientId">
+            <label>Paciente *</label>
+            <select [(ngModel)]="newAppointment.patientId" name="patientId" (ngModelChange)="errorMsg = ''">
               <option [ngValue]="null">Selecione o paciente</option>
               @for (p of patients; track p.id) {
                 <option [ngValue]="p.id">{{ p.nome }}</option>
@@ -178,7 +178,7 @@
           <div class="form-actions">
             <button type="button" class="btn-secondary" (click)="closeAppointmentForm()">Cancelar</button>
             <button type="submit" class="btn-primary"
-              [disabled]="!newAppointment.dataInicio || !newAppointment.dataFim">
+              [disabled]="!newAppointment.patientId || !newAppointment.dataInicio || !newAppointment.dataFim">
               Salvar
             </button>
           </div>

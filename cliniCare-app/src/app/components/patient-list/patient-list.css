@@ -57,17 +57,22 @@ h1 {
 .btn-search {
   border: none;
   background: transparent;
-  color: #94a3b8;
-  font-size: 1rem;
   cursor: pointer;
   padding: 0;
   display: flex;
   align-items: center;
-  transition: color 0.15s ease;
+  transition: opacity 0.15s ease;
 }
 
-.btn-search:hover {
-  color: #64748b;
+.btn-search img {
+  width: 18px;
+  height: 18px;
+  object-fit: contain;
+  opacity: 0.5;
+}
+
+.btn-search:hover img {
+  opacity: 0.8;
 }
 
 /* TABLE */
