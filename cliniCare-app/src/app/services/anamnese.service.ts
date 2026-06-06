@@ -126,6 +126,10 @@ export class AnamneseService {
     return this.http.get<Anamnese[]>(`${this.apiUrl}/paciente/${patientId}`);
   }
 
+  atualizar(id: number, anamnese: Partial<Anamnese>): Observable<Anamnese> {
+    return this.http.put<Anamnese>(`${this.apiUrl}/${id}`, anamnese);
+  }
+
   deletar(id: number): Observable<void> {
     return this.http.delete<void>(`${this.apiUrl}/delete?id=${id}`);
   }

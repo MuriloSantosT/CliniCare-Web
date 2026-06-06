@@ -114,22 +114,22 @@
 
         <div class="form-group full-width">
           <label for="medicamentos">Medicamentos</label>
-          <textarea id="medicamentos" [(ngModel)]="patient.medicamentos" rows="3"></textarea>
+          <textarea id="medicamentos" [(ngModel)]="anamnese.medicamentos" rows="3"></textarea>
         </div>
 
         <div class="form-group full-width">
           <label for="acompanhamentoProfissional">Acompanhamento Profissional</label>
-          <textarea id="acompanhamentoProfissional" [(ngModel)]="patient.acompanhamentoProfissional" rows="3"></textarea>
+          <textarea id="acompanhamentoProfissional" [(ngModel)]="anamnese.acompanhamentoProfissional" rows="3"></textarea>
         </div>
 
         <div class="form-group full-width">
           <label for="cirurgiasPrevias">Cirurgias Prévias</label>
-          <textarea id="cirurgiasPrevias" [(ngModel)]="patient.cirurgiasPrevias" rows="3"></textarea>
+          <textarea id="cirurgiasPrevias" [(ngModel)]="anamnese.cirurgiasPrevias" rows="3"></textarea>
         </div>
 
         <div class="form-group full-width">
           <label for="deficienciaTranstorno">Deficiência / Transtorno</label>
-          <textarea id="deficienciaTranstorno" [(ngModel)]="patient.deficienciaTranstorno" rows="3"></textarea>
+          <textarea id="deficienciaTranstorno" [(ngModel)]="anamnese.deficienciaTranstorno" rows="3"></textarea>
         </div>
       </div>
     </div>
@@ -151,77 +151,77 @@
         <div class="form-group">
           <label>Gravidez Planejada</label>
           <div class="radio-group">
-            <label class="radio-item"><input type="radio" [(ngModel)]="patient.gravidezPlanejada" name="gravidezPlanejada" value="sim" /> Sim</label>
-            <label class="radio-item"><input type="radio" [(ngModel)]="patient.gravidezPlanejada" name="gravidezPlanejada" value="não" /> Não</label>
+            <label class="radio-item"><input type="radio" [(ngModel)]="anamnese.gravidezPlanejada" name="gravidezPlanejada" value="sim" /> Sim</label>
+            <label class="radio-item"><input type="radio" [(ngModel)]="anamnese.gravidezPlanejada" name="gravidezPlanejada" value="não" /> Não</label>
           </div>
         </div>
 
         <div class="form-group">
           <label>Fez Pré-Natal</label>
           <div class="radio-group">
-            <label class="radio-item"><input type="radio" [(ngModel)]="patient.fezPreNatal" name="fezPreNatal" value="sim" /> Sim</label>
-            <label class="radio-item"><input type="radio" [(ngModel)]="patient.fezPreNatal" name="fezPreNatal" value="não" /> Não</label>
+            <label class="radio-item"><input type="radio" [(ngModel)]="anamnese.fezPreNatal" name="fezPreNatal" value="sim" /> Sim</label>
+            <label class="radio-item"><input type="radio" [(ngModel)]="anamnese.fezPreNatal" name="fezPreNatal" value="não" /> Não</label>
           </div>
         </div>
 
         <div class="form-group">
           <label for="idadeGravidez">Idade na Gravidez</label>
-          <input id="idadeGravidez" type="text" [(ngModel)]="patient.idadeGravidez" />
+          <input id="idadeGravidez" type="text" [(ngModel)]="anamnese.idadeGravidez" />
         </div>
 
         <div class="form-group">
           <label for="pontuacaoApgar">Pontuação Apgar</label>
-          <input id="pontuacaoApgar" type="text" [(ngModel)]="patient.pontuacaoApgar" />
+          <input id="pontuacaoApgar" type="text" [(ngModel)]="anamnese.pontuacaoApgar" />
         </div>
 
         <div class="form-group">
           <label for="duracaoParto">Duração do Parto</label>
-          <input id="duracaoParto" type="text" [(ngModel)]="patient.duracaoParto" />
+          <input id="duracaoParto" type="text" [(ngModel)]="anamnese.partoProlongadoDuracao" />
         </div>
 
         <div class="form-group full-width">
           <label for="usoBebidasAlcoolicas">Uso de Bebidas Alcoólicas</label>
-          <textarea id="usoBebidasAlcoolicas" [(ngModel)]="patient.usoBebidasAlcoolicas" rows="3"></textarea>
+          <textarea id="usoBebidasAlcoolicas" [(ngModel)]="anamnese.usoBebidasAlcoolicas" rows="3"></textarea>
         </div>
 
         <div class="form-group full-width">
           <label for="gestacaoParto">Gestação / Parto</label>
-          <textarea id="gestacaoParto" [(ngModel)]="patient.gestacaoParto" rows="3"></textarea>
+          <textarea id="gestacaoParto" [(ngModel)]="anamnese.gestacaoParto" rows="3"></textarea>
         </div>
 
         <div class="form-group full-width">
           <label for="usoMedicamentosGestacao">Uso de Medicamentos na Gestação</label>
-          <textarea id="usoMedicamentosGestacao" [(ngModel)]="patient.usoMedicamentosGestacao" rows="3"></textarea>
+          <textarea id="usoMedicamentosGestacao" [(ngModel)]="anamnese.usoMedicamentosGestacao" rows="3"></textarea>
         </div>
 
         <div class="form-group full-width">
           <label for="partoPrematuro">Parto Prematuro</label>
-          <textarea id="partoPrematuro" [(ngModel)]="patient.partoPrematuro" rows="3"></textarea>
+          <textarea id="partoPrematuro" [(ngModel)]="anamnese.partoPrematuro" rows="3"></textarea>
         </div>
 
         <div class="form-group full-width">
           <label for="condicoesBebe">Condições do Bebê ao Nascer</label>
-          <textarea id="condicoesBebe" [(ngModel)]="patient.condicoesBebe" rows="3"></textarea>
+          <textarea id="condicoesBebe" [(ngModel)]="anamnese.condicoesBebe" rows="3"></textarea>
         </div>
 
         <div class="form-group full-width">
           <label for="usouForceps">Usou Fórceps</label>
-          <textarea id="usouForceps" [(ngModel)]="patient.usouForceps" rows="3"></textarea>
+          <textarea id="usouForceps" [(ngModel)]="anamnese.usouForceps" rows="3"></textarea>
         </div>
 
         <div class="form-group full-width">
           <label for="triagemNeonatal">Triagem Neonatal</label>
-          <textarea id="triagemNeonatal" [(ngModel)]="patient.triagemNeonatal" rows="3"></textarea>
+          <textarea id="triagemNeonatal" [(ngModel)]="anamnese.triagemNeonatal" rows="3"></textarea>
         </div>
 
         <div class="form-group full-width">
           <label for="bebeRecebeuVacinas">Bebê Recebeu Vacinas</label>
-          <textarea id="bebeRecebeuVacinas" [(ngModel)]="patient.bebeRecebeuVacinas" rows="3"></textarea>
+          <textarea id="bebeRecebeuVacinas" [(ngModel)]="anamnese.bebeRecebeuVacinas" rows="3"></textarea>
         </div>
 
         <div class="form-group full-width">
           <label for="problemaSaudeNascimento">Problema de Saúde ao Nascer</label>
-          <textarea id="problemaSaudeNascimento" [(ngModel)]="patient.problemaSaudeNascimento" rows="3"></textarea>
+          <textarea id="problemaSaudeNascimento" [(ngModel)]="anamnese.problemaSaudeNascimento" rows="3"></textarea>
         </div>
       </div>
     </div>
@@ -242,62 +242,62 @@
       <div class="form-grid">
         <div class="form-group">
           <label for="pesoBebe">Peso ao Nascer</label>
-          <input id="pesoBebe" type="text" [(ngModel)]="patient.pesoBebe" />
+          <input id="pesoBebe" type="text" [(ngModel)]="anamnese.pesoBebe" />
         </div>
 
         <div class="form-group">
           <label for="tamanhoBebe">Tamanho ao Nascer</label>
-          <input id="tamanhoBebe" type="text" [(ngModel)]="patient.tamanhoBebe" />
+          <input id="tamanhoBebe" type="text" [(ngModel)]="anamnese.tamanhoBebe" />
         </div>
 
         <div class="form-group">
           <label for="inicioEngatinhar">Início do Engatinhar</label>
-          <input id="inicioEngatinhar" type="text" [(ngModel)]="patient.inicioEngatinhar" />
+          <input id="inicioEngatinhar" type="text" [(ngModel)]="anamnese.inicioEngatinhar" />
         </div>
 
         <div class="form-group">
           <label for="inicioRodar">Início do Rolar</label>
-          <input id="inicioRodar" type="text" [(ngModel)]="patient.inicioRodar" />
+          <input id="inicioRodar" type="text" [(ngModel)]="anamnese.inicioRodar" />
         </div>
 
         <div class="form-group">
           <label for="inicioSentar">Início do Sentar</label>
-          <input id="inicioSentar" type="text" [(ngModel)]="patient.inicioSentar" />
+          <input id="inicioSentar" type="text" [(ngModel)]="anamnese.inicioSentar" />
         </div>
 
         <div class="form-group">
           <label for="inicioAndar">Início do Andar</label>
-          <input id="inicioAndar" type="text" [(ngModel)]="patient.inicioAndar" />
+          <input id="inicioAndar" type="text" [(ngModel)]="anamnese.inicioAndar" />
         </div>
 
         <div class="form-group full-width">
           <label for="alimentacaoPrimeirosMeses">Alimentação nos Primeiros Meses</label>
-          <textarea id="alimentacaoPrimeirosMeses" [(ngModel)]="patient.alimentacaoPrimeirosMeses" rows="3"></textarea>
+          <textarea id="alimentacaoPrimeirosMeses" [(ngModel)]="anamnese.alimentacaoPrimeirosMeses" rows="3"></textarea>
         </div>
 
         <div class="form-group full-width">
           <label for="sonoPrimeirosMeses">Sono nos Primeiros Meses</label>
-          <textarea id="sonoPrimeirosMeses" [(ngModel)]="patient.sonoPrimeirosMeses" rows="3"></textarea>
+          <textarea id="sonoPrimeirosMeses" [(ngModel)]="anamnese.sonoPrimeirosMeses" rows="3"></textarea>
         </div>
 
         <div class="form-group full-width">
           <label for="interacaoAmbiente">Interação com o Ambiente</label>
-          <textarea id="interacaoAmbiente" [(ngModel)]="patient.interacaoAmbiente" rows="3"></textarea>
+          <textarea id="interacaoAmbiente" [(ngModel)]="anamnese.interacaoAmbiente" rows="3"></textarea>
         </div>
 
         <div class="form-group full-width">
           <label for="contatoVisual">Contato Visual</label>
-          <textarea id="contatoVisual" [(ngModel)]="patient.contatoVisual" rows="3"></textarea>
+          <textarea id="contatoVisual" [(ngModel)]="anamnese.contatoVisual" rows="3"></textarea>
         </div>
 
         <div class="form-group full-width">
           <label for="sorria">Sorria</label>
-          <textarea id="sorria" [(ngModel)]="patient.sorria" rows="3"></textarea>
+          <textarea id="sorria" [(ngModel)]="anamnese.sorria" rows="3"></textarea>
         </div>
 
         <div class="form-group full-width">
           <label for="deitava">Deitava</label>
-          <textarea id="deitava" [(ngModel)]="patient.deitava" rows="3"></textarea>
+          <textarea id="deitava" [(ngModel)]="anamnese.deitarRolar" rows="3"></textarea>
         </div>
       </div>
     </div>
@@ -317,30 +317,30 @@
       <div class="form-grid">
         <div class="form-group full-width">
           <label for="primeiraspalavras">Primeiras Palavras</label>
-          <textarea id="primeiraspalavras" [(ngModel)]="patient.primeiraspalavras" rows="3"></textarea>
+          <textarea id="primeiraspalavras" [(ngModel)]="anamnese.primeiraspalavras" rows="3"></textarea>
         </div>
 
         <div class="form-group full-width">
           <label for="primeirasFrases">Primeiras Frases</label>
-          <textarea id="primeirasFrases" [(ngModel)]="patient.primeirasFrases" rows="3"></textarea>
+          <textarea id="primeirasFrases" [(ngModel)]="anamnese.primeirasFrases" rows="3"></textarea>
         </div>
 
         <div class="form-group full-width">
           <label for="quandoApontou">Quando Apontou</label>
-          <textarea id="quandoApontou" [(ngModel)]="patient.quandoApontou" rows="3"></textarea>
+          <textarea id="quandoApontou" [(ngModel)]="anamnese.quandoApontou" rows="3"></textarea>
         </div>
 
         <div class="form-group full-width">
           <label for="alimentacaoBebeCrianca">Alimentação Bebê / Criança</label>
-          <textarea id="alimentacaoBebeCrianca" [(ngModel)]="patient.alimentacaoBebeCrianca" rows="3"></textarea>
+          <textarea id="alimentacaoBebeCrianca" [(ngModel)]="anamnese.alimentacaoBebeCrianca" rows="3"></textarea>
         </div>
 
         <div class="form-group full-width">
           <label>Tipo de Bebê</label>
           <div class="radio-group">
-            <label class="radio-item"><input type="radio" [(ngModel)]="patient.tipoBebe" name="tipoBebe" value="tranquilo" /> Tranquilo</label>
-            <label class="radio-item"><input type="radio" [(ngModel)]="patient.tipoBebe" name="tipoBebe" value="choroso" /> Choroso</label>
-            <label class="radio-item"><input type="radio" [(ngModel)]="patient.tipoBebe" name="tipoBebe" value="agitado" /> Agitado</label>
+            <label class="radio-item"><input type="radio" [(ngModel)]="anamnese.tipoBebe" name="tipoBebe" value="tranquilo" /> Tranquilo</label>
+            <label class="radio-item"><input type="radio" [(ngModel)]="anamnese.tipoBebe" name="tipoBebe" value="choroso" /> Choroso</label>
+            <label class="radio-item"><input type="radio" [(ngModel)]="anamnese.tipoBebe" name="tipoBebe" value="agitado" /> Agitado</label>
           </div>
         </div>
       </div>
@@ -362,53 +362,53 @@
       <div class="form-grid">
         <div class="form-group full-width">
           <label for="comportamentoCasa">Comportamento em Casa</label>
-          <textarea id="comportamentoCasa" [(ngModel)]="patient.comportamentoCasa" rows="3"></textarea>
+          <textarea id="comportamentoCasa" [(ngModel)]="anamnese.comportamentoCasa" rows="3"></textarea>
         </div>
 
         <div class="form-group full-width">
           <label for="comunidade">Comunidade</label>
-          <textarea id="comunidade" [(ngModel)]="patient.comunidade" rows="3"></textarea>
+          <textarea id="comunidade" [(ngModel)]="anamnese.comunidade" rows="3"></textarea>
         </div>
 
         <div class="form-group">
           <label>Possui Relatório Escolar</label>
           <div class="radio-group">
-            <label class="radio-item"><input type="radio" [(ngModel)]="patient.possuiRelatorioEscola" name="possuiRelatorioEscola" value="sim" /> Sim</label>
-            <label class="radio-item"><input type="radio" [(ngModel)]="patient.possuiRelatorioEscola" name="possuiRelatorioEscola" value="não" /> Não</label>
+            <label class="radio-item"><input type="radio" [(ngModel)]="anamnese.possuiRelatorioEscola" name="possuiRelatorioEscola" value="sim" /> Sim</label>
+            <label class="radio-item"><input type="radio" [(ngModel)]="anamnese.possuiRelatorioEscola" name="possuiRelatorioEscola" value="não" /> Não</label>
           </div>
         </div>
 
         <div class="form-group">
           <label>Possui PDI</label>
           <div class="radio-group">
-            <label class="radio-item"><input type="radio" [(ngModel)]="patient.possuiPdi" name="possuiPdi" value="sim" /> Sim</label>
-            <label class="radio-item"><input type="radio" [(ngModel)]="patient.possuiPdi" name="possuiPdi" value="não" /> Não</label>
+            <label class="radio-item"><input type="radio" [(ngModel)]="anamnese.possuiPdi" name="possuiPdi" value="sim" /> Sim</label>
+            <label class="radio-item"><input type="radio" [(ngModel)]="anamnese.possuiPdi" name="possuiPdi" value="não" /> Não</label>
           </div>
         </div>
 
         <div class="form-group full-width">
           <label for="interesseAtividades">Interesse em Atividades</label>
-          <textarea id="interesseAtividades" [(ngModel)]="patient.interesseAtividades" rows="3"></textarea>
+          <textarea id="interesseAtividades" [(ngModel)]="anamnese.interesseAtividades" rows="3"></textarea>
         </div>
 
         <div class="form-group full-width">
           <label for="lidaComRegras">Lida com Regras</label>
-          <textarea id="lidaComRegras" [(ngModel)]="patient.lidaComRegras" rows="3"></textarea>
+          <textarea id="lidaComRegras" [(ngModel)]="anamnese.lidaComRegras" rows="3"></textarea>
         </div>
 
         <div class="form-group full-width">
           <label for="pontuacaoProfessora">Pontuação da Professora</label>
-          <textarea id="pontuacaoProfessora" [(ngModel)]="patient.pontuacaoProfessora" rows="3"></textarea>
+          <textarea id="pontuacaoProfessora" [(ngModel)]="anamnese.pontuacaoProfessora" rows="3"></textarea>
         </div>
 
         <div class="form-group full-width">
           <label for="habilidadesMotFinas">Habilidades Motoras Finas</label>
-          <textarea id="habilidadesMotFinas" [(ngModel)]="patient.habilidadesMotFinas" rows="3"></textarea>
+          <textarea id="habilidadesMotFinas" [(ngModel)]="anamnese.habilidadesMotFinas" rows="3"></textarea>
         </div>
 
         <div class="form-group full-width">
           <label for="habilidadesMotGrossas">Habilidades Motoras Grossas</label>
-          <textarea id="habilidadesMotGrossas" [(ngModel)]="patient.habilidadesMotGrossas" rows="3"></textarea>
+          <textarea id="habilidadesMotGrossas" [(ngModel)]="anamnese.habilidadesMotGrossas" rows="3"></textarea>
         </div>
       </div>
     </div>
@@ -428,22 +428,22 @@
       <div class="form-grid">
         <div class="form-group full-width">
           <label for="memoria">Memória</label>
-          <textarea id="memoria" [(ngModel)]="patient.memoria" rows="3"></textarea>
+          <textarea id="memoria" [(ngModel)]="anamnese.memoria" rows="3"></textarea>
         </div>
 
         <div class="form-group full-width">
           <label for="atencao">Atenção</label>
-          <textarea id="atencao" [(ngModel)]="patient.atencao" rows="3"></textarea>
+          <textarea id="atencao" [(ngModel)]="anamnese.atencao" rows="3"></textarea>
         </div>
 
         <div class="form-group full-width">
           <label for="compreensao">Compreensão</label>
-          <textarea id="compreensao" [(ngModel)]="patient.compreensao" rows="3"></textarea>
+          <textarea id="compreensao" [(ngModel)]="anamnese.compreensao" rows="3"></textarea>
         </div>
 
         <div class="form-group full-width">
           <label for="linguagemCognicao">Linguagem</label>
-          <textarea id="linguagemCognicao" [(ngModel)]="patient.linguagemCognicao" rows="3"></textarea>
+          <textarea id="linguagemCognicao" [(ngModel)]="anamnese.linguagemCognicao" rows="3"></textarea>
         </div>
       </div>
     </div>
@@ -463,12 +463,12 @@
       <div class="form-grid">
         <div class="form-group full-width">
           <label for="desafios">Desafios</label>
-          <textarea id="desafios" [(ngModel)]="patient.desafios" rows="3"></textarea>
+          <textarea id="desafios" [(ngModel)]="anamnese.desafios" rows="3"></textarea>
         </div>
 
         <div class="form-group full-width">
           <label for="potencialidades">Potencialidades</label>
-          <textarea id="potencialidades" [(ngModel)]="patient.potencialidades" rows="3"></textarea>
+          <textarea id="potencialidades" [(ngModel)]="anamnese.potencialidades" rows="3"></textarea>
         </div>
       </div>
     </div>
@@ -491,57 +491,57 @@
       <div class="form-grid">
         <div class="form-group full-width">
           <label for="pessoaQueSeIdentifica">Pessoa que se Identifica</label>
-          <textarea id="pessoaQueSeIdentifica" [(ngModel)]="patient.pessoaQueSeIdentifica" rows="3"></textarea>
+          <textarea id="pessoaQueSeIdentifica" [(ngModel)]="anamnese.pessoaQueSeIdentifica" rows="3"></textarea>
         </div>
 
         <div class="form-group full-width">
           <label for="brincaComCriancas">Brinca com Crianças</label>
-          <textarea id="brincaComCriancas" [(ngModel)]="patient.brincaComCriancas" rows="3"></textarea>
+          <textarea id="brincaComCriancas" [(ngModel)]="anamnese.brincaComCriancas" rows="3"></textarea>
         </div>
 
         <div class="form-group full-width">
           <label for="preferenciaBrinquedos">Preferência de Brinquedos</label>
-          <textarea id="preferenciaBrinquedos" [(ngModel)]="patient.preferenciaBrinquedos" rows="3"></textarea>
+          <textarea id="preferenciaBrinquedos" [(ngModel)]="anamnese.preferenciaBrinquedos" rows="3"></textarea>
         </div>
 
         <div class="form-group full-width">
           <label for="sonoAtual">Sono Atual</label>
-          <textarea id="sonoAtual" [(ngModel)]="patient.sonoAtual" rows="3"></textarea>
+          <textarea id="sonoAtual" [(ngModel)]="anamnese.sonoAtual" rows="3"></textarea>
         </div>
 
         <div class="form-group full-width">
           <label for="atividadesVidaDiaria">Atividades de Vida Diária</label>
-          <textarea id="atividadesVidaDiaria" [(ngModel)]="patient.atividadesVidaDiaria" rows="3"></textarea>
+          <textarea id="atividadesVidaDiaria" [(ngModel)]="anamnese.atividadesVidaDiaria" rows="3"></textarea>
         </div>
 
         <div class="form-group full-width">
           <label for="oQueFazPede">O que Faz / Pede</label>
-          <textarea id="oQueFazPede" [(ngModel)]="patient.oQueFazPede" rows="3"></textarea>
+          <textarea id="oQueFazPede" [(ngModel)]="anamnese.oQueFazPede" rows="3"></textarea>
         </div>
 
         <div class="form-group full-width">
           <label for="rotinaCuidados">Rotina de Cuidados</label>
-          <textarea id="rotinaCuidados" [(ngModel)]="patient.rotinaCuidados" rows="3"></textarea>
+          <textarea id="rotinaCuidados" [(ngModel)]="anamnese.rotinaCuidados" rows="3"></textarea>
         </div>
 
         <div class="form-group full-width">
           <label for="relacaoFamiliar">Relação Familiar</label>
-          <textarea id="relacaoFamiliar" [(ngModel)]="patient.relacaoFamiliar" rows="3"></textarea>
+          <textarea id="relacaoFamiliar" [(ngModel)]="anamnese.relacaoFamiliar" rows="3"></textarea>
         </div>
 
         <div class="form-group">
           <label for="tempoTela">Tempo de Tela</label>
-          <input id="tempoTela" type="text" [(ngModel)]="patient.tempoTela" />
+          <input id="tempoTela" type="text" [(ngModel)]="anamnese.tempoTela" />
         </div>
 
         <div class="form-group">
           <label for="rendaFamiliar">Renda Familiar</label>
-          <input id="rendaFamiliar" type="text" [(ngModel)]="patient.rendaFamiliar" />
+          <input id="rendaFamiliar" type="text" [(ngModel)]="anamnese.rendaFamiliar" />
         </div>
 
         <div class="form-group full-width">
           <label for="observacoes">Observações</label>
-          <textarea id="observacoes" [(ngModel)]="patient.observacoes" rows="3"></textarea>
+          <textarea id="observacoes" [(ngModel)]="anamnese.observacoes" rows="3"></textarea>
         </div>
       </div>
     </div>

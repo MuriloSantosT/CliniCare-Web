@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { PatientService, Patient, Guardian } from '../../services/patient.service';
+import { AnamneseService, Anamnese } from '../../services/anamnese.service';
 import { AuthService } from '../../services/auth.service';
 
 @Component({
@@ -14,6 +15,7 @@ import { AuthService } from '../../services/auth.service';
 })
 export class EditPatient implements OnInit {
   patient: Partial<Patient> = {};
+  anamnese: Partial<Anamnese> = {};
 
   get isMenorDeIdade(): boolean {
     if (!this.patient.dataNascimento) return false;
@@ -31,6 +33,7 @@ export class EditPatient implements OnInit {
 
   constructor(
     private patientService: PatientService,
+    private anamneseService: AnamneseService,
     private authService: AuthService,
     private router: Router,
     private route: ActivatedRoute
@@ -57,6 +60,16 @@ export class EditPatient implements OnInit {
           }
         }
       });
+
+      this.anamneseService.listarPorPaciente(+id).subscribe({
+        next: (anamneses) => {
+          this.anamnese = anamneses.length > 0 ? anamneses[0] : {};
+        },
+        error: (erro) => {
+          console.error('Erro ao carregar anamnese:', erro);
+          this.anamnese = {};
+        }
+      });
     }
   }
 
@@ -67,8 +80,8 @@ export class EditPatient implements OnInit {
       }
       this.patient.responsaveis.push({
         nome: this.novoResponsavel.nome,
-        cpf: (this.novoResponsavel.cpf || '').replace(/\D/g, ''), // Remove formatação
-        telefone: (this.novoResponsavel.telefone || '').replace(/\D/g, '') // Remove formatação
+        cpf: (this.novoResponsavel.cpf || '').replace(/\D/g, ''),
+        telefone: (this.novoResponsavel.telefone || '').replace(/\D/g, '')
       });
       this.novoResponsavel = { nome: '', cpf: '', telefone: '' };
     }
@@ -97,12 +110,9 @@ export class EditPatient implements OnInit {
           : [],
       };
 
-      console.log('Dados enviados:', pacienteParaEnviar);
-
       this.patientService.atualizar(this.patient.id, pacienteParaEnviar as Patient, user.id).subscribe({
-        next: (pacienteSalvo) => {
-          console.log('Paciente atualizado com sucesso:', pacienteSalvo);
-          this.router.navigate(['/patients']);
+        next: () => {
+          this.salvarAnamnese(user.id);
         },
         error: (erro) => {
           console.error('Erro ao atualizar paciente:', erro);
@@ -111,6 +121,35 @@ export class EditPatient implements OnInit {
       });
     } else {
       alert('Por favor, preencha os campos obrigatórios: Nome, CPF e Data de Nascimento.');
+    }
+  }
+
+  private salvarAnamnese(userId: number) {
+    if (this.anamnese.id) {
+      this.anamneseService.atualizar(this.anamnese.id, this.anamnese).subscribe({
+        next: () => this.router.navigate(['/patients']),
+        error: (erro) => {
+          console.error('Erro ao atualizar anamnese:', erro);
+          this.router.navigate(['/patients']);
+        }
+      });
+    } else {
+      const nova: Anamnese = {
+        ...this.anamnese,
+        patientId: this.patient.id!,
+        userId,
+        data: new Date().toISOString().split('T')[0],
+        resumo: '',
+        textoCompleto: '',
+      } as Anamnese;
+
+      this.anamneseService.criar(nova).subscribe({
+        next: () => this.router.navigate(['/patients']),
+        error: (erro) => {
+          console.error('Erro ao criar anamnese:', erro);
+          this.router.navigate(['/patients']);
+        }
+      });
     }
   }
 

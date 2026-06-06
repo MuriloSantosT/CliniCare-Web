@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { PatientService, Patient, Guardian } from '../../services/patient.service';
+import { AnamneseService, Anamnese } from '../../services/anamnese.service';
 import { AuthService } from '../../services/auth.service';
 
 @Component({
@@ -22,10 +23,6 @@ export class NewPatient {
     convenio: '',
     telefoneEmergencia: '',
     observacoesGerais: '',
-    medicamentos: '',
-    acompanhamentoProfissional: '',
-    cirurgiasPrevias: '',
-    deficienciaTranstorno: '',
     nomeEscola: '',
     telefoneEscola: '',
     ano: '',
@@ -44,6 +41,13 @@ export class NewPatient {
     nomePai: '',
     idadePai: '',
     profissaoPai: '',
+  };
+
+  anamnese: Partial<Anamnese> = {
+    medicamentos: '',
+    acompanhamentoProfissional: '',
+    cirurgiasPrevias: '',
+    deficienciaTranstorno: '',
     gravidezPlanejada: '',
     usoBebidasAlcoolicas: '',
     gestacaoParto: '',
@@ -52,7 +56,7 @@ export class NewPatient {
     fezPreNatal: '',
     partoPrematuro: '',
     condicoesBebe: '',
-    duracaoParto: '',
+    partoProlongadoDuracao: '',
     usouForceps: '',
     pontuacaoApgar: '',
     triagemNeonatal: '',
@@ -65,7 +69,7 @@ export class NewPatient {
     interacaoAmbiente: '',
     contatoVisual: '',
     sorria: '',
-    deitava: '',
+    deitarRolar: '',
     inicioEngatinhar: '',
     inicioRodar: '',
     inicioSentar: '',
@@ -100,7 +104,7 @@ export class NewPatient {
     tempoTela: '',
     rendaFamiliar: '',
     relacaoFamiliar: '',
-    observacoes: ''
+    observacoes: '',
   };
 
   get today(): string {
@@ -123,6 +127,7 @@ export class NewPatient {
 
   constructor(
     private patientService: PatientService,
+    private anamneseService: AnamneseService,
     private authService: AuthService,
     private router: Router
   ) {}
@@ -179,108 +184,62 @@ export class NewPatient {
     }
 
     const pacienteParaEnviar = {
-        nome: this.patient.nome || '',
-        cpf: (this.patient.cpf || '').replace(/\D/g, ''),
-        dataNascimento: this.patient.dataNascimento || '',
-        sexo: this.patient.sexo || '',
-        alergias: this.patient.alergias || '',
-        convenio: this.patient.convenio || '',
-        telefoneEmergencia: (this.patient.telefoneEmergencia || '').replace(/\D/g, ''),
-        observacoesGerais: this.patient.observacoesGerais || '',
-        medicamentos: this.patient.medicamentos || '',
-        acompanhamentoProfissional: this.patient.acompanhamentoProfissional || '',
-        cirurgiasPrevias: this.patient.cirurgiasPrevias || '',
-        deficienciaTranstorno: this.patient.deficienciaTranstorno || '',
-        gravidezPlanejada: this.patient.gravidezPlanejada || '',
-        usoBebidasAlcoolicas: this.patient.usoBebidasAlcoolicas || '',
-        gestacaoParto: this.patient.gestacaoParto || '',
-        usoMedicamentosGestacao: this.patient.usoMedicamentosGestacao || '',
-        idadeGravidez: this.patient.idadeGravidez || '',
-        fezPreNatal: this.patient.fezPreNatal || '',
-        partoPrematuro: this.patient.partoPrematuro || '',
-        condicoesBebe: this.patient.condicoesBebe || '',
-        duracaoParto: this.patient.duracaoParto || '',
-        usouForceps: this.patient.usouForceps || '',
-        pontuacaoApgar: this.patient.pontuacaoApgar || '',
-        triagemNeonatal: this.patient.triagemNeonatal || '',
-        bebeRecebeuVacinas: this.patient.bebeRecebeuVacinas || '',
-        problemaSaudeNascimento: this.patient.problemaSaudeNascimento || '',
-        pesoBebe: this.patient.pesoBebe || '',
-        tamanhoBebe: this.patient.tamanhoBebe || '',
-        alimentacaoPrimeirosMeses: this.patient.alimentacaoPrimeirosMeses || '',
-        sonoPrimeirosMeses: this.patient.sonoPrimeirosMeses || '',
-        interacaoAmbiente: this.patient.interacaoAmbiente || '',
-        contatoVisual: this.patient.contatoVisual || '',
-        sorria: this.patient.sorria || '',
-        deitava: this.patient.deitava || '',
-        inicioEngatinhar: this.patient.inicioEngatinhar || '',
-        inicioRodar: this.patient.inicioRodar || '',
-        inicioSentar: this.patient.inicioSentar || '',
-        inicioAndar: this.patient.inicioAndar || '',
-        primeiraspalavras: this.patient.primeiraspalavras || '',
-        primeirasFrases: this.patient.primeirasFrases || '',
-        quandoApontou: this.patient.quandoApontou || '',
-        alimentacaoBebeCrianca: this.patient.alimentacaoBebeCrianca || '',
-        tipoBebe: this.patient.tipoBebe || '',
-        comportamentoCasa: this.patient.comportamentoCasa || '',
-        comunidade: this.patient.comunidade || '',
-        possuiRelatorioEscola: this.patient.possuiRelatorioEscola || '',
-        possuiPdi: this.patient.possuiPdi || '',
-        interesseAtividades: this.patient.interesseAtividades || '',
-        lidaComRegras: this.patient.lidaComRegras || '',
-        pontuacaoProfessora: this.patient.pontuacaoProfessora || '',
-        habilidadesMotFinas: this.patient.habilidadesMotFinas || '',
-        habilidadesMotGrossas: this.patient.habilidadesMotGrossas || '',
-        memoria: this.patient.memoria || '',
-        atencao: this.patient.atencao || '',
-        compreensao: this.patient.compreensao || '',
-        linguagemCognicao: this.patient.linguagemCognicao || '',
-        desafios: this.patient.desafios || '',
-        potencialidades: this.patient.potencialidades || '',
-        pessoaQueSeIdentifica: this.patient.pessoaQueSeIdentifica || '',
-        brincaComCriancas: this.patient.brincaComCriancas || '',
-        preferenciaBrinquedos: this.patient.preferenciaBrinquedos || '',
-        sonoAtual: this.patient.sonoAtual || '',
-        atividadesVidaDiaria: this.patient.atividadesVidaDiaria || '',
-        oQueFazPede: this.patient.oQueFazPede || '',
-        rotinaCuidados: this.patient.rotinaCuidados || '',
-        tempoTela: this.patient.tempoTela || '',
-        rendaFamiliar: this.patient.rendaFamiliar || '',
-        relacaoFamiliar: this.patient.relacaoFamiliar || '',
-        observacoes: this.patient.observacoes || '',
-        nomeMae: this.patient.nomeMae || '',
-        idadeMae: this.patient.idadeMae || '',
-        profissaoMae: this.patient.profissaoMae || '',
-        nomePai: this.patient.nomePai || '',
-        idadePai: this.patient.idadePai || '',
-        profissaoPai: this.patient.profissaoPai || '',
-        nomeEscola: this.patient.nomeEscola || '',
-        telefoneEscola: (this.patient.telefoneEscola || '').replace(/\D/g, ''),
-        ano: this.patient.ano || '',
-        periodo: this.patient.periodo || '',
-        rua: this.patient.rua || '',
-        numero: this.patient.numero || '',
-        bairro: this.patient.bairro || '',
-        cidade: this.patient.cidade || '',
-        estado: this.patient.estado || '',
-        cep: (this.patient.cep || '').replace(/\D/g, ''),
-        complemento: this.patient.complemento || '',
-        responsaveis: (this.patient.responsaveis && this.patient.responsaveis.length > 0)
-          ? this.patient.responsaveis
-          : [],
-        userId: currentUser.id,
-      };
-      
-      this.patientService.adicionar(pacienteParaEnviar as Patient).subscribe({
-        next: () => {
-          this.router.navigate(['/patients']);
-        },
-        error: (erro) => {
-          console.error('Erro ao salvar paciente:', erro);
-          console.error('Detalhes do erro:', erro.error);
-          alert('Erro ao salvar paciente. Verifique os dados e tente novamente.');
-        }
-      });
+      nome: this.patient.nome || '',
+      cpf: cpfDigits,
+      dataNascimento: this.patient.dataNascimento || '',
+      sexo: this.patient.sexo || '',
+      alergias: this.patient.alergias || '',
+      convenio: this.patient.convenio || '',
+      telefoneEmergencia: (this.patient.telefoneEmergencia || '').replace(/\D/g, ''),
+      observacoesGerais: this.patient.observacoesGerais || '',
+      nomeEscola: this.patient.nomeEscola || '',
+      telefoneEscola: (this.patient.telefoneEscola || '').replace(/\D/g, ''),
+      ano: this.patient.ano || '',
+      periodo: this.patient.periodo || '',
+      rua: this.patient.rua || '',
+      numero: this.patient.numero || '',
+      bairro: this.patient.bairro || '',
+      cidade: this.patient.cidade || '',
+      estado: this.patient.estado || '',
+      cep: (this.patient.cep || '').replace(/\D/g, ''),
+      complemento: this.patient.complemento || '',
+      nomeMae: this.patient.nomeMae || '',
+      idadeMae: this.patient.idadeMae || '',
+      profissaoMae: this.patient.profissaoMae || '',
+      nomePai: this.patient.nomePai || '',
+      idadePai: this.patient.idadePai || '',
+      profissaoPai: this.patient.profissaoPai || '',
+      responsaveis: (this.patient.responsaveis && this.patient.responsaveis.length > 0)
+        ? this.patient.responsaveis
+        : [],
+      userId: currentUser.id,
+    };
+
+    this.patientService.adicionar(pacienteParaEnviar as Patient).subscribe({
+      next: (pacienteSalvo) => {
+        const anamneseParaEnviar: Anamnese = {
+          ...this.anamnese,
+          patientId: pacienteSalvo.id!,
+          userId: currentUser.id,
+          data: new Date().toISOString().split('T')[0],
+          resumo: '',
+          textoCompleto: '',
+        } as Anamnese;
+
+        this.anamneseService.criar(anamneseParaEnviar).subscribe({
+          next: () => this.router.navigate(['/patients']),
+          error: (erro) => {
+            console.error('Erro ao salvar anamnese:', erro);
+            this.router.navigate(['/patients']);
+          }
+        });
+      },
+      error: (erro) => {
+        console.error('Erro ao salvar paciente:', erro);
+        console.error('Detalhes do erro:', erro.error);
+        alert('Erro ao salvar paciente. Verifique os dados e tente novamente.');
+      }
+    });
   }
 
   cancelar() {

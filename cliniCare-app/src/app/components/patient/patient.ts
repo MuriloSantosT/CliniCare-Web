@@ -3,6 +3,7 @@ import { CommonModule, DatePipe } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { PatientService, Patient } from '../../services/patient.service';
+import { AnamneseService, Anamnese } from '../../services/anamnese.service';
 import { AppointmentService } from '../../services/appointment.service';
 import { EvolutionService } from '../../services/evolution.service';
 import { ReportService } from '../../services/report.service';
@@ -27,6 +28,7 @@ interface DocumentItem {
 })
 export class PatientComponent implements OnInit {
   patient: Patient | null = null;
+  anamnese: Anamnese | null = null;
   showGallery = false;
 
   evolutionFiles: DocumentItem[] = [];
@@ -44,6 +46,7 @@ export class PatientComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private patientService: PatientService,
+    private anamneseService: AnamneseService,
     private evolutionService: EvolutionService,
     private reportService: ReportService,
     private appointmentService: AppointmentService,
@@ -68,6 +71,7 @@ export class PatientComponent implements OnInit {
         this.patient = patient;
         this.carregarEvolucoes(id);
         this.carregarRelatorios(id);
+        this.carregarAnamnese(id);
       },
       error: (erro) => {
         if (erro.status === 403 || erro.status === 404) {
@@ -76,6 +80,15 @@ export class PatientComponent implements OnInit {
           console.error('Erro ao buscar paciente', erro);
         }
       },
+    });
+  }
+
+  carregarAnamnese(patientId: number) {
+    this.anamneseService.listarPorPaciente(patientId).subscribe({
+      next: (anamneses) => {
+        this.anamnese = anamneses.length > 0 ? anamneses[0] : null;
+      },
+      error: (err) => console.error('Erro ao carregar anamnese:', err),
     });
   }
 

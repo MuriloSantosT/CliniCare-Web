@@ -25,6 +25,11 @@ public class AnamneseController {
     @PostMapping("/criar")
     public Anamnese create(@RequestBody Anamnese anamnese) {return anamneseService.save(anamnese);}
 
+    @PutMapping("/{id}")
+    public Anamnese atualizar(@PathVariable Long id, @RequestBody Anamnese anamnese) {
+        return anamneseService.update(id, anamnese);
+    }
+
     @DeleteMapping("/delete")
     public void deletar(@RequestParam Long id) {
         anamneseService.delete(id);
