@@ -125,6 +125,107 @@ public class PatientService {
         existingPatient.setComplemento(updatedPatient.getComplemento());
 
         // =========================
+        // Informações Médicas
+        // =========================
+        existingPatient.setMedicamentos(updatedPatient.getMedicamentos());
+        existingPatient.setAcompanhamentoProfissional(updatedPatient.getAcompanhamentoProfissional());
+        existingPatient.setCirurgiasPrevias(updatedPatient.getCirurgiasPrevias());
+        existingPatient.setDeficienciaTranstorno(updatedPatient.getDeficienciaTranstorno());
+
+        // =========================
+        // Histórico de Gestação
+        // =========================
+        existingPatient.setGravidezPlanejada(updatedPatient.getGravidezPlanejada());
+        existingPatient.setUsoBebidasAlcoolicas(updatedPatient.getUsoBebidasAlcoolicas());
+        existingPatient.setGestacaoParto(updatedPatient.getGestacaoParto());
+        existingPatient.setUsoMedicamentosGestacao(updatedPatient.getUsoMedicamentosGestacao());
+        existingPatient.setIdadeGravidez(updatedPatient.getIdadeGravidez());
+        existingPatient.setFezPreNatal(updatedPatient.getFezPreNatal());
+        existingPatient.setPartoPrematuro(updatedPatient.getPartoPrematuro());
+        existingPatient.setCondicoesBebe(updatedPatient.getCondicoesBebe());
+        existingPatient.setDuracaoParto(updatedPatient.getDuracaoParto());
+        existingPatient.setUsouForceps(updatedPatient.getUsouForceps());
+        existingPatient.setPontuacaoApgar(updatedPatient.getPontuacaoApgar());
+        existingPatient.setTriagemNeonatal(updatedPatient.getTriagemNeonatal());
+        existingPatient.setBebeRecebeuVacinas(updatedPatient.getBebeRecebeuVacinas());
+        existingPatient.setProblemaSaudeNascimento(updatedPatient.getProblemaSaudeNascimento());
+
+        // =========================
+        // Histórico e Desenvolvimento do Bebê
+        // =========================
+        existingPatient.setPesoBebe(updatedPatient.getPesoBebe());
+        existingPatient.setTamanhoBebe(updatedPatient.getTamanhoBebe());
+        existingPatient.setAlimentacaoPrimeirosMeses(updatedPatient.getAlimentacaoPrimeirosMeses());
+        existingPatient.setSonoPrimeirosMeses(updatedPatient.getSonoPrimeirosMeses());
+        existingPatient.setInteracaoAmbiente(updatedPatient.getInteracaoAmbiente());
+        existingPatient.setContatoVisual(updatedPatient.getContatoVisual());
+        existingPatient.setSorria(updatedPatient.getSorria());
+        existingPatient.setDeitava(updatedPatient.getDeitava());
+        existingPatient.setInicioEngatinhar(updatedPatient.getInicioEngatinhar());
+        existingPatient.setInicioRodar(updatedPatient.getInicioRodar());
+        existingPatient.setInicioSentar(updatedPatient.getInicioSentar());
+        existingPatient.setInicioAndar(updatedPatient.getInicioAndar());
+
+        // =========================
+        // Linguagem e Comunicação
+        // =========================
+        existingPatient.setPrimeiraspalavras(updatedPatient.getPrimeiraspalavras());
+        existingPatient.setPrimeirasFrases(updatedPatient.getPrimeirasFrases());
+        existingPatient.setQuandoApontou(updatedPatient.getQuandoApontou());
+        existingPatient.setAlimentacaoBebeCrianca(updatedPatient.getAlimentacaoBebeCrianca());
+        existingPatient.setTipoBebe(updatedPatient.getTipoBebe());
+
+        // =========================
+        // Ambiente Escolar e Social
+        // =========================
+        existingPatient.setComportamentoCasa(updatedPatient.getComportamentoCasa());
+        existingPatient.setComunidade(updatedPatient.getComunidade());
+        existingPatient.setPossuiRelatorioEscola(updatedPatient.getPossuiRelatorioEscola());
+        existingPatient.setPossuiPdi(updatedPatient.getPossuiPdi());
+        existingPatient.setInteresseAtividades(updatedPatient.getInteresseAtividades());
+        existingPatient.setLidaComRegras(updatedPatient.getLidaComRegras());
+        existingPatient.setPontuacaoProfessora(updatedPatient.getPontuacaoProfessora());
+        existingPatient.setHabilidadesMotFinas(updatedPatient.getHabilidadesMotFinas());
+        existingPatient.setHabilidadesMotGrossas(updatedPatient.getHabilidadesMotGrossas());
+
+        // =========================
+        // Cognição
+        // =========================
+        existingPatient.setMemoria(updatedPatient.getMemoria());
+        existingPatient.setAtencao(updatedPatient.getAtencao());
+        existingPatient.setCompreensao(updatedPatient.getCompreensao());
+        existingPatient.setLinguagemCognicao(updatedPatient.getLinguagemCognicao());
+
+        // =========================
+        // Potencialidades e Déficits
+        // =========================
+        existingPatient.setDesafios(updatedPatient.getDesafios());
+        existingPatient.setPotencialidades(updatedPatient.getPotencialidades());
+
+        // =========================
+        // Socialização
+        // =========================
+        existingPatient.setPessoaQueSeIdentifica(updatedPatient.getPessoaQueSeIdentifica());
+        existingPatient.setBrincaComCriancas(updatedPatient.getBrincaComCriancas());
+        existingPatient.setPreferenciaBrinquedos(updatedPatient.getPreferenciaBrinquedos());
+        existingPatient.setSonoAtual(updatedPatient.getSonoAtual());
+        existingPatient.setAtividadesVidaDiaria(updatedPatient.getAtividadesVidaDiaria());
+        existingPatient.setOQueFazPede(updatedPatient.getOQueFazPede());
+        existingPatient.setRotinaCuidados(updatedPatient.getRotinaCuidados());
+        existingPatient.setTempoTela(updatedPatient.getTempoTela());
+        existingPatient.setRendaFamiliar(updatedPatient.getRendaFamiliar());
+        existingPatient.setRelacaoFamiliar(updatedPatient.getRelacaoFamiliar());
+        existingPatient.setObservacoes(updatedPatient.getObservacoes());
+
+        // Atualiza dados dos pais
+        existingPatient.setNomeMae(updatedPatient.getNomeMae());
+        existingPatient.setIdadeMae(updatedPatient.getIdadeMae());
+        existingPatient.setProfissaoMae(updatedPatient.getProfissaoMae());
+        existingPatient.setNomePai(updatedPatient.getNomePai());
+        existingPatient.setIdadePai(updatedPatient.getIdadePai());
+        existingPatient.setProfissaoPai(updatedPatient.getProfissaoPai());
+
+        // =========================
         // Atualização dos responsáveis
         // =========================
         if (updatedPatient.getResponsaveis() != null) {

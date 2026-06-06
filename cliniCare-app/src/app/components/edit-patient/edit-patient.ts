@@ -14,6 +14,15 @@ import { AuthService } from '../../services/auth.service';
 })
 export class EditPatient implements OnInit {
   patient: Partial<Patient> = {};
+
+  get isMenorDeIdade(): boolean {
+    if (!this.patient.dataNascimento) return false;
+    const nascimento = new Date(this.patient.dataNascimento);
+    const dezoitoAnos = new Date(nascimento);
+    dezoitoAnos.setFullYear(dezoitoAnos.getFullYear() + 18);
+    return new Date() < dezoitoAnos;
+  }
+
   novoResponsavel: Partial<Guardian> = {
     nome: '',
     cpf: '',
@@ -76,33 +85,20 @@ export class EditPatient implements OnInit {
     if (!user) { alert('Sessão expirada. Faça login novamente.'); return; }
 
     if (this.patient.id && this.patient.nome && this.patient.cpf && this.patient.dataNascimento) {
+      const { id, user: _user, createdAt, updatedAt, ...rest } = this.patient as any;
       const pacienteParaEnviar = {
-        nome: this.patient.nome || '',
-        cpf: (this.patient.cpf || '').replace(/\D/g, ''), // Remove formatação do CPF
-        dataNascimento: this.patient.dataNascimento || '',
-        sexo: this.patient.sexo || '',
-        alergias: this.patient.alergias || '',
-        convenio: this.patient.convenio || '',
-        telefoneEmergencia: (this.patient.telefoneEmergencia || '').replace(/\D/g, ''), // Remove formatação
-        observacoesGerais: this.patient.observacoesGerais || '',
-        nomeEscola: this.patient.nomeEscola || '',
-        telefoneEscola: (this.patient.telefoneEscola || '').replace(/\D/g, ''), // Remove formatação
-        ano: this.patient.ano || '',
-        periodo: this.patient.periodo || '',
-        rua: this.patient.rua || '',
-        numero: this.patient.numero || '',
-        bairro: this.patient.bairro || '',
-        cidade: this.patient.cidade || '',
-        estado: this.patient.estado || '',
-        cep: (this.patient.cep || '').replace(/\D/g, ''), // Remove formatação
-        complemento: this.patient.complemento || '',
-        responsaveis: (this.patient.responsaveis && this.patient.responsaveis.length > 0) 
-          ? this.patient.responsaveis 
+        ...rest,
+        cpf: (this.patient.cpf || '').replace(/\D/g, ''),
+        telefoneEmergencia: (this.patient.telefoneEmergencia || '').replace(/\D/g, ''),
+        telefoneEscola: (this.patient.telefoneEscola || '').replace(/\D/g, ''),
+        cep: (this.patient.cep || '').replace(/\D/g, ''),
+        responsaveis: (this.patient.responsaveis && this.patient.responsaveis.length > 0)
+          ? this.patient.responsaveis
           : [],
       };
 
       console.log('Dados enviados:', pacienteParaEnviar);
-      
+
       this.patientService.atualizar(this.patient.id, pacienteParaEnviar as Patient, user.id).subscribe({
         next: (pacienteSalvo) => {
           console.log('Paciente atualizado com sucesso:', pacienteSalvo);
