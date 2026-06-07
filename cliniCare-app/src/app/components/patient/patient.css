@@ -629,6 +629,16 @@
   overflow-y: auto;
 }
 
+.consulta-error-msg {
+  margin: -10px 0 14px;
+  padding: 8px 12px;
+  background: #fff1f2;
+  border: 1px solid #fecdd3;
+  border-radius: 8px;
+  color: #be123c;
+  font-size: 0.85rem;
+}
+
 .consulta-form-actions {
   display: flex;
   justify-content: flex-end;

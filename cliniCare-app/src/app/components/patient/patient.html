@@ -512,48 +512,15 @@
             </div>
           </div>
 
-          <div class="consulta-form-group">
-            <label>Status</label>
-            <select [(ngModel)]="novaConsulta.status" name="status">
-              <option value="Agendado">Agendado</option>
-              <option value="Confirmado">Confirmado</option>
-              <option value="Cancelado">Cancelado</option>
-              <option value="Realizado">Realizado</option>
-            </select>
-          </div>
+          <div *ngIf="consultaErrorMsg" class="consulta-error-msg">{{ consultaErrorMsg }}</div>
 
           <div class="consulta-form-group">
             <label>Observações</label>
             <textarea
               [(ngModel)]="novaConsulta.observacoes"
               name="observacoes"
-              placeholder="Observações sobre a consulta..."
+              placeholder="Observações sobre o compromisso..."
             ></textarea>
-          </div>
-
-          <div class="consulta-form-row">
-            <div class="consulta-form-group">
-              <label>Valor (R$)</label>
-              <input
-                type="number"
-                [(ngModel)]="novaConsulta.valor"
-                name="valor"
-                step="0.01"
-                min="0"
-                placeholder="0,00"
-              />
-            </div>
-            <div class="consulta-form-group">
-              <label>Forma de Pagamento</label>
-              <select [(ngModel)]="novaConsulta.formaPagamento" name="formaPagamento">
-                <option value="">Selecione</option>
-                <option value="Dinheiro">Dinheiro</option>
-                <option value="Cartão de Crédito">Cartão de Crédito</option>
-                <option value="Cartão de Débito">Cartão de Débito</option>
-                <option value="PIX">PIX</option>
-                <option value="Cheque">Cheque</option>
-              </select>
-            </div>
           </div>
 
           <div class="consulta-form-actions">

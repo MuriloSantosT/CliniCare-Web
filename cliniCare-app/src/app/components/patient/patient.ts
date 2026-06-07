@@ -41,6 +41,7 @@ export class PatientComponent implements OnInit {
 
   showConsultaForm = false;
   novaConsulta: any = this.emptyConsulta();
+  consultaErrorMsg = '';
 
   constructor(
     private route: ActivatedRoute,
@@ -180,6 +181,7 @@ export class PatientComponent implements OnInit {
 
   fecharNovaConsulta() {
     this.showConsultaForm = false;
+    this.consultaErrorMsg = '';
   }
 
   onInicioChange() {
@@ -189,6 +191,7 @@ export class PatientComponent implements OnInit {
       end.setHours(end.getHours() + 1);
       this.novaConsulta.dataFim = this.toDatetimeLocal(end);
     }
+    this.consultaErrorMsg = '';
   }
 
   salvarConsulta() {
@@ -198,16 +201,17 @@ export class PatientComponent implements OnInit {
     const payload: Appointment = {
       dataInicio: this.withSeconds(this.novaConsulta.dataInicio),
       dataFim: this.withSeconds(this.novaConsulta.dataFim),
-      status: this.novaConsulta.status,
+      status: 'Agendado',
       observacoes: this.novaConsulta.observacoes,
-      valor: this.novaConsulta.valor,
-      formaPagamento: this.novaConsulta.formaPagamento,
       patient: { id: this.patient.id },
       user: { id: user.id },
     };
     this.appointmentService.create(payload).subscribe({
       next: () => this.fecharNovaConsulta(),
-      error: (err) => console.error('Erro ao salvar consulta:', err),
+      error: (err) => {
+        console.error('Erro ao salvar consulta:', err);
+        this.consultaErrorMsg = 'Erro ao salvar consulta. Tente novamente.';
+      },
     });
   }
 
@@ -215,10 +219,7 @@ export class PatientComponent implements OnInit {
     return {
       dataInicio: '',
       dataFim: '',
-      status: 'Agendado',
       observacoes: '',
-      valor: null as number | null,
-      formaPagamento: '',
     };
   }
 
