@@ -202,27 +202,35 @@ export class Agenda implements OnInit {
     const dataInicio = this.withSeconds(this.newAppointment.dataInicio);
     const dataFim = this.withSeconds(this.newAppointment.dataFim);
 
-    if (this.hasConflict(dataInicio, dataFim)) {
-      this.errorMsg = 'Já existe um compromisso neste horário.';
-      return;
-    }
-    this.errorMsg = '';
+    this.appointmentService.listByUser(currentUser.id).subscribe({
+      next: (latestApts) => {
+        this.appointments = latestApts;
 
-    const payload: Appointment = {
-      dataInicio,
-      dataFim,
-      status: this.newAppointment.status,
-      observacoes: this.newAppointment.observacoes,
-      valor: this.newAppointment.valor,
-      formaPagamento: this.newAppointment.formaPagamento,
-      user: { id: currentUser.id },
-    };
-    if (this.newAppointment.patientId) {
-      payload.patient = { id: this.newAppointment.patientId };
-    }
-    this.appointmentService.create(payload).subscribe({
-      next: (apt) => { this.appointments.push(apt); this.closeAppointmentForm(); },
-      error: (err) => { console.error('Erro ao salvar compromisso:', err); }
+        if (this.hasConflict(dataInicio, dataFim)) {
+          this.errorMsg = 'Já existe um compromisso neste horário.';
+          return;
+        }
+        this.errorMsg = '';
+
+        const payload: Appointment = {
+          dataInicio,
+          dataFim,
+          status: this.newAppointment.status,
+          observacoes: this.newAppointment.observacoes,
+          valor: this.newAppointment.valor,
+          formaPagamento: this.newAppointment.formaPagamento,
+          user: { id: currentUser.id },
+        };
+        if (this.newAppointment.patientId) {
+          payload.patient = { id: this.newAppointment.patientId };
+        }
+
+        this.appointmentService.create(payload).subscribe({
+          next: (apt) => { this.appointments.push(apt); this.closeAppointmentForm(); },
+          error: (err) => { console.error('Erro ao salvar compromisso:', err); }
+        });
+      },
+      error: (err) => { console.error('Erro ao verificar disponibilidade:', err); }
     });
   }
 
@@ -272,12 +280,14 @@ export class Agenda implements OnInit {
   // ── Helpers ───────────────────────────────────────────────────────────────
 
   private hasConflict(startStr: string, endStr: string): boolean {
-    const newStart = new Date(startStr);
-    const newEnd = new Date(endStr);
+    const newStart = new Date(startStr).getTime();
+    const newEnd = new Date(endStr).getTime();
     return this.appointments.some(apt => {
       if (apt.status === 'Cancelado') return false;
-      const aptStart = new Date(apt.dataInicio);
-      const aptEnd = new Date(apt.dataFim);
+      if (!apt.dataInicio || !apt.dataFim) return false;
+      const aptStart = new Date(apt.dataInicio).getTime();
+      const aptEnd = new Date(apt.dataFim).getTime();
+      if (isNaN(aptStart) || isNaN(aptEnd)) return false;
       return newStart < aptEnd && newEnd > aptStart;
     });
   }
