@@ -46,7 +46,7 @@ public class UserController {
     }
 
     @DeleteMapping("/delete")
-    public void delete(Long id) {
+    public void delete(@RequestParam Long id) {
         userService.delete(id);
     }
 }

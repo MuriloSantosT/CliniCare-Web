@@ -23,7 +23,7 @@ public class ReportController {
 
     @GetMapping("/patient/{patientId}")
     public List<Report> listByPatient(@PathVariable Long patientId) {
-        return reportService.listBtPatient(patientId);
+        return reportService.listByPatient(patientId);
     }
 
     @GetMapping("/user/{userId}")

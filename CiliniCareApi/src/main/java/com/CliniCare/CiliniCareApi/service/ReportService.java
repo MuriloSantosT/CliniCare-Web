@@ -30,7 +30,7 @@ public class ReportService {
         return reportRepository.save(report);
     }
 
-    public List<Report> listBtPatient(Long patientId) {
+    public List<Report> listByPatient(Long patientId) {
         return reportRepository.findByPatientIdOrderByDataDesc(patientId);
     }
 

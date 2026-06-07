@@ -21,4 +21,8 @@ export class ReportService {
   update(id: number, report: Partial<Report>): Observable<Report> {
     return this.http.put<Report>(`${this.apiUrl}/atualizar/${id}`, report);
   }
+
+  delete(id: number): Observable<void> {
+    return this.http.delete<void>(`${this.apiUrl}/deletar/${id}`);
+  }
 }

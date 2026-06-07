@@ -25,4 +25,8 @@ export class EvolutionService {
   update(id: number, evolution: Partial<Evolution>): Observable<Evolution> {
     return this.http.put<Evolution>(`${this.apiUrl}/atualizar/${id}`, evolution);
   }
+
+  delete(id: number): Observable<void> {
+    return this.http.delete<void>(`${this.apiUrl}/delete/${id}`);
+  }
 }

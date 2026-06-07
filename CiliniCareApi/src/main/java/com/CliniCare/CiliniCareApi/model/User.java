@@ -1,5 +1,6 @@
 package com.CliniCare.CiliniCareApi.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.time.LocalDateTime;
@@ -13,6 +14,7 @@ public class User {
     private Long id;
     private String nome;
     private String email;
+    @JsonIgnore
     private String senhaHash;
     private String telefone;
     private LocalDateTime createdAt;
