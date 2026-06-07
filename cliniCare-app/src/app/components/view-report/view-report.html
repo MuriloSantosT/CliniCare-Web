@@ -3,7 +3,10 @@
   <div class="view-report-header">
     <button class="btn-back" (click)="voltar()">&#8592; Voltar</button>
     @if (!editMode) {
-      <button class="btn-edit" (click)="entrarEdicao()">✏️ Editar</button>
+      <div class="header-actions">
+        <button class="btn-pdf" (click)="baixarPdf()">&#8595; Baixar PDF</button>
+        <button class="btn-edit" (click)="entrarEdicao()">✏️ Editar</button>
+      </div>
     }
   </div>
 

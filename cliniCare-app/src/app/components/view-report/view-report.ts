@@ -75,6 +75,10 @@ export class ViewReport implements OnInit {
     });
   }
 
+  baixarPdf() {
+    window.print();
+  }
+
   voltar() {
     if (this.patientId) {
       this.router.navigate(['/patients', this.patientId]);

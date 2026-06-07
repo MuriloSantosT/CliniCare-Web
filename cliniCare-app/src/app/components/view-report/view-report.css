@@ -33,6 +33,29 @@
   color: #0f172a;
 }
 
+.header-actions {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.btn-pdf {
+  background: #eff6ff;
+  border: 1.5px solid #bfdbfe;
+  color: #2563eb;
+  padding: 8px 18px;
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  font-weight: 600;
+  transition: all 0.15s ease;
+}
+
+.btn-pdf:hover {
+  background: #dbeafe;
+  border-color: #93c5fd;
+}
+
 .btn-edit {
   background: #f0fdf4;
   border: 1.5px solid #bbf7d0;
@@ -246,4 +269,23 @@
 
 @media (max-width: 480px) {
   .report-title { font-size: 1.2rem; }
+}
+
+@media print {
+  .view-report-header { display: none; }
+
+  .report-card {
+    box-shadow: none;
+    border: none;
+    padding: 0;
+  }
+
+  .report-body p {
+    font-size: 12pt;
+    line-height: 1.8;
+  }
+
+  .report-title {
+    font-size: 18pt;
+  }
 }
