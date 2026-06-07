@@ -198,24 +198,49 @@ export class PatientComponent implements OnInit {
     if (!this.novaConsulta.dataInicio || !this.novaConsulta.dataFim || !this.patient) return;
     const user = this.authService.getCurrentUser();
     if (!user) return;
-    const payload: Appointment = {
-      dataInicio: this.withSeconds(this.novaConsulta.dataInicio),
-      dataFim: this.withSeconds(this.novaConsulta.dataFim),
-      status: 'Agendado',
-      observacoes: this.novaConsulta.observacoes,
-      patient: { id: this.patient.id },
-      user: { id: user.id },
-    };
-    this.appointmentService.create(payload).subscribe({
-      next: () => this.fecharNovaConsulta(),
-      error: (err) => {
-        if (err.status === 409) {
+
+    const dataInicio = this.withSeconds(this.novaConsulta.dataInicio);
+    const dataFim = this.withSeconds(this.novaConsulta.dataFim);
+
+    this.appointmentService.listByUser(user.id).subscribe({
+      next: (appointments) => {
+        const conflict = appointments.some(apt => {
+          if (apt.status === 'Cancelado') return false;
+          if (!apt.dataInicio || !apt.dataFim) return false;
+          const aptStart = new Date(apt.dataInicio).getTime();
+          const aptEnd = new Date(apt.dataFim).getTime();
+          if (isNaN(aptStart) || isNaN(aptEnd)) return false;
+          return new Date(dataInicio).getTime() < aptEnd &&
+                 new Date(dataFim).getTime() > aptStart;
+        });
+
+        if (conflict) {
           this.consultaErrorMsg = 'Já existe um compromisso neste horário.';
-        } else {
-          console.error('Erro ao salvar consulta:', err);
-          this.consultaErrorMsg = 'Erro ao salvar consulta. Tente novamente.';
+          return;
         }
+
+        this.consultaErrorMsg = '';
+        const payload: Appointment = {
+          dataInicio,
+          dataFim,
+          status: 'Agendado',
+          observacoes: this.novaConsulta.observacoes,
+          patient: { id: this.patient!.id },
+          user: { id: user.id },
+        };
+        this.appointmentService.create(payload).subscribe({
+          next: () => this.fecharNovaConsulta(),
+          error: (err) => {
+            if (err.status === 409) {
+              this.consultaErrorMsg = 'Já existe um compromisso neste horário.';
+            } else {
+              console.error('Erro ao salvar consulta:', err);
+              this.consultaErrorMsg = 'Erro ao salvar consulta. Tente novamente.';
+            }
+          },
+        });
       },
+      error: (err) => { console.error('Erro ao verificar disponibilidade:', err); }
     });
   }
 
