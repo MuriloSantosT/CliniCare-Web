@@ -107,7 +107,7 @@
         <strong>Notas</strong>
         <div class="notes-controls">
           @if (!editandoNotas) {
-            <button class="edit-btn" (click)="iniciarEdicaoNotas()" title="Editar notas">✏️</button>
+            <button class="edit-btn" (click)="iniciarEdicaoNotas()" title="Editar notas"><img src="pencil.png" alt="Editar" /></button>
           } @else {
             <button class="save-btn" (click)="salvarNotas()">Salvar</button>
             <button class="cancel-btn" (click)="cancelarEdicaoNotas()">✕</button>
