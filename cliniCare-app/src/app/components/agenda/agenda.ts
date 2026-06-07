@@ -227,7 +227,13 @@ export class Agenda implements OnInit {
 
         this.appointmentService.create(payload).subscribe({
           next: (apt) => { this.appointments.push(apt); this.closeAppointmentForm(); },
-          error: (err) => { console.error('Erro ao salvar compromisso:', err); }
+          error: (err) => {
+            if (err.status === 409) {
+              this.errorMsg = 'Já existe um compromisso neste horário.';
+            } else {
+              console.error('Erro ao salvar compromisso:', err);
+            }
+          }
         });
       },
       error: (err) => { console.error('Erro ao verificar disponibilidade:', err); }

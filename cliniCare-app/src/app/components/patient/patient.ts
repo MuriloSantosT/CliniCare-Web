@@ -209,8 +209,12 @@ export class PatientComponent implements OnInit {
     this.appointmentService.create(payload).subscribe({
       next: () => this.fecharNovaConsulta(),
       error: (err) => {
-        console.error('Erro ao salvar consulta:', err);
-        this.consultaErrorMsg = 'Erro ao salvar consulta. Tente novamente.';
+        if (err.status === 409) {
+          this.consultaErrorMsg = 'Já existe um compromisso neste horário.';
+        } else {
+          console.error('Erro ao salvar consulta:', err);
+          this.consultaErrorMsg = 'Erro ao salvar consulta. Tente novamente.';
+        }
       },
     });
   }

@@ -4,7 +4,9 @@ import com.CliniCare.CiliniCareApi.model.Appointment;
 import com.CliniCare.CiliniCareApi.repository.AppointmentRepository;
 import com.CliniCare.CiliniCareApi.repository.PatientRepository;
 import com.CliniCare.CiliniCareApi.repository.UserRepository;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -36,6 +38,19 @@ public class AppointmentService {
         if (appointment.getUser() != null && appointment.getUser().getId() != null) {
             userRepository.findById(appointment.getUser().getId())
                     .ifPresent(appointment::setUser);
+        }
+
+        if (appointment.getUser() != null && appointment.getUser().getId() != null
+                && appointment.getDataInicio() != null && appointment.getDataFim() != null) {
+            List<Appointment> conflicts = appointmentRepository.findConflicting(
+                    appointment.getUser().getId(),
+                    appointment.getDataInicio(),
+                    appointment.getDataFim()
+            );
+            if (!conflicts.isEmpty()) {
+                throw new ResponseStatusException(HttpStatus.CONFLICT,
+                        "Já existe um compromisso neste horário.");
+            }
         }
 
         return appointmentRepository.save(appointment);
